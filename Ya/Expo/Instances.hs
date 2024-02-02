@@ -35,16 +35,13 @@ instance Mapping Straight Straight Arrow Arrow (Day Straight Arrow LM LM IO IO i
 		-> bindIO x (\xx -> from `compose` f `compose` These xx `fo` y)
 
 instance Mapping Straight Straight Arrow Arrow (Straight Arrow ()) IO
-	where mapping = rewrap / \from (U_I_II f) -> returnIO `i_i` from `i` f ()
+	where mapping = rewrap / \from (U_I_II f) -> returnIO `a` from `i` f ()
 
 returnIO :: a -> IO a
 returnIO x = IO (\ s -> (# s, x #))
 
 bindIO :: IO a -> (a -> IO b) -> IO b
 bindIO (IO m) k = IO (\s -> case m s of (# new_s, x #) -> unIO (k x) new_s)
-
--- thenIO :: IO a -> IO b -> IO b
--- thenIO (IO m) k = IO (\s -> case m s of (# new_s, _ #) -> unIO k new_s)
 
 unIO :: IO a -> (State# RealWorld -> (# State# RealWorld, a #))
 unIO (IO x) = x
