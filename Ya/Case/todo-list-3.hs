@@ -8,23 +8,27 @@ import "ya-expo" Ya.Expo.Instances ()
 import "ya-expo" Ya.Expo.Terminal as Terminal
 
 type Status = () `ML` ()
-pattern TODO = This ()
-pattern DONE = That ()
+
+pattern TODO = This () :: Status
+pattern DONE = That () :: Status
 
 type Task = Status `LM` String
+
 pattern Task mark title = These mark title :: Task
 
 type Bullet = () `ML` ()
+
 pattern Bullet = This () :: Bullet
 pattern Cursor = That () :: Bullet
 
 line :: Bullet -> Task `ARR` String
 line bullet (These status title) =
-	constant "  - " `rf` constant " -> " `yi` bullet ++ 
-	constant "TODO" `rf` constant "DONE" `yi` status ++
+	is "  - " `rf` is " -> " `yi` bullet ++ 
+	is "TODO" `rf` is "DONE" `yi` status ++
 	" " ++ title
 
 type Command = Vertical `ML` Status
+
 pattern Move v = This v :: Command
 pattern Mark s = That s :: Command
 

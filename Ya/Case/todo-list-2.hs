@@ -10,11 +10,12 @@ import "ya-expo" Ya.Expo.Terminal as Terminal
 type Task = String
 
 type Bullet = () `ML` ()
+
 pattern Bullet = This () :: Bullet
 pattern Cursor = That () :: Bullet
 
 line :: Bullet `ARR` Task `ARR` String
-line bullet title = constant "  - " `rf` constant " -> " `yi` bullet ++ title
+line bullet title = is "  - " `rf` is " -> " `yi` bullet ++ title
 
 keypress :: Char `ARR` Optional Vertical
 keypress 'j' = Some Up
