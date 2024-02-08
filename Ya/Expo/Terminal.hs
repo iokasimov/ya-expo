@@ -6,7 +6,7 @@ import Ya.Expo.Instances
 import Ya.Expo.ASCII
 
 import "base" Data.Bool as Base (Bool (False))
-import "base" System.IO (IO, BufferMode (NoBuffering), hSetBuffering, hSetEcho, stdin, putStr, getChar)
+import "base" System.IO (IO, BufferMode (NoBuffering), hSetBuffering, hSetEcho, stdin, putStr, putChar, getChar)
 
 clear :: IO ()
 clear = do
@@ -21,3 +21,6 @@ prepare = do
 
 input :: IO `TI` Optional ASCII
 input = getChar `yo` char_to_ascii
+
+output :: ASCII -> IO ()
+output = char `o` putChar
