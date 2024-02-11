@@ -4,6 +4,8 @@ import Ya
 import Ya.ASCII
 
 import "base" Data.Char (Char)
+import "base" Data.String (IsString (fromString))
+import "base" GHC.Err (error)
 import "base" System.IO (IO, getChar)
 
 char :: ASCII -> Char
@@ -130,3 +132,18 @@ char_to_ascii = \case
 	'8' -> Some `a` Decimal `i` D8
 	'9' -> Some `a` Decimal `i` D9
 	_ -> None
+
+instance IsString (List Char) where
+	fromString x = List (worker x) where
+		worker (c : []) = Last c
+		worker (c : cs) = Next c (worker cs)
+
+char_to_ascii_with_error :: Char -> ASCII
+char_to_ascii_with_error x =
+	(error ('\'' : x : '\'' : " - is not ASCII") `rf` i)
+	(char_to_ascii x)
+
+instance IsString (List ASCII) where
+	fromString x = List (worker x) where
+		worker (c : []) = Last (char_to_ascii_with_error c)
+		worker (c : cs) = Next (char_to_ascii_with_error c) (worker cs)
