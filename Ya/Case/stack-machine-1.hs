@@ -1,11 +1,13 @@
 import Ya
+import Ya.ASCII
+import Ya.Expo.ASCII
 import Ya.Expo.Instances
 import Ya.Expo.Terminal
 
 import "base" Data.Int (Int)
 import "base" Data.String (String)
 import "base" Data.List ((++))
-import "base" Text.Show (show)
+import "base" Text.Show (Show (show))
 import "base" System.IO (IO, print, putChar, putStr)
 import Prelude ((+))
 
@@ -19,26 +21,26 @@ pattern Immediate x = This x :: Command v
 
 pattern Operation x = That x :: Command v
 
-load :: forall v . Immediate v `ARR` State `TI` List v `JT` Halts `TI` v
-load v = enter @(State `TI` List v `JT` Halts)
+load :: forall v . Immediate v
+	`ARR` State `TI` List v `JT` Halts `TI` v
+load v = enter
 	`yukl` push @List v `u` State
 
-eval :: forall v . Operation v `ARR` State `TI` List v `JT` Halts `TI` v
-eval op = enter @(State `TI` List v `JT` Halts)
+eval :: forall v . Operation v
+	`ARR` State `TI` List v `JT` Halts `TI` v
+eval op = enter
 	`yukl` pop @List `u` State `u` try
 	`lm_dp` pop @List `u` State `u` try
 	`yokl` op `o` push @List `o` State
 
 main = Nonempty @List
-	`aaa` Next (Immediate 1)
-	`aaa` Next (Immediate 2)
-	`aaa` Next (Operation ((+) `j_`))
-	`aaa` Next (Immediate 4)
-	`yii` Last (Operation ((+) `j_`))
-	`yi_yoklKL` Forwards `aaa` load `rf` eval
-	`u_u_u_u_u_u_u_u` unwrap `o` unwrap
-	`yi_yi_yi_yi` Empty @List
-	`u_u_u_u_u_u_u_u` is "Not enough operands!" `o` print
-		`yi_yi_rf` pass `aaa` unwrap `o` that
-			`oo_yoklKL` show `o` putStr
-				`o_yukl` putChar ',' `o` Forwards
+	`a` Next (Immediate 1)
+	`a` Next (Immediate 2)
+	`a` Next (Operation ((+) `j_`))
+	`a` Next (Immediate 4)
+	`i` Last (Operation ((+) `j_`))
+	`yoklKL` Forwards `aaa` load `rf` eval
+	`rwwwww_rw` Empty @List
+	`u_u_u_u_u_u` is "[ERROR] No operands!" `o` putStr
+		`yi_rf` pass `aaa` is "[OK] Traced: " `o` putStr
+			`cn_dp` (`yoklKL` Forwards `aaa` show `o` putStr `o_yukl` putChar ' ')
