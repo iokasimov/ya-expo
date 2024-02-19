@@ -21,12 +21,12 @@ pattern Immediate x = This x :: Command v
 
 pattern Operation x = That x :: Command v
 
-load :: forall v . Immediate v
+load :: Immediate v
 	`ARR` State `TI` List v `JT` Halts `TI` v
 load v = enter
 	`yukl` push @List v `u` State
 
-eval :: forall v . Operation v
+eval :: Operation v
 	`ARR` State `TI` List v `JT` Halts `TI` v
 eval op = enter
 	`yukl` pop @List `u` State `u` try

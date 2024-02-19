@@ -27,7 +27,12 @@ analyze bracket = enter
 	`yi_yokl` Error `a` Missing `a` Closed `a` is bracket
 		`yi_rf` Error `a` Mismatch `rf` Ok `aaa` (`e` bracket)
 
-main = List `a` Next (Opened Angle) `i` Last (Closed Square)
+main = Nonempty @List 
+	`a` Next (Opened Angle)
+	`a` Next (Opened Curly)
+	`a` Next (Closed Curly)
+	`a` Next (Opened Angle)
+	`i` Last (Closed Square)
 	`yoklKL` Forwards `aaa` remember `rf` analyze
 	`rwwwww_rw` Empty @List
 	`yi_yokl` Ok `rf` Error `a` Missing `a` Opened `a` inspect top `cn_dp` Ok
