@@ -11,7 +11,7 @@ type Task = String
 line :: Task `ARR` String
 line title = " - " ++ title
 
-main = Nonempty @List
+main = Nonempty @List `a` Construct
 	`a` Next "Apply to that new position"
 	`a` Next "Find a way to fix ligatures"
 	`a` Next "Organize a boardgame session"

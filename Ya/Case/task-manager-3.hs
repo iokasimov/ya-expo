@@ -37,7 +37,7 @@ keypress 'j' = Some `i` Move Up
 keypress 'k' = Some `i` Move Down
 keypress 'T' = Some `i` Mark TODO
 keypress 'D' = Some `i` Mark DONE
-keypress _ = None
+keypress _ = None ()
 
 main = forever `o` unwrap `o` unwrap
 	`yi_yi_yi_yi` enter @(State `TI` Scrolling List Task `JT` IO)
@@ -49,7 +49,7 @@ main = forever `o` unwrap `o` unwrap
 		`yi_yukl` until `yii` getChar `yo` keypress
 		`yi_yokl` pass `a` State `aaa` scroll @List @Task
 			`yi_rf` pass `a` State `aaa` switch `oo_a` part @Focused `o` has @Task `o` has @Status
-	`yi_yi_yi_yi` transform `a` Nonempty @List
+	`yi_yi_yi_yi` transform `a` (Construct `o` Nonempty @List)
 		`aaaaaa` Next `yi` Task TODO "Apply to that new position"
 		`aaaaaa` Next `yi` Task TODO "Find a way to fix ligatures"
 		`aaaaaa` Next `yi` Task TODO "Organize a boardgame session"

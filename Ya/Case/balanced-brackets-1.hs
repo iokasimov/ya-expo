@@ -15,7 +15,7 @@ type Enclosed = Shape `LM` Shape
 type Imbalance = Bracket `ML` Enclosed
 
 pattern Missing x = This x :: Imbalance
-pattern Mismatch x = That x :: Imbalance
+pattern Conflict x = That x :: Imbalance
 
 remember bracket = enter
 	@(State (List Shape) `JT` Error Imbalance)
@@ -25,16 +25,25 @@ analyze bracket = enter
 	@(State `TI` List Shape `JT` Error Imbalance)
 	`yi_yukl` pop @List `u` State
 	`yi_yokl` Error `a` Missing `a` Closed `a` is bracket
-		`yi_rf` Error `a` Mismatch `rf` Ok `aaa` (`e` bracket)
+		`yi_rf` Error `a` Conflict `rf` Ok `aaa` (`e` bracket)
 
-main = Nonempty @List 
+-- main = Construct
+  -- `o` Nonempty @List
+  -- `a` Next (Opened Angle)
+  -- `a` Next (Opened Curly)
+  -- `a` Next (Closed Curly)
+  -- `a` Next (Opened Angle)
+  -- `i` Last (Closed Square)
+  -- `yoklKL` Forwards
+
+main = Nonempty @List `a`Construct
 	`a` Next (Opened Angle)
 	`a` Next (Opened Curly)
 	`a` Next (Closed Curly)
 	`a` Next (Opened Angle)
 	`i` Last (Closed Square)
 	`yoklKL` Forwards `aaa` remember `rf` analyze
-	`rwwwww_rw` Empty @List
+	`rwwwww_rw` Empty @List ()
 	`yi_yokl` Ok `rf` Error `a` Missing `a` Opened `a` inspect top `cn_dp` Ok
 	`u_u_u_u_u_u` print `a` is "[ERROR] Lonely bracket"
 		`yi_rf` print `a` is "[ERROR] Mismatching brackets"

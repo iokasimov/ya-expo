@@ -10,9 +10,10 @@ import "base" System.IO (IO, getChar)
 
 char :: ASCII -> Char
 char = is '\BS' `rf` is '\HT' `rf` is '\LF' `rf` is '\ESC' `rf` is '\SP' `rf` is '\DEL'
-	`yi_yi_rf` is '(' `rf` is '{' `rf` is '<' `rf` is '['
-		`yi_rf` is ')' `rf` is '}' `rf` is '>' `rf` is ']'
-		`yi_rf` is '/' `rf` is '\\' `rf` is '\"' `rf` is '\'' `rf` is '.'
+	`yi_yi_rf` is '/' `rf` is '\\'
+	  `yi_rf` (is '(' `rf` is '{' `rf` is '<' `rf` is '['
+		`yi_rf` is ')' `rf` is '}' `rf` is '>' `rf` is ']')
+		`yi_rf` is '\"' `rf` is '\'' `rf` is '.'
 			`rf` is ',' `rf` is ';' `rf` is ':' `rf` is '!' `rf` is '?'
 		`yi_rf` is '#' `rf` is '$' `rf` is '%' `rf` is '&'
 			`rf` is '*' `rf` is '+' `rf` is '-' `rf` is '@'
@@ -32,43 +33,43 @@ char = is '\BS' `rf` is '\HT' `rf` is '\LF' `rf` is '\ESC' `rf` is '\SP' `rf` is
 
 char_to_ascii :: Char -> Optional ASCII
 char_to_ascii = \case
-	'\BS' -> Some `i` Peripheral Backspace
-	'\HT' -> Some `i` Peripheral Tab
-	'\LF' -> Some `i` Peripheral Newline
-	'\ESC' -> Some `i` Peripheral Escape
-	'\SP' -> Some `i` Peripheral Space
-	'\DEL' -> Some `i` Peripheral Delete
-	'(' -> Some `a` Sign `a` Bracket `a` Opened `i` Round
-	')' -> Some `a` Sign `a` Bracket `a` Closed `i` Round
-	'{' -> Some `a` Sign `a` Bracket `a` Opened `i` Curly
-	'}' -> Some `a` Sign `a` Bracket `a` Closed `i` Curly
-	'<' -> Some `a` Sign `a` Bracket `a` Opened `i` Angle
-	'>' -> Some `a` Sign `a` Bracket `a` Closed `i` Angle
-	'[' -> Some `a` Sign `a` Bracket `a` Opened `i` Square
-	']' -> Some `a` Sign `a` Bracket `a` Closed `i` Square
-	'/' -> Some `a` Sign `a` Punctuation `i` Slash
-	'\\' -> Some `a` Sign `a` Punctuation `i` Backslash
-	'"' -> Some `a` Sign `a` Punctuation `i` Doublequote
-	'\'' -> Some `a` Sign `a` Punctuation `i` Singlequote
-	'.' -> Some `a` Sign `a` Punctuation `i` Period
-	',' -> Some `a` Sign `a` Punctuation `i` Comma
-	';' -> Some `a` Sign `a` Punctuation `i` Semicolon
-	':' -> Some `a` Sign `a` Punctuation `i` Colon
-	'!' -> Some `a` Sign `a` Punctuation `i` Exclamation
-	'?' -> Some `a` Sign `a` Punctuation `i` Question
-	'#' -> Some `a` Sign `a` Miscellanneous `i` Hash
-	'$' -> Some `a` Sign `a` Miscellanneous `i` Dollar
-	'%' -> Some `a` Sign `a` Miscellanneous `i` Percent
-	'&' -> Some `a` Sign `a` Miscellanneous `i` Ampersand
-	'*' -> Some `a` Sign `a` Miscellanneous `i` Asterisk
-	'+' -> Some `a` Sign `a` Miscellanneous `i` Plus
-	'-' -> Some `a` Sign `a` Miscellanneous `i` Hyphen
-	'@' -> Some `a` Sign `a` Miscellanneous `i` At
-	'^' -> Some `a` Sign `a` Miscellanneous `i` Caret
-	'_' -> Some `a` Sign `a` Miscellanneous `i` Underscore
-	'`' -> Some `a` Sign `a` Miscellanneous `i` Grave
-	'|' -> Some `a` Sign `a` Miscellanneous `i` Bar
-	'~' -> Some `a` Sign `a` Miscellanneous `i` Tilde
+	'\BS' -> Some `i` Signal Backspace
+	'\HT' -> Some `i` Signal Tab
+	'\LF' -> Some `i` Signal Newline
+	'\ESC' -> Some `i` Signal Escape
+	'\SP' -> Some `i` Signal Space
+	'\DEL' -> Some `i` Signal Delete
+	'/' -> Some `a` Symbol `a` Slashes `i` This ()
+	'\\' -> Some `a` Symbol `a` Slashes `i` That ()
+	'(' -> Some `a` Symbol `a` Bracket `a` Opened `i` Round
+	')' -> Some `a` Symbol `a` Bracket `a` Closed `i` Round
+	'{' -> Some `a` Symbol `a` Bracket `a` Opened `i` Curly
+	'}' -> Some `a` Symbol `a` Bracket `a` Closed `i` Curly
+	'<' -> Some `a` Symbol `a` Bracket `a` Opened `i` Angle
+	'>' -> Some `a` Symbol `a` Bracket `a` Closed `i` Angle
+	'[' -> Some `a` Symbol `a` Bracket `a` Opened `i` Square
+	']' -> Some `a` Symbol `a` Bracket `a` Closed `i` Square
+	'"' -> Some `a` Symbol `a` Punctuation `i` Doublequote
+	'\'' -> Some `a` Symbol `a` Punctuation `i` Singlequote
+	'.' -> Some `a` Symbol `a` Punctuation `i` Period
+	',' -> Some `a` Symbol `a` Punctuation `i` Comma
+	';' -> Some `a` Symbol `a` Punctuation `i` Semicolon
+	':' -> Some `a` Symbol `a` Punctuation `i` Colon
+	'!' -> Some `a` Symbol `a` Punctuation `i` Exclamation
+	'?' -> Some `a` Symbol `a` Punctuation `i` Question
+	'#' -> Some `a` Symbol `a` Miscellanneous `i` Hash
+	'$' -> Some `a` Symbol `a` Miscellanneous `i` Dollar
+	'%' -> Some `a` Symbol `a` Miscellanneous `i` Percent
+	'&' -> Some `a` Symbol `a` Miscellanneous `i` Ampersand
+	'*' -> Some `a` Symbol `a` Miscellanneous `i` Asterisk
+	'+' -> Some `a` Symbol `a` Miscellanneous `i` Plus
+	'-' -> Some `a` Symbol `a` Miscellanneous `i` Hyphen
+	'@' -> Some `a` Symbol `a` Miscellanneous `i` At
+	'^' -> Some `a` Symbol `a` Miscellanneous `i` Caret
+	'_' -> Some `a` Symbol `a` Miscellanneous `i` Underscore
+	'`' -> Some `a` Symbol `a` Miscellanneous `i` Grave
+	'|' -> Some `a` Symbol `a` Miscellanneous `i` Bar
+	'~' -> Some `a` Symbol `a` Miscellanneous `i` Tilde
 	'A' -> Some `a` Letter `a` Uppercase `i`A
 	'B' -> Some `a` Letter `a` Uppercase `i`B
 	'C' -> Some `a` Letter `a` Uppercase `i`C
@@ -121,17 +122,17 @@ char_to_ascii = \case
 	'x' -> Some `a` Letter `a` Lowercase `i`X
 	'y' -> Some `a` Letter `a` Lowercase `i`Y
 	'z' -> Some `a` Letter `a` Lowercase `i`Z
-	'0' -> Some `a` Decimal `i` D0
-	'1' -> Some `a` Decimal `i` D1
-	'2' -> Some `a` Decimal `i` D2
-	'3' -> Some `a` Decimal `i` D3
-	'4' -> Some `a` Decimal `i` D4
-	'5' -> Some `a` Decimal `i` D5
-	'6' -> Some `a` Decimal `i` D6
-	'7' -> Some `a` Decimal `i` D7
-	'8' -> Some `a` Decimal `i` D8
-	'9' -> Some `a` Decimal `i` D9
-	_ -> None
+	'0' -> Some `a` Number `i` D0
+	'1' -> Some `a` Number `i` D1
+	'2' -> Some `a` Number `i` D2
+	'3' -> Some `a` Number `i` D3
+	'4' -> Some `a` Number `i` D4
+	'5' -> Some `a` Number `i` D5
+	'6' -> Some `a` Number `i` D6
+	'7' -> Some `a` Number `i` D7
+	'8' -> Some `a` Number `i` D8
+	'9' -> Some `a` Number `i` D9
+	_ -> None ()
 
 instance IsString (List Char) where
 	fromString x = List (worker x) where
