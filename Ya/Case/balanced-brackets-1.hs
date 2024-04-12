@@ -27,24 +27,16 @@ analyze bracket = enter
 	`yi_yokl` Error `a` Missing `a` Closed `a` is bracket
 		`yi_rf` Error `a` Conflict `rf` Ok `aaa` (`e` bracket)
 
--- main = Construct
-  -- `o` Nonempty @List
-  -- `a` Next (Opened Angle)
-  -- `a` Next (Opened Curly)
-  -- `a` Next (Closed Curly)
-  -- `a` Next (Opened Angle)
-  -- `i` Last (Closed Square)
-  -- `yoklKL` Forwards
-
-main = Nonempty @List `a`Construct
-	`a` Next (Opened Angle)
-	`a` Next (Opened Curly)
-	`a` Next (Closed Curly)
-	`a` Next (Opened Angle)
-	`i` Last (Closed Square)
-	`yoklKL` Forwards `aaa` remember `rf` analyze
-	`rwwwww_rw` Empty @List ()
-	`yi_yokl` Ok `rf` Error `a` Missing `a` Opened `a` inspect top `cn_dp` Ok
-	`u_u_u_u_u_u` print `a` is "[ERROR] Lonely bracket"
-		`yi_rf` print `a` is "[ERROR] Mismatching brackets"
-		`yi_rf` print `a` is "[OKAY] Brackets are balanced"
+main = Construct
+ `o` Nonempty @List
+ `a` Next (Opened Angle)
+ `a` Next (Opened Curly)
+ `a` Next (Closed Curly)
+ `a` Next (Opened Angle)
+ `i` Last (Closed Square)
+ `yoklKL` Forwards `aaa` remember `rf` analyze
+ `rwwwww_rw` Empty @List ()
+ `yi_yokl` Ok `rf` Error `a` Missing `a` Opened `a` inspect top `cn_dp` Ok
+ `u_u_u_u_u_u` print `a` is "[ERROR] Lonely bracket"
+   `yi_rf` print `a` is "[ERROR] Mismatching brackets"
+   `yi_rf` print `a` is "[OKAY] Brackets are balanced"
