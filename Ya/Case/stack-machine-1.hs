@@ -8,7 +8,7 @@ import "base" Data.Int (Int)
 import "base" Data.String (String)
 import "base" Data.List ((++))
 import "base" Text.Show (Show (show))
-import "base" System.IO (IO, print, putChar, putStr)
+import "base" System.IO (IO, putStr)
 import Prelude ((+))
 
 type Immediate v = v
@@ -21,28 +21,31 @@ pattern Immediate x = This x :: Command v
 
 pattern Operation x = That x :: Command v
 
-type Processing v = State `TI` List v `JT` Halts `TI` v
+type Processing v = State `TI` List v `JT` Halts
 
-load :: Immediate v `ARR` Processing v
-load v = enter
-	`yukl` push @List v `u` State
+load :: Immediate v `ARR` Processing v v
+load v = enter @(Processing _)
+ `yukl` push @List v `u` State
 
-eval :: Operation v `ARR` Processing v
-eval op = enter
-	`yukl` pop @List `u` State `u` try
-	`lm_dp` pop @List `u` State `u` try
-	`yokl` op `o` push @List `o` State
+eval :: Operation v `ARR` Processing v v
+eval op = enter @(Processing _)
+ `yukl` pop @List `u` State `u` try
+ `lm_dp` pop @List `u` State `u` try
+ `yokl` op `o` push @List `o` State
 
-main = Nonempty @List `a` Construct
+print = pass `aaa` is @(List ASCII) "[ERROR] No operands!" `oo_yoklKL` Forwards `a` output
+ `yi_yi_rf` pass `aaa` is @(List ASCII) "[OK] Traced output: " `oo_yoklKL` Forwards `a` output
+   `cn_dp` (`yoklKL` Forwards `aaa` show `o` putStr `oo_yukl` Space `u` Signal `u` output)
+
+main = Construct
+ `o` Nonempty @List
  `a` Next (Immediate 1)
  `a` Next (Immediate 2)
  `a` Next (Operation ((+) `j_`))
  `a` Next (Immediate 4)
  `i` Last (Operation ((+) `j_`))
- `yoklKL` Forwards
+ `yoklKL` Forwards @(Processing Int)
    `aaaa` Immediate `v` load
      `rf` Operation `v` eval
  `rwwwww_rw` Empty @List ()
- `u_u_u_u_u_u` is "[ERROR] No operands!" `o` putStr
-   `yi_rf` pass `aaa` is "[OK] Traced: " `o` putStr
-   `cn_dp` (`yoklKL` Forwards `aaa` show `o` putStr `o_yukl` putChar ' ')
+ `u_u_u_u_u_u` print
