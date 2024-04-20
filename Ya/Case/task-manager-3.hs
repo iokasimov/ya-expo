@@ -25,9 +25,9 @@ type Bullet = () `ML` ()
 pattern Bullet = This () :: Bullet
 pattern Cursor = That () :: Bullet
 
-line :: List ASCII -> Task -> IO ()
 line prefix (Task status title) =
- prefix `yoklKL` output `o` Forwards
+ prefix `u` as @(List ASCII)
+   `yoklKL` output `o` Forwards
  `yi_yi_yukl` as @(List ASCII)
    `yiiiii` is "TODO " `rf` is "DONE " `yi` status
    `yoklKL` output `o` Forwards
@@ -53,19 +53,22 @@ type Command = Vertical `ML` Status
 pattern Move v = This v :: Command
 pattern Mark s = That s :: Command
 
-keypress :: Char `ARR` Optional Command
-keypress 'j' = Some `i` Move Up
-keypress 'k' = Some `i` Move Down
-keypress 'T' = Some `i` Mark TODO
-keypress 'D' = Some `i` Mark DONE
-keypress _ = None ()
+command :: ASCII `ARR` Optional Command
+command (Letter (Lowercase J)) = Some `i` Move Up
+command (Letter (Lowercase K)) = Some `i` Move Down
+command (Letter (Uppercase T)) = Some `i` Mark TODO
+command (Letter (Uppercase D)) = Some `i` Mark DONE
+command _ = None ()
+
+-- command :: ASCII `ARR` Optional Command
+-- command = match @Letter `a_a` match @
 
 main = forever `o` unwrap `o` unwrap
  `yi_yi_yi_yi` enter @(State `TI` Scrolling List Task `JT` IO)
    `yi_yukl` refresh
    `yi_yukl` review `u` State
    `yi_yokl` render
-   `yi_yukl` until `yii` getChar `yo` keypress
+   `yi_yukl` until `yii` input `yo` command
    `yi_yokl` handle
  `yi_yi_yi_yi` transform `aaa` Construct `o` Nonempty @List
    `aaaaaa` Next `yi` Task TODO "Apply to that new position"

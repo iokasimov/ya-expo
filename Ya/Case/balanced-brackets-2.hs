@@ -45,7 +45,8 @@ main = ("fn main() { println(\"hello, world!\") }" :: List ASCII)
    `aaaaa` match @Symbol `a_a` match @Bracket
     `yi_yi` remember `o_yo` (Symbol `a` Bracket `a` Opened)
       `rf` consider `o_yo` (Symbol `a` Bracket `a` Closed)
-    `yi_yi` intro `a` Symbol `yi_yi` intro @ASCII
+    `yi_yi` intro `a` Symbol
+    `yi_yi` intro @ASCII
   `rwwwww_rw` Empty @List ()
   `yi_yokl` remnants
   `u_u_u_u_u_u` Error `a` Conflict `v` is "[ERROR] Mismatching brackets" `o` print

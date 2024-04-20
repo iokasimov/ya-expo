@@ -19,7 +19,7 @@ prepare = do
 	hSetEcho stdin Base.False
 	putStr "\ESC[?25l"
 
-input :: IO `TI` Optional ASCII
+input :: IO `TI` ASCII
 input = getChar `yo` char_to_ascii
 
 output :: ASCII -> IO ()
