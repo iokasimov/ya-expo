@@ -17,28 +17,26 @@ type Operation v = v `LM` v `ARR` v
 
 type Command v = Immediate v `ML` Operation v
 
-pattern Immediate x = This x :: Command v
-
-pattern Operation x = That x :: Command v
+pattern Immediate x = This x
+pattern Operation x = That x
 
 type Processing v = State `TI` List v `JT` Halts
 
-load :: Immediate v `ARR` Processing v v
 load v = enter @(Processing _)
  `yukl` push @List v `u` State
 
-eval :: Operation v `ARR` Processing v v
 eval op = enter @(Processing _)
  `yukl` pop @List `u` State `u` try
  `lm_dp` pop @List `u` State `u` try
- `yokl` op `o` push @List `o` State
+ `yokl` op `u` as @(Operation _)
+  `o` push @List `o` State
 
 print = pass `aaa` is @(List ASCII) "[ERROR] No operands!" `oo_yoklKL` Forwards `a` output
  `yi_yi_rf` pass `aaa` is @(List ASCII) "[OK] Traced output: " `oo_yoklKL` Forwards `a` output
    `cn_dp` (`yoklKL` Forwards `aaa` show `o` putStr `oo_yukl` Space `u` Signal `u` output)
 
 main = Construct
- `o` Nonempty @List
+ `o` Nonempty @List @(Command Int)
  `a` Next (Immediate 1)
  `a` Next (Immediate 2)
  `a` Next (Operation ((+) `j_`))
