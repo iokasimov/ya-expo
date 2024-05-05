@@ -135,9 +135,9 @@ char_to_ascii = \case
 	_ -> error "Not ASCII!"
 
 instance IsString (List Char) where
-	fromString x = List (worker x) where
-		worker (c : []) = Last c
-		worker (c : cs) = Next c (worker cs)
+ fromString x = T_TT_I (Some (Construct (worker x))) where
+  worker (c : []) = Last c
+  worker (c : cs) = Next c (worker cs)
 
 -- char_to_ascii_with_error :: Char -> ASCII
 -- char_to_ascii_with_error x =
@@ -145,6 +145,6 @@ instance IsString (List Char) where
 	-- (char_to_ascii x)
 
 instance IsString (List ASCII) where
-	fromString x = List (worker x) where
-		worker (c : []) = Last (char_to_ascii c)
-		worker (c : cs) = Next (char_to_ascii c) (worker cs)
+ fromString x = T_TT_I (Some (Construct (worker x))) where
+  worker (c : []) = Last (char_to_ascii c)
+  worker (c : cs) = Next (char_to_ascii c) (worker cs)

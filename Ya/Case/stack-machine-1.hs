@@ -29,7 +29,7 @@ eval op = enter @(Processing _)
  `yukl` pop @List `u` State `u` try
  `lm_dp` pop @List `u` State `u` try
  `yokl` op `u` as @(Operation _)
-  `o` push @List `o` State
+ `o` push @List `o` State
 
 print = pass `aaa` is @(List ASCII) "[ERROR] No operands!" `oo_yoklKL` Forwards `a` output
  `yi_yi_rf` pass `aaa` is @(List ASCII) "[OK] Traced output: " `oo_yoklKL` Forwards `a` output
