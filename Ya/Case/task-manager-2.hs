@@ -26,9 +26,9 @@ main = forever `o` unwrap `o` unwrap
 	`yi_yi_yi_yi` enter @(State `TI` Scrolling List Task `JT` IO)
 		`yi_yukl` Terminal.prepare `yukl` Terminal.clear
 		`yi_yukl` review `u` State @(Scrolling List Task)
-		`yi_yokl` (`yoklKL` line Bullet `o` putStrLn `o` Backwards)
+		`yi_yokl` (`yoklKL` line Bullet `o` putStrLn `o` Back)
 			`cn_dp` (`yoklKL` line Cursor `o` putStrLn)
-			`cn_dp` (`yoklKL` line Bullet `o` putStrLn `o` Forwards)
+			`cn_dp` (`yoklKL` line Bullet `o` putStrLn `o` Fore)
 		`yi_yukl` until `yii` getChar `yo` keypress
 		`yi_yokl` pass `a` State `aaa` scroll @List @Task
 	`yi_yi_yi_yi` transform `a` (Construct `o` Nonempty @List)

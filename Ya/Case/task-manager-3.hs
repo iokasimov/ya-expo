@@ -27,11 +27,11 @@ pattern Cursor = That () :: Bullet
 
 line prefix (Task status title) =
  prefix `u` as @(List ASCII)
-   `yoklKL` output `o` Forwards
+   `yoklKL` output `o` Fore
  `yi_yi_yukl` as @(List ASCII)
    `yiiiii` is "TODO " `rf` is "DONE " `yi` status
-   `yoklKL` output `o` Forwards
- `yi_yi_yukl` title `yoklKL` output `o` Forwards
+   `yoklKL` output `o` Fore
+ `yi_yi_yukl` title `yoklKL` output `o` Fore
  `yi_yi_yukl` Newline `u` Signal `u` output
 
 refresh = Terminal.prepare
@@ -39,14 +39,14 @@ refresh = Terminal.prepare
      `yukl` Newline `u` Signal `u` output
 
 render = as @(Scrolling List Task)
- `oooo` (`yoklKL` line "    " `o` Backwards)
+ `oooo` (`yoklKL` line "    " `o` Back)
  `cn_dp` (`yoklKL` line " -> ")
- `cn_dp` (`yoklKL` line "    " `o` Forwards)
+ `cn_dp` (`yoklKL` line "    " `o` Fore)
 
 handle :: Command -> State `TI` Scrolling List Task `TI` ()
 handle = pass `a` State `aaa` scroll @List @Task
     `yi_rf` pass `a` State `aaa` switch
-     `oo_a` part @Focused `o` has @Task `o` has @Status
+     `oo_a` section @Focused `o` field @Task `o` field @Status
 
 type Command = Vertical `ML` Status
 

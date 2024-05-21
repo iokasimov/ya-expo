@@ -26,19 +26,15 @@ type Processing v = State `TI` List v `JT` Halts `TI` v
 main = (Nonempty @List `a` Construct
  `a` Next (Immediate 1)
  `a` Next (Immediate 2)
- `a` Next (Operation ((+) `j_`))
+ `a` Next (Operation ((+) `j'`))
  `a` Next (Immediate 4)
- `i` Last (Operation ((+) `j_`))
-
- `yi_yoklKL` Forwards @(State `TI` List Int `JT` Halts)
-  `aaaaaaa` Immediate
-    `vvvv` intro @Int
-    `oo_yokl` push @List `o` State @(List Int)
-   `yi_yi_rf`  Operation
-    `vvvvv` pop @List `u` State `u` try
+ `i` Last (Operation ((+) `j'`))
+ `yi_yoklKL` Fore @(State `TI` List Int `JT` Halts)
+  `aaaaaaa` intro @Int `oo_yokl` push @List `o` State @(List Int)
+   `yi_yi_rf` pop @List `u` State `u` try
      `lm_dp` pop @List `u` State `u` try
      `yokl_a` push @List `o` State @(List Int)
   ) `rwwwww_rw` Empty @List ()
-  `u_u_u_u_u_u` is "[ERROR] No operands!" `o` putStr
+  `uuuuuu` is "[ERROR] No operands!" `o` putStr
     `yi_rf` pass `aaa` is "[OK] Traced: " `o` putStr
-    `cn_dp` (`yoklKL` Forwards `aaa` show `o` putStr `o_yukl` putChar ' ')
+    `cn_dp` (`yoklKL` Fore `aaa` show `o` putStr `o_yukl` putChar ' ')

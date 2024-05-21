@@ -11,9 +11,9 @@ type Task = String
 line :: Task `ARR` String
 line title = " - " ++ title
 
-main = Nonempty @List `a` Construct
-	`a` Next "Apply to that new position"
-	`a` Next "Find a way to fix ligatures"
-	`a` Next "Organize a boardgame session"
-	`i` Last "Buy a water gun for Songkran"
-	`yoklKL` line `o` putStrLn `o` Forwards
+main = literal @(Nonempty List)
+ `yiiiii` "Apply to that new position" `u` as @Task
+     `lm` "Find a way to fix ligatures" `u` as @Task
+     `lm` "Organize a boardgame session" `u` as @Task
+     `lm` "Buy a water gun for Songkran" `u` as @Task
+ `yoklKL` line `o` putStrLn `o` Fore
