@@ -9,27 +9,27 @@ import "base" GHC.Err (error)
 import "base" System.IO (IO, getChar)
 
 char :: ASCII -> Char
-char = is '\BS' `rf` is '\HT' `rf` is '\LF' `rf` is '\ESC' `rf` is '\SP' `rf` is '\DEL'
-	`yi_yi_rf` is '/' `rf` is '\\'
-	  `yi_rf` (is '(' `rf` is '{' `rf` is '<' `rf` is '['
-		`yi_rf` is ')' `rf` is '}' `rf` is '>' `rf` is ']')
-		`yi_rf` is '\"' `rf` is '\'' `rf` is '.'
-			`rf` is ',' `rf` is ';' `rf` is ':' `rf` is '!' `rf` is '?'
-		`yi_rf` is '#' `rf` is '$' `rf` is '%' `rf` is '&'
-			`rf` is '*' `rf` is '+' `rf` is '-' `rf` is '@'
-			`rf` is '^' `rf` is '_' `rf` is '`' `rf` is '|' `rf` is '~'
-	`yi_yi_rf` is 'A' `rf` is 'B' `rf` is 'C' `rf` is 'D' `rf` is 'E' `rf` is 'F'
-			`rf` is 'G' `rf` is 'H' `rf` is 'I' `rf` is 'J' `rf` is 'K' `rf` is 'L'
-			`rf` is 'M' `rf` is 'N' `rf` is 'O' `rf` is 'P' `rf` is 'Q' `rf` is 'R'
-			`rf` is 'S' `rf` is 'T' `rf` is 'U' `rf` is 'V' `rf` is 'W' `rf` is 'X'
-			`rf` is 'Y' `rf` is 'Z'
-		`yi_rf` is 'a' `rf` is 'b' `rf` is 'c' `rf` is 'd' `rf` is 'e' `rf` is 'f'
-			`rf` is 'g' `rf` is 'h' `rf` is 'i' `rf` is 'j' `rf` is 'k' `rf` is 'l'
-			`rf` is 'm' `rf` is 'n' `rf` is 'o' `rf` is 'p' `rf` is 'q' `rf` is 'r'
-			`rf` is 's' `rf` is 't' `rf` is 'u' `rf` is 'v' `rf` is 'w' `rf` is 'x'
-			`rf` is 'y' `rf` is 'z'
-	`yi_yi_rf` is '0' `rf` is '1' `rf` is '2' `rf` is '3' `rf` is '4'
-			`rf` is '5' `rf` is '6' `rf` is '7' `rf` is '8' `rf` is '9'
+char = but '\BS' `rf` but '\HT' `rf` but '\LF' `rf` but '\ESC' `rf` but '\SP' `rf` but '\DEL'
+	`yi_yi_rf` but '/' `rf` but '\\'
+	  `yi_rf` (but '(' `rf` but '{' `rf` but '<' `rf` but '['
+		`yi_rf` but ')' `rf` but '}' `rf` but '>' `rf` but ']')
+		`yi_rf` but '\"' `rf` but '\'' `rf` but '.'
+			`rf` but ',' `rf` but ';' `rf` but ':' `rf` but '!' `rf` but '?'
+		`yi_rf` but '#' `rf` but '$' `rf` but '%' `rf` but '&'
+			`rf` but '*' `rf` but '+' `rf` but '-' `rf` but '@'
+			`rf` but '^' `rf` but '_' `rf` but '`' `rf` but '|' `rf` but '~'
+	`yi_yi_rf` but 'A' `rf` but 'B' `rf` but 'C' `rf` but 'D' `rf` but 'E' `rf` but 'F'
+			`rf` but 'G' `rf` but 'H' `rf` but 'I' `rf` but 'J' `rf` but 'K' `rf` but 'L'
+			`rf` but 'M' `rf` but 'N' `rf` but 'O' `rf` but 'P' `rf` but 'Q' `rf` but 'R'
+			`rf` but 'S' `rf` but 'T' `rf` but 'U' `rf` but 'V' `rf` but 'W' `rf` but 'X'
+			`rf` but 'Y' `rf` but 'Z'
+		`yi_rf` but 'a' `rf` but 'b' `rf` but 'c' `rf` but 'd' `rf` but 'e' `rf` but 'f'
+			`rf` but 'g' `rf` but 'h' `rf` but 'i' `rf` but 'j' `rf` but 'k' `rf` but 'l'
+			`rf` but 'm' `rf` but 'n' `rf` but 'o' `rf` but 'p' `rf` but 'q' `rf` but 'r'
+			`rf` but 's' `rf` but 't' `rf` but 'u' `rf` but 'v' `rf` but 'w' `rf` but 'x'
+			`rf` but 'y' `rf` but 'z'
+	`yi_yi_rf` but '0' `rf` but '1' `rf` but '2' `rf` but '3' `rf` but '4'
+			`rf` but '5' `rf` but '6' `rf` but '7' `rf` but '8' `rf` but '9'
 
 char_to_ascii :: Char -> ASCII
 char_to_ascii = \case
@@ -146,5 +146,12 @@ instance IsString (List Char) where
 
 instance IsString (List ASCII) where
  fromString x = T_TT_I (Some (Construct (worker x))) where
+  worker (c : []) = Last (char_to_ascii c)
+  worker (c : cs) = Next (char_to_ascii c) (worker cs)
+
+-- instance IsString (List Latin) where
+
+instance IsString (Construction Optional ASCII) where
+ fromString x = Construct (worker x) where
   worker (c : []) = Last (char_to_ascii c)
   worker (c : cs) = Next (char_to_ascii c) (worker cs)

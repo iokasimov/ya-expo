@@ -22,27 +22,19 @@ remember shape = enter
 consider shape = enter
   @(State `TI` List Shape `JT` Error Imbalanced)
   `yi_yukl` pop @List `u` State
-  `yi_yokl` Error `a` Missing `a` Closed `a` is shape
+  `yi_yokl` Error `a` Missing `a` Closed `a` but shape
     `yi_rf` (`e` shape)
     -- `ooo` Mismatch -- `a` as @(Mismatched Shape)
     `ooo` Error `a` Mismatch
       `rf` Ok
 
--- TODO: is there a way to use `Mismatch` here?
-
-    -- `yi_rf` Error `a` Conflict `a` as @(Mismatched Shape) `rf` Ok `aaa` (`e` shape)
-
-
-  -- `yi_yokl` None `vvv` (Error `a` Missing `a` Closed `a` is shape)
-    -- `yi_rf` Some `vvv` (Error `a` Conflict `rf` Ok `aaa` same shape)
-
 -- remnants = Empty @List `v` Ok
      -- `rf` Nonempty @List `v` inspect top `o` Opened `o` Missing `o` Error
 remnants = Ok
      `rf` inspect top `o` Opened `o` Missing `o` Error
-  `aaaaa` unwrap `o` this @(List Shape)
+  `aaa'` this @(List Shape)
 
--- TODO: our main task here is to accept full ASCII on input
+-- TODO: our main task here but to accept full ASCII on input
 -- handler :: ASCII `ARR` State `TI` List Shape `JT` Error Imbalanced `TI` ASCII
 -- handler = intro `a` Signal
  -- `yi_yi_yi_rf` intro `a` Symbol `a` Slashes
@@ -53,15 +45,15 @@ remnants = Ok
  -- `yi_yi_yi_rf` intro `a` Letter
  -- `yi_yi_yi_rf` intro `a` Number
 
-main = "fn main() { println(\"hello, world!\") }" `u` as @(List ASCII)
+main = on @List "fn main() { println('hello, world!') }"
  `yoklKL` Fore @(State `TI` List Shape `JT` Error Imbalanced)
  `aaaaa` match @Symbol `a_a` match @Bracket
    `yi_yi` remember `o_yo` (Symbol `a` Bracket `a` Opened)
      `rf` consider `o_yo` (Symbol `a` Bracket `a` Closed)
    `yi_yi` intro `a` Symbol
    `yi_yi` intro @ASCII
- `rwwwww_rw` Empty @List ()
+ `yiii'_yi'` Empty @List ()
  `yi_yokl` remnants
- `uuuuuu` is "[ERROR] Mismatching brackets" `o` print
-   `yi_rf` is "[ERROR] Lonely bracket" `o` print
-   `yi_rf` is "[OKAY] Brackets are balanced" `o` print
+ `uuuuuu` but "[ERROR] Mismatching brackets" `o` print
+   `yi_rf` but "[ERROR] Lonely bracket" `o` print
+   `yi_rf` but "[OKAY] Brackets are balanced" `o` print
