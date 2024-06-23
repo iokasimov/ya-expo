@@ -6,35 +6,31 @@ import Ya.Expo.Terminal
 
 import "base" System.IO (print)
 
-type Enclosed = Shape `LM` Shape
+type Curved = ()
 
-type Imbalance = Enclosed `ML` Bracket
+type Parenthesis = Curved `ML` Curved
 
-pattern Mismatch x = This x :: Imbalance
-pattern Missing x = That x :: Imbalance
+remember p = enter
+ @(State `TI` List Curved `JT` Error Parenthesis)
+ `yukl` push @List p `u` State
 
-remember bracket = enter
- @(State (List Shape) `JT` Error Imbalance)
- `yukl` push @List bracket `u` State
-
-analyze bracket = enter
- @(State `TI` List Shape `JT` Error Imbalance)
+analyze _ = enter
+ @(State `TI` List Curved `JT` Error Parenthesis)
  `yi_yukl` pop @List `u` State
- `yi_yokl` Error `a` Missing `a` Closed `aaa` but bracket
-   `yi_rf` Error `a` Mismatch `rf` Valid `aaa` (`e` bracket)
+ `yi_yokl` Error `a` Closed `rf` Valid
 
 example =
- is @Bracket
- `yi` Opened Angle
- `lm` Opened Curly
- `lm` Closed Curly
- `lm` Opened Angle
- `lm` Closed Square
+ is @Parenthesis
+ `yi` Opened ()
+ -- `lm` Opened ()
+ `lm` Closed ()
+ -- `lm` Opened ()
+ -- `lm` Closed ()
 
-main = example `u` as @(Nonempty List) @Bracket
+main = example `u` as @(Nonempty List) @Parenthesis
  `yoklKL` Fore `aaa` remember `rf` analyze
  `yiii'_yi'` Empty @List ()
- `yi_yokl` Ok `rf` Error `a` Missing `a` Opened `a` inspect top `cn_dp` Ok
+ `yi_yokl` Ok `rf` Error `a` Opened `a` inspect top `cn_dp` Ok
  `uuuuuu` print `a` but "[ERROR] Lonely bracket"
    `yi_rf` print `a` but "[ERROR] Mismatching brackets"
    `yi_rf` print `a` but "[OKAY] Brackets are balanced"

@@ -41,7 +41,7 @@ type Morse = () `ML` ()
 pattern Dot e = This e :: Morse
 pattern Dash e = That e :: Morse
 
-type Table = U_I_I LM `T_TT_I` Optional `TI` Binary Tree Latin
+type Table = Supertype (Forest (Binary Tree) Latin)
 
 -- TODO: now I understand what I should do
 -- ..... I need to use `find` method of `Dict` class
