@@ -39,9 +39,10 @@ refresh = Terminal.prepare
      `yukl` Newline `u` Signal `u` output
 
 render = is @(Scrolling List Task)
+    `o` unwrap @Arrow @(Scrolling List Task)
+    `o` unwrap @Arrow @((U_T_I_TT_I LM Only (Situation List)) Task)
  `oooo` (`yoklKL` line " -> ")
- `cn_dp` ((`yoklKL` line "    " `o` Back)
- `cn_dp` (`yoklKL` line "    " `o` Fore))
+ `cn_dp` (unwrap @Arrow @((U_I_I LM `T_TT_I` List) Task) `o` unwrap @Arrow `ooo` (`yoklKL` line "    " `o` Back) `cn_dp` (`yoklKL` line "    " `o` Fore))
 
 handle :: Command -> State `TI` Scrolling List Task `TI` ()
 handle = pass `a` State `aaa` scroll @List @Task

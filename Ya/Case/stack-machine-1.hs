@@ -30,20 +30,21 @@ eval op = enter @(Processing _)
  `yokl` op `u` is @(Operation _)
  `o` push @List `o` State
 
-print = pass `aaa` but @(List ASCII) "[ERROR] No operands!" `oo_yoklKL` Fore `a` output
- `yi_yi_rf` pass `aaa` but @(List ASCII) "[OK] Traced output: " `oo_yoklKL` Fore `a` output
-   `cn_dp` (`yoklKL` Fore `aaa` show `o` putStr `oo_yukl` Space `u` Signal `u` output)
+print = unwrap @Arrow @(Optional _)
+ `oooooo` (pass `aaa` but @(List ASCII) "[ERROR] No operands!" `oo_yoklKL` Fore `a` output
+ `yi_yi_rf` unwrap @Arrow
+  `oooo` pass `aaa` but @(List ASCII) "[OK] Traced output: " `oo_yoklKL` Fore `a` output
+   `cn_dp` (`yoklKL` Fore `aaa` show `o` putStr `oo_yukl` Space `u` Signal `u` output))
 
-example = is
- `yi` Immediate 1
- `lm` Immediate 2
- `lm` Operation ((+) `j'`)
- `lm` Immediate 4
- `lm` Operation ((+) `j'`)
-
-main = example
+main = is @(Command Integer)
+     `yi` Immediate 1
+     `lm` Immediate 2
+     `lm` Operation ((+) `j'`)
+     `lm` Immediate 4
+     `lm` Operation ((+) `j'`)
  `uuuuu` as @(Nonempty List) @(Command Integer)
  `yoklKL` Fore @(Processing Integer)
  `aaaaa` load `a` is @(Immediate Integer)
      `rf` eval `a` is @(Operation Integer)
- `yiii'_yi'` Empty @List () `uuuuuu` print
+ `yiii'_yi'` Empty @List ()
+ `uuuuuu` print

@@ -23,15 +23,15 @@ consider shape = enter
   @(State `TI` List Shape `JT` Error Imbalanced)
   `yi_yukl` pop @List `u` State
   `yi_yokl` Error `a` Missing `a` Closed `a` but shape
-    `yi_rf` (`e` shape)
-    -- `ooo` Mismatch -- `a` as @(Mismatched Shape)
-    `ooo` Error `a` Mismatch
-      `rf` Ok
+    `yi_rf` ((`e` shape) `o` unwrap @Arrow)
+    `ooo` Error `a` Mismatch `rf` Ok
+    `aaaa` unwrap @Arrow
 
 -- remnants = Empty @List `v` Ok
      -- `rf` Nonempty @List `v` inspect top `o` Opened `o` Missing `o` Error
-remnants = Ok
-     `rf` inspect top `o` Opened `o` Missing `o` Error
+remnants = ((Ok
+     `rf` inspect top `o` Opened `o` Missing `o` Error)
+    `aa` unwrap @Arrow `a` unwrap @Arrow)
   `aaa'` this @(List Shape)
 
 -- TODO: our main task here but to accept full ASCII on input
@@ -54,6 +54,7 @@ main = on @List "fn main() { println('hello, world!') }"
    `yi_yi` intro @ASCII
  `yiii'_yi'` Empty @List ()
  `yi_yokl` remnants
- `uuuuuu` but "[ERROR] Mismatching brackets" `o` print
-   `yi_rf` but "[ERROR] Lonely bracket" `o` print
+ `uuuuuu` (but "[ERROR] Mismatching brackets" `o` print
+   `yi_rf` but "[ERROR] Lonely bracket" `o` print)
    `yi_rf` but "[OKAY] Brackets are balanced" `o` print
+   `aaaa` unwrap @Arrow

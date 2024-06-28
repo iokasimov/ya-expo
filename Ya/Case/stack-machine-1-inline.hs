@@ -35,6 +35,7 @@ main = (Nonempty @List `a` Construct
      `lm_dp` pop @List `u` State `u` try
      `yokl_a` push @List `o` State @(List Int)
   ) `yiii'_yi'` Empty @List ()
-  `uuuuuu` but "[ERROR] No operands!" `o` putStr
-    `yi_rf` pass `aaa` but "[OK] Traced: " `o` putStr
+  `uuuuuu` (unwrap @Arrow `oooo`
+    but "[ERROR] No operands!" `o` putStr
+    `yi_rf` pass `aaa` but "[OK] Traced: " `o` putStr)
     `cn_dp` (`yoklKL` Fore `aaa` show `o` putStr `o_yukl` putChar ' ')
