@@ -54,10 +54,10 @@ pattern Move v = This v :: Command
 pattern Mark s = That s :: Command
 
 command :: ASCII `ARR` Optional Command
-command (Letter (Lowercase J)) = Some `i` Move Up
-command (Letter (Lowercase K)) = Some `i` Move Down
-command (Letter (Uppercase T)) = Some `i` Mark TODO
-command (Letter (Uppercase D)) = Some `i` Mark DONE
+command (Letter (Lowercase J)) = Some `yi` Move `i` Up ()
+command (Letter (Lowercase K)) = Some `yi` Move `i` Down () 
+command (Letter (Uppercase T)) = Some `yi` Mark `i` TODO
+command (Letter (Uppercase D)) = Some `yi` Mark `i` DONE
 command _ = None ()
 
 -- command :: ASCII `ARR` Optional Command

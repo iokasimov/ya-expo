@@ -20,11 +20,11 @@ remember bracket = enter
 analyze bracket = enter
  @(State `TI` List Shape `JT` Error Imbalance)
  `yi_yukl` pop @List `u` State
- `yi_yokl` unwrap @Arrow `ooooo` Error `a` Missing `a` Closed `aaa` but bracket
-   `yi_rf` Error `a` Mismatch `rf` Valid `aaa` (`e` bracket) `o` unwrap @Arrow
+ `yi_yokl` Error `a` Missing `a` Closed `aaa` but bracket
+   `yi_rf'` Error `a` Mismatch `rf` Valid `aaa` (`e` bracket)
 
-remnant = unwrap @Arrow `o` unwrap @Arrow `ooo` Ok
- `rf` Error `a` Missing `a` Opened
+remnant = Ok
+ `yi'_rf'` Error `a` Missing `a` Opened
  `a` inspect top `a` on @(Nonempty List)
 
 main = is @Bracket
@@ -42,6 +42,5 @@ main = is @Bracket
  `uuuuuu` on @List @ASCII
  `aaaaa` but "[ERROR] Lonely bracket"
      `rf` but "[ERROR] Mismatching brackets"
-     `rf` but "[OKAY] Brackets are balanced"
- `aaaaa` unwrap @Arrow
+     `rf'` but "[OKAY] Brackets are balanced"
  `yoklKL` Fore `a` output

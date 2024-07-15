@@ -59,7 +59,6 @@ main = Dot () `lm` Dash () `lm` Dot () `uuu` as @(Nonempty List)
  `yoklKL` Fore @(State Table `JT` Halts)
  `aaaaa` intro `o_yokl` jump `o_yokl` on @Halts `o_yokl` trim
  `yiii'_yi'` morse_code_tree
- `uuuuuu` unwrap @Arrow
-  `oooo` but "[ERROR] Letter was not found!"
-     `rf` that `o'_yo` (Letter `a` Uppercase)
+ `uuuuuu`but "[ERROR] Letter was not found!"
+     `rf'` that `o'_yo` (Letter `a` Uppercase)
  `yoklKL` Fore `a` output

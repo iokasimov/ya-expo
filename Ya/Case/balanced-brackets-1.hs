@@ -17,8 +17,7 @@ remember p = enter
 analyze _ = enter
  @(State `TI` List Curved `JT` Error Parenthesis)
  `yi_yukl` pop @List `u` State
- `yi_yokl` unwrap @Arrow `ooo` Error `a` Closed
-    `rf` Valid
+ `yi_yokl` Error `a` Closed `rf'` Valid
 
 example =
  is @Parenthesis
@@ -28,11 +27,10 @@ example =
  -- `lm` Opened ()
  -- `lm` Closed ()
 
-main = example `u` as @(Nonempty List) @Parenthesis
+main = print `a` but "[ERROR] Lonely bracket"
+  `yi_rf` print `a` but "[ERROR] Mismatching brackets"
+  `yi_rf'` print `a` but "[OKAY] Brackets are balanced"
+ `yi_yi_yi_yi` example `u` as @(Nonempty List) @Parenthesis
  `yoklKL` Fore `aaa` remember `rf` analyze
  `yiii'_yi'` Empty @List ()
- `yi_yokl` ((Ok `rf` Error `a` Opened `a` inspect top `aaa` unwrap @Arrow `a` unwrap @Arrow) `cn_dp` Ok) `aaaa` unwrap @Arrow
- `uuuuuu` (print `a` but "[ERROR] Lonely bracket"
-   `yi_rf` print `a` but "[ERROR] Mismatching brackets")
-   `yi_rf` print `a` but "[OKAY] Brackets are balanced"
-   `aaaa` unwrap @Arrow -- `a` unwrap @Arrow
+ `yi_yokl` Ok `yi'_rf'` Error `a` Opened `a` inspect top `yi_cn'_dp` Ok
