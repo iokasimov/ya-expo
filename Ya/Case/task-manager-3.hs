@@ -1,58 +1,79 @@
 import Ya
 
 import "base" System.IO (IO)
-import "ya-expo" Ya.Expo.Instances ()
 import "ya-ascii" Ya.ASCII
+import "ya-expo" Ya.Expo.Instances ()
+
+import qualified "ya-expo" Ya.Expo.Terminal as Console
 import "ya-expo" Ya.Expo.ASCII
-
-import "ya-expo" Ya.Expo.Terminal as Terminal
-
-type Status = () `ML` ()
 
 type Title = List ASCII
 
-pattern TODO = This () :: Status
-pattern DONE = That () :: Status
+type Mark = Unit `ML` Unit
 
-type Task = Status `LM` Title
+pattern TODO e = This e :: Mark
+pattern DONE e = That e :: Mark
 
-type Command = Vertical `ML` Status
+type Move = Unit `ML` Unit
 
-pattern Move v = This v :: Command
-pattern Mark s = That s :: Command
+type Task = Mark `LM` Title
 
-line point status title =
- on @List point `yoklKL` Fore `a` output
- `yi_yi_yukl` but "TODO " `rf` but "DONE " `yi` status `uu` on @List
-   `yoklKL` Fore `a` output
- `yi_yi_yukl` title `yoklKL` Fore `a` output
- `yi_yi_yukl` Newline `u` Signal `u` output
+pattern Task m t = These m t :: Task
 
-pressed k p =
- k `e` p `yui` () `yiu` ()
+type Command = Move `ML` Mark
 
-key x = on @Optional
- `yi_yi_yi` J `u` Lowercase `u` Letter `u` pressed x `u` Maybe
-   `lm_ds` K `u` Lowercase `u` Letter `u` pressed x `u` Maybe
- `yi_lm_ds` T `u` Uppercase `u` Letter `u` pressed x `u` Maybe
-   `lm_ds` D `u` Uppercase `u` Letter `u` pressed x `u` Maybe
+pattern Move x = This x :: Command
+pattern Mark x = That x :: Command
 
-initial = is @Task
- `yi_yi` TODO `lm` is @Title `i` "Apply to that new position"
- `yi_lm` DONE `lm` is @Title `i` "Find a way to fix ligatures"
- `yi_lm` TODO `lm` is @Title `i` "Organize a boardgame session"
- `yi_lm` DONE `lm` is @Title `i` "Buy a water gun for Songkran"
+-- TODO: try to use this operator here! `yo'ha` 
 
-main = forever
- `yi_yi_yi` enter @(State `TI` Scrolling List Task `JT` IO)
-   `yukl` Terminal.prepare `yukl` Terminal.clear
-   `yukl` State `yii` review `aa` sub @(Situation List) `o'` rep Backwards
-     `yokl_yoklKL` (line "  - " `j'`) `o` Back
-   `yukl` State `yii` review `aa` sub @Focused
-     `yokl_yoklKL` (line " -> " `j'`)
-   `yukl` State `yii` review `aa` sub @(Situation List) `o'` rep Forwards
-     `yokl_yoklKL` (line "  - " `j'`) `o` Fore
-   `yukl` until `yii` input `yo` key
-     `yokl` (pass `a` State `aaa` scroll @List @Task `aaa` Up `rf` Down)
-       `rf` (pass `a` State `aaa` switch @Status `oo_a` sub @Only `o'` has)
- `yi_yi'_yi'` initial `u` as @(Nonempty List) `u` transform @(Scrolling List)
+pattern Bullet = This Unit
+pattern Cursor = That Unit
+
+string cursor status title = enter @IO
+ `yukkk` Forward `he` hand cursor `yokl` Console.output
+ `yukkk` Forward `he` mark status `yokl` Console.output
+ `yukkk` Forward @List `he` title `yokl` Console.output
+ `yukkk` Once `hee` Caret Newline `yokl` Console.output
+
+hand = is @Title `haaa` is `hu` "  -  " `la` is `hu` "  -> "
+mark = is @Title `haaa` is `hu` "TODO " `la` is `hu` "DONE "
+
+press k f p = Maybe `heeee` k `hd'q` p `yui` Unit `yiu` f Unit
+
+type Shifted = Shafted List
+
+draft = enter @(State `T_I` Scrolling List Task `JNT` IO)
+ `yukkkk` Console.prepare `lu'yp` Console.clear
+ `yukkkk` State `heee` Transition `he` auto
+  `haa'he` at @(Shifted Task)
+   `ho'he` at @(Reverse List Task)
+ `yokkkk'yokl` (string Bullet `hj`)
+ `yukkkk` State `heee` Transition `he` auto
+  `haa'he` at @(Focused Task)
+ `yokkkk'yokl` (string Cursor `hj`)
+ `yukkkk` State `heee` Transition `he` auto
+  `haa'he` at @(Shifted Task)
+   `ho'he` at @(Forward List Task)
+ `yokkkk'yokl` (string Bullet `hj`)
+ `yukkkk` Console.input `yokkkk` Retry
+ `haaaaa` press K (Move `ha` Down)
+ `lo'ys'la` press J (Move `ha` Lift)
+   `laaa` press T (Mark `ha` TODO)
+ `lo'ys'la` press D (Mark `ha` DONE)
+   `laaa` is @Number `hu` None ()
+   `laaa` is @Symbol `hu` None ()
+   `laaa` is @Signal `hu` None ()
+ `yokkkk` State `haaa` Transition `haa` scroll `ho'ho` (`yui` Unit)
+  `laaaa` State `haaa` Transition `haa` switch `ho'ho` (`yui` Unit)
+ `hoo'ha'he` at @(Focused Task) `ho'he` at @Mark
+ `yokkkk` Again `ha` Once
+
+main = draft `heeee'he` to @(Scrolling List)
+ `ha` as @(Nonempty List) @Task `heee` is
+ `li` Task `he` TODO () `he` "Apply to that new position"
+ `lu` Task `he` DONE () `he` "Find a way to fix ligatures"
+ `lu` Task `he` TODO () `he` "Organize a boardgame session"
+ `lu` Task `he` DONE () `he` "Buy a water gun for Songkran"
+
+-- TODO: `q` to exit the loop
