@@ -6,132 +6,151 @@ import Ya.ASCII
 import "base" Data.Char (Char)
 import "base" Data.String (IsString (fromString))
 import "base" GHC.Err (error)
+import "base" GHC.IsList (IsList (Item, toList, fromList))
+import "base" GHC.Integer (Integer)
 import "base" System.IO (IO, getChar)
+import "base" Text.Show (show)
 
-char :: ASCII -> Char
-char = but '\BS' `rf` but '\HT' `rf` but '\LF' `rf` but '\ESC' `rf` but '\SP' `rf` but '\DEL'
-	`yi_yi_rf` but '/' `rf` but '\\'
-	  `yi_rf` (but '(' `rf` but '{' `rf` but '<' `rf` but '['
-		`yi_rf` but ')' `rf` but '}' `rf` but '>' `rf` but ']')
-		`yi_rf` but '\"' `rf` but '\'' `rf` but '.'
-			`rf` but ',' `rf` but ';' `rf` but ':' `rf` but '!' `rf` but '?'
-		`yi_rf` but '#' `rf` but '$' `rf` but '%' `rf` but '&'
-			`rf` but '*' `rf` but '+' `rf` but '-' `rf` but '@'
-			`rf` but '^' `rf` but '_' `rf` but '`' `rf` but '|' `rf` but '~'
-	`yi_yi_rf` but 'A' `rf` but 'B' `rf` but 'C' `rf` but 'D' `rf` but 'E' `rf` but 'F'
-			`rf` but 'G' `rf` but 'H' `rf` but 'I' `rf` but 'J' `rf` but 'K' `rf` but 'L'
-			`rf` but 'M' `rf` but 'N' `rf` but 'O' `rf` but 'P' `rf` but 'Q' `rf` but 'R'
-			`rf` but 'S' `rf` but 'T' `rf` but 'U' `rf` but 'V' `rf` but 'W' `rf` but 'X'
-			`rf` but 'Y' `rf` but 'Z'
-		`yi_rf` but 'a' `rf` but 'b' `rf` but 'c' `rf` but 'd' `rf` but 'e' `rf` but 'f'
-			`rf` but 'g' `rf` but 'h' `rf` but 'i' `rf` but 'j' `rf` but 'k' `rf` but 'l'
-			`rf` but 'm' `rf` but 'n' `rf` but 'o' `rf` but 'p' `rf` but 'q' `rf` but 'r'
-			`rf` but 's' `rf` but 't' `rf` but 'u' `rf` but 'v' `rf` but 'w' `rf` but 'x'
-			`rf` but 'y' `rf` but 'z'
-	`yi_yi_rf` but '0' `rf` but '1' `rf` but '2' `rf` but '3' `rf` but '4'
-			`rf` but '5' `rf` but '6' `rf` but '7' `rf` but '8' `rf` but '9'
+caret_to_char :: Caret -> Char
+caret_to_char = but '\BS' `la` but '\HT' `la` but '\LF' `la` but '\ESC' `la` but '\SP' `la` but '\DEL'
+
+bracket_to_char :: Bracket -> Char
+bracket_to_char = but '(' `la` but '{' `la` but '<' `la` but '['
+            `laa` but ')' `la` but '}' `la` but '>' `la` but ']'
+
+punctuation_to_char :: Punctuation -> Char
+punctuation_to_char = but '\"' `la` but '\'' `la` but '#' `la` but '-' `la` but '@'
+ `la` but '^' `la` but '_' `la` but '`' `la` but '|' `la` but '~'
+ `la` but '+' `la` but '*' `la` but '%' `la` but '&' `la` but '$' `la` but '\\' `la` but '/'
+ `la` but '.' `la` but ',' `la` but ';' `la` but ':' `la` but '!' `la` but '?'
+
+upper_latin_to_char :: Latin -> Char
+upper_latin_to_char = but 'A' `la` but 'B' `la` but 'C' `la` but 'D' `la` but 'E' `la` but 'F'
+ `la` but 'G' `la` but 'H' `la` but 'I' `la` but 'J' `la` but 'K' `la` but 'L'
+ `la` but 'M' `la` but 'N' `la` but 'O' `la` but 'P' `la` but 'Q' `la` but 'R'
+ `la` but 'S' `la` but 'T' `la` but 'U' `la` but 'V' `la` but 'W' `la` but 'X'
+ `la` but 'Y' `la` but 'Z'
+
+lower_latin_to_char :: Latin -> Char
+lower_latin_to_char = but 'a' `la` but 'b' `la` but 'c' `la` but 'd' `la` but 'e' `la` but 'f'
+ `la` but 'g' `la` but 'h' `la` but 'i' `la` but 'j' `la` but 'k' `la` but 'l'
+ `la` but 'm' `la` but 'n' `la` but 'o' `la` but 'p' `la` but 'q' `la` but 'r'
+ `la` but 's' `la` but 't' `la` but 'u' `la` but 'v' `la` but 'w' `la` but 'x'
+ `la` but 'y' `la` but 'z'
+
+digit_to_char :: Number -> Char
+digit_to_char = but '0' `la` but '1' `la` but '2' `la` but '3' `la` but '4' `la` but '5' `la` but '6' `la` but '7' `la` but '8' `la` but '9'
+
+ascii_to_char :: ASCII -> Char
+ascii_to_char = is
+  `li` lower_latin_to_char
+  `la` upper_latin_to_char
+ `laa` digit_to_char
+ `laa` bracket_to_char
+  `la` punctuation_to_char
+ `laa` caret_to_char
 
 char_to_ascii :: Char -> ASCII
 char_to_ascii = \case
-	'\BS' -> Signal Backspace
-	'\HT' -> Signal Tab
-	'\LF' -> Signal Newline
-	'\ESC' -> Signal Escape
-	'\SP' -> Signal Space
-	'\DEL' -> Signal Delete
-	'/' -> Symbol `a` Slashes `i` This ()
-	'\\' -> Symbol `a` Slashes `i` That ()
-	'(' -> Symbol `a` Bracket `a` Opened `i` Round
-	')' -> Symbol `a` Bracket `a` Closed `i` Round
-	'{' -> Symbol `a` Bracket `a` Opened `i` Curly
-	'}' -> Symbol `a` Bracket `a` Closed `i` Curly
-	'<' -> Symbol `a` Bracket `a` Opened `i` Angle
-	'>' -> Symbol `a` Bracket `a` Closed `i` Angle
-	'[' -> Symbol `a` Bracket `a` Opened `i` Square
-	']' -> Symbol `a` Bracket `a` Closed `i` Square
-	'"' -> Symbol `a` Punctuation `i` Doublequote
-	'\'' -> Symbol `a` Punctuation `i` Singlequote
-	'.' -> Symbol `a` Punctuation `i` Period
-	',' -> Symbol `a` Punctuation `i` Comma
-	';' -> Symbol `a` Punctuation `i` Semicolon
-	':' -> Symbol `a` Punctuation `i` Colon
-	'!' -> Symbol `a` Punctuation `i` Exclamation
-	'?' -> Symbol `a` Punctuation `i` Question
-	'#' -> Symbol `a` Miscellanneous `i` Hash
-	'$' -> Symbol `a` Miscellanneous `i` Dollar
-	'%' -> Symbol `a` Miscellanneous `i` Percent
-	'&' -> Symbol `a` Miscellanneous `i` Ampersand
-	'*' -> Symbol `a` Miscellanneous `i` Asterisk
-	'+' -> Symbol `a` Miscellanneous `i` Plus
-	'-' -> Symbol `a` Miscellanneous `i` Hyphen
-	'@' -> Symbol `a` Miscellanneous `i` At
-	'^' -> Symbol `a` Miscellanneous `i` Caret
-	'_' -> Symbol `a` Miscellanneous `i` Underscore
-	'`' -> Symbol `a` Miscellanneous `i` Grave
-	'|' -> Symbol `a` Miscellanneous `i` Bar
-	'~' -> Symbol `a` Miscellanneous `i` Tilde
-	'A' -> Letter `a` Uppercase `i`A
-	'B' -> Letter `a` Uppercase `i`B
-	'C' -> Letter `a` Uppercase `i`C
-	'D' -> Letter `a` Uppercase `i`D
-	'E' -> Letter `a` Uppercase `i`E
-	'F' -> Letter `a` Uppercase `i`F
-	'G' -> Letter `a` Uppercase `i`G
-	'H' -> Letter `a` Uppercase `i`H
-	'I' -> Letter `a` Uppercase `i`I
-	'J' -> Letter `a` Uppercase `i`J
-	'K' -> Letter `a` Uppercase `i`K
-	'L' -> Letter `a` Uppercase `i`L
-	'M' -> Letter `a` Uppercase `i`M
-	'N' -> Letter `a` Uppercase `i`N
-	'O' -> Letter `a` Uppercase `i`O
-	'P' -> Letter `a` Uppercase `i`P
-	'Q' -> Letter `a` Uppercase `i`Q
-	'R' -> Letter `a` Uppercase `i`R
-	'S' -> Letter `a` Uppercase `i`S
-	'T' -> Letter `a` Uppercase `i`T
-	'U' -> Letter `a` Uppercase `i`U
-	'V' -> Letter `a` Uppercase `i`V
-	'W' -> Letter `a` Uppercase `i`W
-	'X' -> Letter `a` Uppercase `i`X
-	'Y' -> Letter `a` Uppercase `i`Y
-	'Z' -> Letter `a` Uppercase `i`Z
-	'a' -> Letter `a` Lowercase `i`A
-	'b' -> Letter `a` Lowercase `i`B
-	'c' -> Letter `a` Lowercase `i`C
-	'd' -> Letter `a` Lowercase `i`D
-	'e' -> Letter `a` Lowercase `i`E
-	'f' -> Letter `a` Lowercase `i`F
-	'g' -> Letter `a` Lowercase `i`G
-	'h' -> Letter `a` Lowercase `i`H
-	'i' -> Letter `a` Lowercase `i`I
-	'j' -> Letter `a` Lowercase `i`J
-	'k' -> Letter `a` Lowercase `i`K
-	'l' -> Letter `a` Lowercase `i`L
-	'm' -> Letter `a` Lowercase `i`M
-	'n' -> Letter `a` Lowercase `i`N
-	'o' -> Letter `a` Lowercase `i`O
-	'p' -> Letter `a` Lowercase `i`P
-	'q' -> Letter `a` Lowercase `i`Q
-	'r' -> Letter `a` Lowercase `i`R
-	's' -> Letter `a` Lowercase `i`S
-	't' -> Letter `a` Lowercase `i`T
-	'u' -> Letter `a` Lowercase `i`U
-	'v' -> Letter `a` Lowercase `i`V
-	'w' -> Letter `a` Lowercase `i`W
-	'x' -> Letter `a` Lowercase `i`X
-	'y' -> Letter `a` Lowercase `i`Y
-	'z' -> Letter `a` Lowercase `i`Z
-	'0' -> Number `i` D0
-	'1' -> Number `i` D1
-	'2' -> Number `i` D2
-	'3' -> Number `i` D3
-	'4' -> Number `i` D4
-	'5' -> Number `i` D5
-	'6' -> Number `i` D6
-	'7' -> Number `i` D7
-	'8' -> Number `i` D8
-	'9' -> Number `i` D9
+	'\BS' -> Caret Backspace
+	'\HT' -> Caret Tab
+	'\LF' -> Caret Newline
+	'\ESC' -> Caret Escape
+	'\SP' -> Caret Space
+	'\DEL' -> Caret Delete
+	'/' -> Glyph `ha` Symbol `ha` Punctuation `ha` Back `ha` Slash `he` ()
+	'\\' -> Glyph `ha` Symbol `ha` Punctuation `ha` Slash `he` ()
+	'(' -> Glyph `ha` Symbol `ha` Bracket `ha` Opened `li` Round
+	')' -> Glyph `ha` Symbol `ha` Bracket `ha` Closed `li` Round
+	'{' -> Glyph `ha` Symbol `ha` Bracket `ha` Opened `li` Curly
+	'}' -> Glyph `ha` Symbol `ha` Bracket `ha` Closed `li` Curly
+	'<' -> Glyph `ha` Symbol `ha` Bracket `ha` Opened `li` Angle
+	'>' -> Glyph `ha` Symbol `ha` Bracket `ha` Closed `li` Angle
+	'[' -> Glyph `ha` Symbol `ha` Bracket `ha` Opened `li` Square
+	']' -> Glyph `ha` Symbol `ha` Bracket `ha` Closed `li` Square
+	'"' -> Glyph `ha` Symbol `ha` Punctuation `ha` Doublequote `he` ()
+	'\'' -> Glyph `ha` Symbol `ha` Punctuation `ha` Singlequote `he` ()
+	'.' -> Glyph `ha` Symbol `ha` Punctuation `ha` Period `he` ()
+	',' -> Glyph `ha` Symbol `ha` Punctuation `ha` Comma `he` ()
+	';' -> Glyph `ha` Symbol `ha` Punctuation `ha` Semicolon `he` ()
+	':' -> Glyph `ha` Symbol `ha` Punctuation `ha` Colon `he` ()
+	'!' -> Glyph `ha` Symbol `ha` Punctuation `ha` Exclam `he` ()
+	'?' -> Glyph `ha` Symbol `ha` Punctuation `ha` Question `he` ()
+	'#' -> Glyph `ha` Symbol `ha` Punctuation `ha` Hash `he` ()
+	'$' -> Glyph `ha` Symbol `ha` Punctuation `ha` Dollar `he` ()
+	'%' -> Glyph `ha` Symbol `ha` Punctuation `ha` Percent `he` ()
+	'&' -> Glyph `ha` Symbol `ha` Punctuation `ha` Ampersand `he` ()
+	'*' -> Glyph `ha` Symbol `ha` Punctuation `ha` Asterisk `he` ()
+	'+' -> Glyph `ha` Symbol `ha` Punctuation `ha` Plus `he` ()
+	'-' -> Glyph `ha` Symbol `ha` Punctuation `ha` Hyphen `he` ()
+	'@' -> Glyph `ha` Symbol `ha` Punctuation `ha` At `he` ()
+	'^' -> Glyph `ha` Symbol `ha` Punctuation `ha` Circumflex `he` ()
+	'_' -> Glyph `ha` Symbol `ha` Punctuation `ha` Underscore `he` ()
+	'`' -> Glyph `ha` Symbol `ha` Punctuation `ha` Grave `he` ()
+	'|' -> Glyph `ha` Symbol `ha` Punctuation `ha` Bar `he` ()
+	'~' -> Glyph `ha` Symbol `ha` Punctuation `ha` Tilde `he` ()
+	'A' -> Glyph `ha` Letter `ha` Upper `li`A
+	'B' -> Glyph `ha` Letter `ha` Upper `li`B
+	'C' -> Glyph `ha` Letter `ha` Upper `li`C
+	'D' -> Glyph `ha` Letter `ha` Upper `li`D
+	'E' -> Glyph `ha` Letter `ha` Upper `li`E
+	'F' -> Glyph `ha` Letter `ha` Upper `li`F
+	'G' -> Glyph `ha` Letter `ha` Upper `li`G
+	'H' -> Glyph `ha` Letter `ha` Upper `li`H
+	'I' -> Glyph `ha` Letter `ha` Upper `li`I
+	'J' -> Glyph `ha` Letter `ha` Upper `li`J
+	'K' -> Glyph `ha` Letter `ha` Upper `li`K
+	'L' -> Glyph `ha` Letter `ha` Upper `li`L
+	'M' -> Glyph `ha` Letter `ha` Upper `li`M
+	'N' -> Glyph `ha` Letter `ha` Upper `li`N
+	'O' -> Glyph `ha` Letter `ha` Upper `li`O
+	'P' -> Glyph `ha` Letter `ha` Upper `li`P
+	'Q' -> Glyph `ha` Letter `ha` Upper `li`Q
+	'R' -> Glyph `ha` Letter `ha` Upper `li`R
+	'S' -> Glyph `ha` Letter `ha` Upper `li`S
+	'T' -> Glyph `ha` Letter `ha` Upper `li`T
+	'U' -> Glyph `ha` Letter `ha` Upper `li`U
+	'V' -> Glyph `ha` Letter `ha` Upper `li`V
+	'W' -> Glyph `ha` Letter `ha` Upper `li`W
+	'X' -> Glyph `ha` Letter `ha` Upper `li`X
+	'Y' -> Glyph `ha` Letter `ha` Upper `li`Y
+	'Z' -> Glyph `ha` Letter `ha` Upper `li`Z
+	'a' -> Glyph `ha` Letter `ha` Lower `li`A
+	'b' -> Glyph `ha` Letter `ha` Lower `li`B
+	'c' -> Glyph `ha` Letter `ha` Lower `li`C
+	'd' -> Glyph `ha` Letter `ha` Lower `li`D
+	'e' -> Glyph `ha` Letter `ha` Lower `li`E
+	'f' -> Glyph `ha` Letter `ha` Lower `li`F
+	'g' -> Glyph `ha` Letter `ha` Lower `li`G
+	'h' -> Glyph `ha` Letter `ha` Lower `li`H
+	'i' -> Glyph `ha` Letter `ha` Lower `li`I
+	'j' -> Glyph `ha` Letter `ha` Lower `li`J
+	'k' -> Glyph `ha` Letter `ha` Lower `li`K
+	'l' -> Glyph `ha` Letter `ha` Lower `li`L
+	'm' -> Glyph `ha` Letter `ha` Lower `li`M
+	'n' -> Glyph `ha` Letter `ha` Lower `li`N
+	'o' -> Glyph `ha` Letter `ha` Lower `li`O
+	'p' -> Glyph `ha` Letter `ha` Lower `li`P
+	'q' -> Glyph `ha` Letter `ha` Lower `li`Q
+	'r' -> Glyph `ha` Letter `ha` Lower `li`R
+	's' -> Glyph `ha` Letter `ha` Lower `li`S
+	't' -> Glyph `ha` Letter `ha` Lower `li`T
+	'u' -> Glyph `ha` Letter `ha` Lower `li`U
+	'v' -> Glyph `ha` Letter `ha` Lower `li`V
+	'w' -> Glyph `ha` Letter `ha` Lower `li`W
+	'x' -> Glyph `ha` Letter `ha` Lower `li`X
+	'y' -> Glyph `ha` Letter `ha` Lower `li`Y
+	'z' -> Glyph `ha` Letter `ha` Lower `li`Z
+	'0' -> Glyph `ha` Number `ha` Zero `he` ()
+	'1' -> Glyph `ha` Number `ha` One `he` ()
+	'2' -> Glyph `ha` Number `ha` Two `he` ()
+	'3' -> Glyph `ha` Number `ha` Three `he` ()
+	'4' -> Glyph `ha` Number `ha` Four `he` ()
+	'5' -> Glyph `ha` Number `ha` Five `he` ()
+	'6' -> Glyph `ha` Number `ha` Six `he` ()
+	'7' -> Glyph `ha` Number `ha` Seven `he` ()
+	'8' -> Glyph `ha` Number `ha` Eight `he` ()
+	'9' -> Glyph `ha` Number `ha` Nine `he` ()
 	_ -> error "Not ASCII!"
 
 instance IsString (List Char) where
@@ -141,7 +160,7 @@ instance IsString (List Char) where
 
 -- char_to_ascii_with_error :: Char -> ASCII
 -- char_to_ascii_with_error x =
-	-- (error ('\'' : x : '\'' : " - is not ASCII") `rf` i)
+	-- (error ('\'' : x : '\'' : " - is not ASCII") `hs` i)
 	-- (char_to_ascii x)
 
 instance IsString (List ASCII) where
@@ -155,3 +174,18 @@ instance IsString (Construction Optional ASCII) where
  fromString x = Construct (worker x) where
   worker (c : []) = Last (char_to_ascii c)
   worker (c : cs) = Next (char_to_ascii c) (worker cs)
+
+instance IsList (Construction Optional item) where
+ type Item (Construction Optional item) = item
+ fromList x = Construct (worker x) where
+  worker (c : []) = Last c
+  worker (c : cs) = Next c (worker cs)
+
+-- instance IsList (Construction Optional item) where
+ -- type Item (Construction Optional item) = item
+ -- fromList x = Construct (worker x) where
+  -- worker (c : []) = Last c
+  -- worker (c : cs) = Next c (worker cs)
+
+integer :: Integer -> Nonempty List ASCII
+integer = show `ho` fromList `ho'yo` char_to_ascii

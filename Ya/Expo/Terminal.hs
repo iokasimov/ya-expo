@@ -8,19 +8,19 @@ import Ya.Expo.ASCII
 import "base" Data.Bool as Base (Bool (False))
 import "base" System.IO (IO, BufferMode (NoBuffering), hSetBuffering, hSetEcho, stdin, putStr, putChar, getChar)
 
-clear :: IO ()
+clear :: IO Unit
 clear = do
-	putStr "\ESC[2J"
-	putStr "\ESC[100A"
+ putStr "\ESC[2J"
+ putStr "\ESC[100A"
 
-prepare :: IO ()
+prepare :: IO Unit
 prepare = do
-	hSetBuffering stdin NoBuffering
-	hSetEcho stdin Base.False
-	putStr "\ESC[?25l"
+ hSetBuffering stdin NoBuffering
+ hSetEcho stdin Base.False
+ putStr "\ESC[?25l"
 
-input :: IO `TI` ASCII
+input :: IO ASCII
 input = getChar `yo` char_to_ascii
 
 output :: ASCII -> IO ()
-output = char `o` putChar
+output = ascii_to_char `ho` putChar
