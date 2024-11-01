@@ -16,7 +16,7 @@ caret_to_char = but '\BS' `la` but '\HT' `la` but '\LF' `la` but '\ESC' `la` but
 
 bracket_to_char :: Bracket -> Char
 bracket_to_char = but '(' `la` but '{' `la` but '<' `la` but '['
-            `laa` but ')' `la` but '}' `la` but '>' `la` but ']'
+            `la_` but ')' `la` but '}' `la` but '>' `la` but ']'
 
 punctuation_to_char :: Punctuation -> Char
 punctuation_to_char = but '\"' `la` but '\'' `la` but '#' `la` but '-' `la` but '@'
@@ -45,10 +45,10 @@ ascii_to_char :: ASCII -> Char
 ascii_to_char = is
   `li` lower_latin_to_char
   `la` upper_latin_to_char
- `laa` digit_to_char
- `laa` bracket_to_char
+ `la_` digit_to_char
+ `la_` bracket_to_char
   `la` punctuation_to_char
- `laa` caret_to_char
+ `la_` caret_to_char
 
 char_to_ascii :: Char -> ASCII
 char_to_ascii = \case
@@ -154,7 +154,7 @@ char_to_ascii = \case
 	_ -> error "Not ASCII!"
 
 instance IsString (List Char) where
- fromString x = T_TT_I (Some (Construct (worker x))) where
+ fromString x = T'TT'I (Some (Construct (worker x))) where
   worker (c : []) = Last c
   worker (c : cs) = Next c (worker cs)
 
@@ -164,7 +164,7 @@ instance IsString (List Char) where
 	-- (char_to_ascii x)
 
 instance IsString (List ASCII) where
- fromString x = T_TT_I (Some (Construct (worker x))) where
+ fromString x = T'TT'I (Some (Construct (worker x))) where
   worker (c : []) = Last (char_to_ascii c)
   worker (c : cs) = Next (char_to_ascii c) (worker cs)
 

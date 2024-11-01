@@ -17,25 +17,23 @@ deriving instance Eq Void
 deriving instance Show i => Show (Identity i)
 deriving instance (Show l, Show r) => Show (l `LM` r)
 deriving instance (Show l, Show r) => Show (l `ML` r)
-deriving instance (Show l, Show r) => Show (Straight LM l r)
-deriving instance (Show l, Show r) => Show (Straight ML l r)
-deriving instance (Show l, Show r) => Show (Opposite ML r l)
-deriving instance (Show l, Show r) => Show (Opposite LM r l)
+deriving instance (Show l, Show r) => Show (U_I_II LM l r)
+deriving instance (Show l, Show r) => Show (U_I_II ML l r)
+deriving instance (Show l, Show r) => Show (U_II_I ML r l)
+deriving instance (Show l, Show r) => Show (U_II_I LM r l)
 deriving instance Show Void
 
 instance Mapping Straight Straight Arrow Arrow IO IO
 	where mapping = rewrap / \m x -> bindIO x (returnIO `fio` m)
 
-instance Mapping Straight Straight Arrow Arrow (IO `T_TT_I` IO) IO
-	where mapping = rewrap / \m (T_TT_I ioio) -> 
-		bindIO (bindIO ioio identity) (returnIO `fio` m)
+instance Mapping Straight Straight Arrow Arrow (IO `T'TT'I` IO) IO
+ where mapping = rewrap / \m (T'TT'I ioio) -> bindIO (bindIO ioio identity) (returnIO `fio` m)
 
 instance Mapping Straight Straight Arrow Arrow (Day Straight Arrow LM LM IO IO i ii) IO
-	where mapping = rewrap / \from (U_V_UU_UUU_UUUU_T_TT_I_II_III (These (These x y) (U_I_II f)))
-		-> bindIO x (\xx -> from `compose` f `compose` These xx `fo` y)
+ where mapping = rewrap / \from (U_V_UU_UUU_UUUU_T'TT'I_II_III (These (These x y) (U_I_II f))) -> bindIO x (\xx -> from `compose` f `compose` These xx `fo` y)
 
 instance Mapping Straight Straight Arrow Arrow (Straight Arrow ()) IO
-	where mapping = rewrap / \from (U_I_II f) -> returnIO `ha` from `li` f ()
+ where mapping = rewrap / \from (U_I_II f) -> returnIO `ha` from `li` f ()
 
 returnIO :: a -> IO a
 returnIO x = IO (\ s -> (# s, x #))
