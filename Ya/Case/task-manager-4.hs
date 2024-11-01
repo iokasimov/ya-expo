@@ -37,48 +37,51 @@ pattern Cursor = That Unit
 type Shifted = Shafted List
 
 string cursor (These status title) = enter @IO
- `yukkk` Forward `he` hand cursor `yokl` Console.output
- `yukkk` Forward `he` mark status `yokl` Console.output
- `yukkk` Forward @List `he` title `yokl` Console.output
- `yukkk` Once `hee` Caret Newline `yokl` Console.output
+ `yuk__` Forward `he` hand cursor `yokl` Console.output
+ `yuk__` Forward `he` mark status `yokl` Console.output
+ `yuk__` Forward @List `he` title `yokl` Console.output
+ `yuk__` Once `he_` Caret Newline `yokl` Console.output
 
-hand = is @Title `haaa` is `hu` "  -  " `la` is `hu` "  -> "
-mark = is @Title `haaa` is `hu` "TODO " `la` is `hu` "DONE "
+hand = is @Title `ha__` is `hu` "   * " `la` is `hu` "   > "
+mark = is @Title `ha__` is `hu` "TODO " `la` is `hu` "DONE "
 
-press k f p = Maybe `heeee` k `hd'q` p `yui` Unit `yiu` f Unit
+press k f p = Maybe `he___` k `hd'q` p `yui` Unit `yiu` f Unit
 
-type Application = State `WR` Scrolling List Task `JNT` Halts `JNT` IO
+type Project = Scrolling List Task
 
-draft = enter @Application
- `yukkkk` Console.prepare `lu'yp` Console.clear
- `yukkkk` State `heee` Transition `he` auto
-  `haa'he` at @(Shafted List Task)
-   `ho'he` at @(Reverse List Task)
- `yokkkk'yokl` string Bullet
- `yukkkk` State `heee` Transition `he` auto
-  `haa'he` at @(Focused Task)
- `yokkkk'yokl` string Cursor
- `yukkkk` State `heee` Transition `he` auto
-  `haa'he` at @(Shafted List Task)
-   `ho'he` at @(Forward List Task)
- `yokkkk'yokl` string Bullet
- `yukkkk` Console.input `yokkkk` Retry
- `haaaaa` press `he` Lower K `he` (Move `ha` Down)
+type Application = State Project `JNT` Halts `JNT` IO
+
+process = enter @Application
+ `yuk_____` Console.prepare `lu'yp` Console.clear
+ `yuk_____` State `he__` Transition `he` auto
+  `ha_'he` Scope @(Shafted List Task) at
+   `ho'he` Scope @(Reverse List Task) at
+ `yok_____'yokl` string Bullet
+ `yuk_____` State `he__` Transition `he` auto
+  `ha_'he` Scope @(Focused Task) at
+ `yok_____'yokl` string Cursor
+ `yuk_____` State `he__` Transition `he` auto
+  `ha_'he` Scope @(Shafted List Task) at
+   `ho'he` Scope @(Forward List Task) at
+ `yok_____'yokl` string Bullet
+ `yuk_____` Console.input `yok__` Retry
+  `ha___` match @Letter @ASCII
+   `ho__` press `he` Lower K `he` (Move `ha` Down)
  `lo'ys'la` press `he` Lower J `he` (Move `ha` Lift)
  `lo'ys'la` press `he` Lower Q `he` (Quit)
  `lo'ys'la` press `he` Upper T `he` (Mark `ha` TODO)
  `lo'ys'la` press `he` Upper D `he` (Mark `ha` DONE)
-     `la` Wrong
- `haaaaa` match @Letter @ASCII
- `yokkkk` State `ho` to `haaa` Transition `haa` scroll `ho'ho` (`yui` Unit)
-  `laaaa` State `ho` to `haaa` Transition `haa` switch `ho'ho` (`yui` Unit)
-  `hoo'ha'he` at @(Focused Task) `ho'he` at @Mark
-  `laaaa` Close `ho` to @Application
- `yokkkk` Again `ha` Once
+     `la` Wrong `hv` is @(Number `ML` Symbol `ML` Caret)
+ `yok_____` State `ho` to `ha__` Transition `ha_` scroll `ho'ho` (`yui` Unit)
+  `la___` State `ho` to `ha__` Transition `ha_` switch `ho'ho` (`yui` Unit)
+  `ho_'ha'he` Scope @(Focused Task) at `ho'he` Scope @Mark at
+  `la___` Close `ho` to @Application
+ `yok_____` Again `ha` Once
 
-main = unwrap (draft `heeee'he` to @(Scrolling List)
- `ha` as @(Nonempty List) @Task `heee` is
+start = to @(Scrolling List) `ha` as @(Nonempty List) @Task `he__` is
  `li` Task `he` TODO () `he` "Apply to that new position"
  `lu` Task `he` DONE () `he` "Find a way to fix ligatures"
  `lu` Task `he` TODO () `he` "Organize a boardgame session"
- `lu` Task `he` DONE () `he` "Buy a water gun for Songkran")
+ `lu` Task `he` DONE () `he` "Buy a water gun for Songkran"
+
+main = unwrap (process `he'he` start)

@@ -10,27 +10,29 @@ type Curved = ()
 
 type Parenthesis = Curved `ML` Curved
 
-remember p = enter
- @(State `TI` List Curved `JT` Error Parenthesis)
- `yukl` push @List p `u` State
+-- remember p = enter
+ -- @(State `TI` List Curved `JT` Error Parenthesis)
+ -- `yuk` push @List p `hu` State
 
-analyze _ = enter
- @(State `TI` List Curved `JT` Error Parenthesis)
- `yi_yukl` pop @List `u` State
- `yi_yokl` Error `a` Closed `rf'` Valid
+-- analyze _ = enter
+ -- @(State `TI` List Curved `JT` Error Parenthesis)
+ -- `yi'yuk` pop @List `hu` State
+ -- `yi'yok` Error `ha` Closed `rfz` Valid
 
 example =
  is @Parenthesis
- `yi` Opened ()
- -- `lm` Opened ()
- `lm` Closed ()
- -- `lm` Opened ()
- -- `lm` Closed ()
+ `li` Opened ()
+ -- `lu` Opened ()
+ `lu` Closed ()
+ -- `lu` Opened ()
+ -- `lu` Closed ()
 
-main = print `a` but "[ERROR] Lonely bracket"
-  `yi_rf` print `a` but "[ERROR] Mismatching brackets"
-  `yi_rf'` print `a` but "[OKAY] Brackets are balanced"
- `yi_yi_yi_yi` example `u` as @(Nonempty List) @Parenthesis
- `yoklKL` Fore `aaa` remember `rf` analyze
- `yiii'_yi'` Empty @List ()
- `yi_yokl` Ok `yi'_rf'` Error `a` Opened `a` inspect top `yi_cn'_dp` Ok
+main = print "typechecked"
+
+-- main = (print `ha` but "[ERROR] Lonely bracket"
+ -- `yi'rf` print `ha` but "[ERROR] Mismatching brackets"
+ -- `yi'rfz` print `ha` but "[OKAY] Brackets are balanced")
+ -- `yi'yi'yi'yi` (example `hu` as @(Nonempty List) @Parenthesis
+ -- `yokl` way @Fore `haaa` remember `rf` analyze
+ -- `_yiiiii` Empty @List ()
+ -- `yi'yokl` Ok `_yi'rfz` Error `ha` Opened `ha` this `ha` unwrap top `yi'cnz'yp` Ok)

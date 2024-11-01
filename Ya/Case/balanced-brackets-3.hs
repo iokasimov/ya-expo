@@ -15,42 +15,44 @@ type Imbalanced = Shape `LM` Shape `ML` Bracket
 pattern Mismatch x = This x :: Imbalanced
 pattern Missing x = That x :: Imbalanced
 
-remember shape = enter
-  @(State (List Shape) `JT` Error Imbalanced)
-  `yukl` push @List shape `u` State
+-- remember shape = enter
+  -- @(State (List Shape) `JT` Error Imbalanced)
+  -- `yuk` push @List shape `hu` State
 
-consider shape = enter
-  @(State `TI` List Shape `JT` Error Imbalanced)
-  `yi_yukl` pop @List `u` State
-  `yi_yokl` Error `a` Missing `a` Closed `a` but shape
-    `yi_rf'` (`e` shape) `ooo` Error `a` Mismatch `rf` Ok
+-- consider shape = enter
+  -- @(State `TI` List Shape `JT` Error Imbalanced)
+  -- `yi'yuk` pop @List `hu` State
+  -- `yi'yok` Error `ha` Missing `ha` Closed `ha` but shape
+    -- `yi'rfz` (`e` shape) `hooo` Error `ha` Mismatch `rf` Ok
 
 -- remnants = Empty @List `v` Ok
-     -- `rf` Nonempty @List `v` inspect top `o` Opened `o` Missing `o` Error
-remnants = Ok
-  `yi'_rf'` inspect top `o` Opened `o` Missing `o` Error
-  `aaaa'` this @(List Shape)
+     -- `rf` Nonempty @List `v` inspect top `ho` Opened `ho` Missing `ho` Error
+-- remnants = Ok
+  -- `_yi'rfz` unwrap top `ho`this @Shape `ho` Opened `ho` Missing `ho` Error
+  -- `haaaaz` this @(List Shape)
 
 -- TODO: our main task here but to accept full ASCII on input
 -- handler :: ASCII `ARR` State `TI` List Shape `JT` Error Imbalanced `TI` ASCII
--- handler = intro `a` Signal
- -- `yi_yi_yi_rf` intro `a` Symbol `a` Slashes
-   -- `yi_yi_rf` remember `o_yo` (Symbol `a` Bracket `a` Opened)
-     -- `yi_rf` consider `o_yo` (Symbol `a` Bracket `a` Closed)
-   -- `yi_yi_rf` intro `a` Symbol `a` Punctuation
-   -- `yi_yi_rf` intro `a` Symbol `a` Miscellanneous
- -- `yi_yi_yi_rf` intro `a` Letter
- -- `yi_yi_yi_rf` intro `a` Number
+-- handler = intro `ha` Signal
+ -- `yi'yi'yi'rf` intro `ha` Symbol `ha` Slashes
+   -- `yi'yi'rf` remember `ho'yo` (Symbol `ha` Bracket `ha` Opened)
+     -- `yi'rf` consider `ho'yo` (Symbol `ha` Bracket `ha` Closed)
+   -- `yi'yi'rf` intro `ha` Symbol `ha` Punctuation
+   -- `yi'yi'rf` intro `ha` Symbol `ha` Miscellanneous
+ -- `yi'yi'yi'rf` intro `ha` Letter
+ -- `yi'yi'yi'rf` intro `ha` Number
 
-main = on @List "fn main() { println('hello, world!') }"
- `yoklKL` Fore @(State `TI` List Shape `JT` Error Imbalanced)
- `aaaaa` match @Symbol `a_a` match @Bracket
-   `yi_yi` remember `o_yo` (Symbol `a` Bracket `a` Opened)
-     `rf` consider `o_yo` (Symbol `a` Bracket `a` Closed)
-   `yi_yi` intro `a` Symbol
-   `yi_yi` intro @ASCII
- `yiii'_yi'` Empty @List ()
- `yi_yokl` remnants
- `uuuuuu` (but "[ERROR] Mismatching brackets" `o` print
-   `yi_rf` but "[ERROR] Lonely bracket" `o` print)
-   `yi_rf'` but "[OKAY] Brackets are balanced" `o` print
+-- main = on @List "fn main() { println('hello, world!') }"
+ -- `yokl` way @Fore @(State `TI` List Shape `JT` Error Imbalanced)
+ -- `haaaaa` match @Symbol `ha'ha` match @Bracket
+   -- `yi'yi` remember `ho'yo` (Symbol `ha` Bracket `ha` Opened)
+     -- `rf` consider `ho'yo` (Symbol `ha` Bracket `ha` Closed)
+   -- `yi'yi` intro `ha` Symbol
+   -- `yi'yi` intro @ASCII
+ -- `yiiiz'_yi` Empty @List ()
+ -- `yi'yokl` remnants
+ -- `huuuuuu` (but "[ERROR] Mismatching brackets" `ho` print
+   -- `yi'rf` but "[ERROR] Lonely bracket" `ho` print)
+   -- `yi'rfz` but "[OKAY] Brackets are balanced" `ho` print
+
+main = print "typechecked"

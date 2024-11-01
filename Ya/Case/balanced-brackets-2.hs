@@ -13,34 +13,35 @@ type Imbalance = Mismatch `ML` Bracket
 pattern Mismatch x = This x :: Imbalance
 pattern Missing x = That x :: Imbalance
 
-remember bracket = enter
- @(State (List Shape) `JT` Error Imbalance)
- `yukl` push @List bracket `u` State
+-- remember bracket = enter
+ -- @(State (List Shape) `JT` Error Imbalance)
+ -- `yuk` push @List bracket `hu` State
 
-analyze bracket = enter
- @(State `TI` List Shape `JT` Error Imbalance)
- `yi_yukl` pop @List `u` State
- `yi_yokl` Error `a` Missing `a` Closed `aaa` but bracket
-   `yi_rf'` Error `a` Mismatch `rf` Valid `aaa` (`e` bracket)
+-- analyze bracket = enter
+ -- @(State `TI` List Shape `JT` Error Imbalance)
+ -- `yi'yuk` pop @List `hu` State
+ -- `yi'yok` Error `ha` Missing `ha` Closed `haaa` but bracket
+   -- `yi'rfz` Error `ha` Mismatch `rf` Valid `haaa` (`e` bracket)
 
-remnant = Ok
- `yi'_rf'` Error `a` Missing `a` Opened
- `a` inspect top `a` on @(Nonempty List)
+-- remnant = Ok
+ -- `_yi'rfz` Error `ha` Missing `ha` Opened
+ -- `ha` this @Shape `ha` unwrap top `ha` on @(Nonempty List) @Shape
 
-main = is @Bracket
-     `yi` Opened Angle
-     `lm` Opened Curly
-     `lm` Closed Curly
-     `lm` Opened Angle
-     `lm` Closed Square
- `uuuuu` as @(Nonempty List) @Bracket
- `yoklKL` Fore @(State `TI` List Shape `JT` Error Imbalance)
- `aaaaa` is @Shape `o` remember
-     `rf` is @Shape `o` analyze
- `yiii'_yi'` Empty @List ()
- `yi_yokl` remnant `a'` this @(List Shape)
- `uuuuuu` on @List @ASCII
- `aaaaa` but "[ERROR] Lonely bracket"
-     `rf` but "[ERROR] Mismatching brackets"
-     `rf'` but "[OKAY] Brackets are balanced"
- `yoklKL` Fore `a` output
+main = print "typechecked"
+-- main = is @Bracket
+     -- `yi` Opened Angle
+     -- `lm` Opened Curly
+     -- `lm` Closed Curly
+     -- `lm` Opened Angle
+     -- `lm` Closed Square
+ -- `huuuuu` as @(Nonempty List) @Bracket
+ -- `yokl` way @Fore @(State `TI` List Shape `JT` Error Imbalance)
+ -- `haaa` is @Shape `ho` remember
+   -- `rf` is @Shape `ho` analyze
+ -- `__yiiiii` Empty @List ()
+ -- `yi'yok` remnant `ha_` this @(List Shape)
+ -- `huuuuuu` on @List @ASCII
+ -- `haaaaa` but "[ERROR] Lonely bracket"
+     -- `rf` but "[ERROR] Mismatching brackets"
+     -- `rfz` but "[OKAY] Brackets are balanced"
+ -- `yokl` way @Fore `ha` output

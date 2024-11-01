@@ -15,7 +15,7 @@ pattern Dead = This ()
 pattern Alive = That ()
 
 start :: Scrolling List Cell
-start = transform `aaa` Construct `o` Nonempty @List `yiii` Last Alive
+start = transform `haaa` Construct `ho` Nonempty @List `liii` Last Alive
 
 -- sierpinski :: Scrolling List Cell
 -- sierpinski = part @List `cn` part @Focused `cn` part @List

@@ -23,19 +23,21 @@ pattern Operation x = That x :: Command v
 
 type Processing v = State `TI` List v `JT` Halts `TI` v
 
-main = (Nonempty @List `a` Construct
- `a` Next (Immediate 1)
- `a` Next (Immediate 2)
- `a` Next (Operation ((+) `j'`))
- `a` Next (Immediate 4)
- `i` Last (Operation ((+) `j'`))
- `yi_yoklKL` Fore @(State `TI` List Int `JT` Halts)
-  `aaaaaaa` intro @Int `oo_yokl` push @List `o` State @(List Int)
-   `yi_yi_rf` pop @List `u` State `u` try
-     `lm_dp` pop @List `u` State `u` try
-     `yokl_a` push @List `o` State @(List Int)
-  ) `yiii'_yi'` Empty @List ()
-  `uuuuuu` (unwrap @Arrow `oooo`
-    but "[ERROR] No operands!" `o` putStr
-    `yi_rf` pass `aaa` but "[OK] Traced: " `o` putStr)
-    `cn_dp` (`yoklKL` Fore `aaa` show `o` putStr `o_yukl` putChar ' ')
+main = print "typechecked"
+
+-- main = (Nonempty @List `ha` Construct
+--  `ha` Next (Immediate 1)
+--  `ha` Next (Immediate 2)
+--  `ha` Next (Operation ((+) `j'`))
+--  `ha` Next (Immediate 4)
+--  `i` Last (Operation ((+) `j'`))
+--  `yi'yokl` way @Fore @(State `TI` List Int `JT` Halts)
+--   `haaaaaaa` intro @Int `hoo'yok` push @List `ho` State @(List Int)
+--    `yi'yi'rf` pop @List `hu` State `hu` try
+--      `lu'dp` pop @List `hu` State `hu` try
+--      `yokl'a` push @List `ho` State @(List Int)
+--   ) `yiiiz'_yi` Empty @List ()
+--   `huuuuuu` (unwrap @Arrow `hoooo`
+--     but "[ERROR] No operands!" `ho` putStr
+--     `yi'rf` pass `haaa` but "[OK] Traced: " `ho` putStr)
+--     `cn'dp` (`yokl` Fore `haaa` show `ho` putStr `ho'yuk` putChar ' ')

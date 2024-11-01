@@ -1,6 +1,6 @@
 import Ya
 
-import "base" System.IO (IO)
+import "base" System.IO (IO, print)
 import "ya-expo" Ya.Expo.Instances ()
 import "ya-ascii" Ya.ASCII
 import "ya-expo" Ya.Expo.ASCII
@@ -9,33 +9,34 @@ import "ya-expo" Ya.Expo.Terminal as Terminal
 
 type Task = List ASCII
 
-line point title =
- on @List point `yoklKL` Fore `a` output
- `yi_yi_yukl` title `yoklKL` Fore `a` output
- `yi_yi_yukl` Newline `u` Signal `u` output
+-- line point title =
+ -- (on @List point `yokl` way @Fore `ha` output)
+ -- `yuk` (title `yokl` way @Fore `ha` output)
+ -- `yuk` Newline `hu` Signal `hu` output
 
 pressed k p =
- k `e` p `yui` () `yiu` ()
+ q (k `lu` p) `yui` () `yiu` ()
 
-key x = on @Optional
- `yi_yi_yi` J `u` Lowercase `u` Letter `u` pressed x `u` Maybe
- `yi_lm_ds` K `u` Lowercase `u` Letter `u` pressed x `u` Maybe
+key x = is @(Optional _)
+ `li__` (Maybe `ha` pressed x `he_` Lower `ho` Letter `he` J)
+ `lu'ys` (Maybe `ha` pressed x `he_` Lower `ho` Letter `he` K)
 
-initial = as @(Nonempty List) @Task
- `yii` is @Task "Apply to that new position"
-  `lm` is @Task "Find a way to fix ligatures"
-  `lm` is @Task "Organize a boardgame session"
-  `lm` is @Task "Buy a water gun for Songkran"
+-- init = as @(Nonempty List) @Task
+ -- `lii` is @Task "Apply to that new position"
+  -- `lu` is @Task "Find a way to fix ligatures"
+  -- `lu` is @Task "Organize a boardgame session"
+  -- `lu` is @Task "Buy a water gun for Songkran"
 
-main = forever
- `yi_yi_yi` enter @(State `TI` Scrolling List Task `JT` IO)
-   `yukl` Terminal.prepare `yukl` Terminal.clear
-   `yukl` State `yii` review `aa` sub @(Situation List) `o'` rep Backwards
-     `yokl_yoklKL` line "  - " `o` Back
-   `yukl` State `yii` review `aa` sub @Focused
-     `yokl_yoklKL` line " -> "
-   `yukl` State `yii` review `aa` sub @(Situation List) `o'` rep Forwards
-     `yokl_yoklKL` line "  - " `o` Fore
-   `yukl` until `yii` input `yo` key
-     `yokl` State `a` scroll @List @Task `aaa` Up `rf` Down
- `yi_yi'_yi'` transform @(Scrolling List) initial
+main = print "typechecked"
+-- main = forever
+ -- `yi'yi'yi` enter @(State `TI` Scrolling List Task `JNT` IO)
+   -- `yuk` Terminal.prepare `yuk` Terminal.clear
+   -- `yuk` State `yi` auto `hu` Transition `haa_` (has @(Shafted List Task) `hu` Attribute) `ho_` rep (Passed ())
+     -- `yok'yokl` line "  - " `ho` way @Back
+   -- `yuk` State `yi` auto `hu` Transition `haa_` (has @(Focused Task) `hu` Attribute)
+     -- `yok'yokl` line " -> "
+   -- `yuk` State `yi` auto `hu` Transition `haa_` (has @(Shafted List Task) `hu` Attribute) `ho_` rep (Future ())
+     -- `yok'yokl` line "  - " `ho` way @Fore
+   -- `yuk` until `yi` input `yo` key
+     -- -- `yok` State `ha` scroll @List @Task `haaa` Up `rf` Down
+ -- `__yiiiii` transform @(Scrolling List) init
