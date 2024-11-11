@@ -164,6 +164,7 @@ instance IsString (List Char) where
 	-- (char_to_ascii x)
 
 instance IsString (List ASCII) where
+ fromString [] = T'TT'I (None Unit)
  fromString x = T'TT'I (Some (Construct (worker x))) where
   worker (c : []) = Last (char_to_ascii c)
   worker (c : cs) = Next (char_to_ascii c) (worker cs)
