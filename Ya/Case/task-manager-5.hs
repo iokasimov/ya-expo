@@ -1,126 +1,80 @@
 import Ya
 
-import "base" System.IO (IO, print)
+import "base" System.IO (IO)
+import "ya-expo" Ya.Expo.Instances
 import "ya-ascii" Ya.ASCII
 import "ya-expo" Ya.Expo.ASCII
-import "ya-expo" Ya.Expo.Instances
 
-import qualified "ya-expo" Ya.Expo.Terminal as Console
+import "ya-expo" Ya.Expo.Terminal as Console
 
 type Title = List ASCII
 
-type Mark = Unit `ML` Unit
+type Mark = Scroller List
 
-pattern TODO e = This e :: Mark
-pattern DONE e = That e :: Mark
-
-type Move = Unit `ML` Unit
-
-pattern Down x = This x :: Move
-pattern Lift x = That x :: Move
-
-type Quit = Unit
+pattern TODO e = This e
+pattern DONE e = That e
 
 type Task = Mark `LM` Title
 
 pattern Task m t = These m t :: Task
 
-type Command = Scroller List `ML` Mark `ML` Quit
-
-pattern Move x = This (This x) :: Command
-pattern Mark x = This (That x) :: Command
-pattern Quit x = That x :: Command
-
 pattern Bullet = This Unit
 pattern Cursor = That Unit
 
-type Shifted = Shafted List
+print cursor (These status task) = enter @IO
+ `yuk___` IO (hand `yokl` Forth `ha` Console.output)
+ `yuk___` IO (mark `yokl` Forth `ha` Console.output)
+ `yuk___` IO (task `yokl` Forth `ha` Console.output)
+ `yuk___` IO (Console.output `he` Signal Newline) where
 
-string prefix cursor (These status title) = enter @IO
- `yuk__` Forward `he` prefix `yokl` Console.output
- `yuk__` Forward `he` hand cursor `yokl` Console.output
- `yuk__` Forward `he` mark status `yokl` Console.output
- `yuk__` Forward @List `he` title `yokl` Console.output
- `yuk__` Once `he_` Caret Newline `yokl` Console.output
+ hand = is @Title `he__` is `hu` "  -  " `la` is `hu` "  -> " `li` cursor
+ mark = is @Title `he__` is `hu` "TODO " `la` is `hu` "DONE " `li` status
 
-block_tree prefix cursor tree =
-      this `ho` is @Task `ho` string prefix cursor
- `lo'yp` (that `ho` Forward `ho_'yokl` Construct `ho` block_tree (tab `ha` tab `he` prefix) Bullet) `ho'yu` Unit
- `li` unwrap (unwrap (unwrap tree))
+type Move = Unit `ML` Unit
 
-tab = that `ha` push @List (Caret Space)
+pattern Lift x = This x :: Move
+pattern Down x = That x :: Move
 
-block_scrolling_list_tree prefix cursor (U_T_I_TT_I (These focus (U_T_I_TT_I (These left right)))) = enter @IO
- `yuk__`  left `yokl` block_tree prefix Bullet
- `yuk__` focus `yokl` block_tree prefix cursor
- `yuk__` right `yokl` block_tree prefix Bullet
+type Command = Move `ML` Mark
 
-block_project :: Title -> (Unit `ML` Unit) -> Project -> IO Unit
-block_project prefix cursor project = enter @IO
- `yuk__` Console.output `he` Caret Newline
- `yuk__` block_scrolling_list_tree prefix cursor `ha` unwrap @AR
-    `ha` to @(Scrolling List `T'TT'I` Tree) `he` project
- `yuk__` enter @IO where
-
-hand = is @Title `ha__` is `hu` "   * " `la` is `hu` "  -> "
-mark = is @Title `ha__` is `hu` "TODO " `la` is `hu` "DONE "
+pattern Move x = This x :: Command
+pattern Mark x = That x :: Command
 
 press k f p = Maybe `he___` k `hd'q` p `yui` Unit `yiu` f Unit
 
-type Project = Scrolling Tree Task
-
-type Outline = Scrolling List Project
-
-type Application = State Outline `JNT` Halts `JNT` IO
-
-draft = enter @Application
- `yuk___` Console.prepare `lu'yp` Console.clear
- `yuk___` State `he___` Transition `he` auto
- `ha__'he` Scope @(Shafted List Project) at
-   `ho'he` Scope @(Reverse List Project) at
- `yok___'yokl` block_project (Empty @List Unit) Bullet
- `yuk___` State `he___` Transition `he` auto
- `ha__'he` Scope @(Focused Project) at
- `yok___'yokl` block_project (Empty @List Unit) Cursor
- `yuk___` State `he___` Transition `he` auto
- `ha__'he` Scope @(Shafted List Project) at
-   `ho'he` Scope @(Forward List Project) at
- `yok___'yokl` block_project (Empty @List Unit) Bullet
- `yuk___` Console.input `yok__` Retry
-  `ha___` match @Letter @ASCII
-   `ho__` press `he` Lower K `he` (Move `ha` Down)
- `lo'ys'la` press `he` Lower J `he` (Move `ha` Lift)
- `lo'ys'la` press `he` Lower Q `he` (Quit)
+apply = press `he` Lower J `he` (Move `ha` Down)
+ `lo'ys'la` press `he` Lower K `he` (Move `ha` Lift)
  `lo'ys'la` press `he` Upper T `he` (Mark `ha` TODO)
  `lo'ys'la` press `he` Upper D `he` (Mark `ha` DONE)
-     `la` Wrong `hv` is @(Number `ML` Symbol `ML` Caret)
- `yok___` State `ho` to `ha__` Transition `ha_` scroll `ho'ho` (`yui` Unit)
-  `la___` State `ho` to `ha__` Transition `ha_` switch `ho'ho` (`yui` Unit)
-  `ho_'ha'he` Scope @(Focused Project) at
-   `ho'he'he` Scope @((Scrolling List `T'TT'I` Tree) Task) at
-   `ho'he'he` Scope @(Focused `T'I` Tree Task) at
-   `ho'he'he'he'he` Scope @Mark at
-  `la___` Close `ho` to @Application
+ `la____` Wrong `hv` is @(Number `ML` Symbol `ML` Caret)
+
+start = to @(Scrolling List) `ha` Construct
+ `ha_` Next `he` Task (TODO ()) "Apply to that new position"
+ `ha_` Next `he` Task (TODO ()) "Find a way to fix ligatures"
+ `ha_` Next `he` Task (TODO ()) "Organize a boardgame session"
+ `he_` Last `he` Task (DONE ()) "Buy a water gun for Songkran"
+
+draft = enter @(State `WR` Scrolling List Task `JNT` IO)
+ `yuk___` Usual (Console.prepare `lu'yp` Console.clear)
+ `yuk___` State `ho` New
+  `he___` Event `he` auto
+  `ha_'he` Scope @(Shafted List Task) at
+   `ho'he` Scope @(Reverse List Task) at
+   `ho'he` Scope @(List Task) self
+ `yok___` Usual `ha_'yokl` Prior `ha` print Bullet
+ `yuk___` State `ho` New `he__` Event `he` auto
+  `ha_'he` Scope @(Focused Task) at
+ `yok___` Usual `ha_'yokl` Forth `ha` print Cursor
+ `yuk___` State `ho` New `he__` Event `he` auto
+  `ha_'he` Scope @(Shafted List Task) at
+   `ho'he` Scope @(Forward List Task) at
+   `ho'he` Scope @(List Task) self
+ `yok___` Usual `ha_'yokl` Forth `ha` print Bullet
+ `yuk___` Usual `he___` Console.input
+    `yok` Retry `ha` apply `ha` match @Letter @ASCII
+ `yok___` State `ho` New `ha__` Event `ha_` scroll `ho'ho` (`yui` Unit)
+  `la___` State `ho` New `ha__` Event `ha_` switch `ho'ho` (`yui` Unit)
+ `ho_'ha'he` Scope @(Focused Task) at `ho'he` Scope @Mark at
  `yok___` Again `ha` Once
 
-initial = Construct `ho` to @(Scrolling List)
- `ha______` Next `ha_` Tree `he` Task (TODO Unit) "Get ready for a Bangkok hackaton" `ho` to @(Scrolling Tree)
-  `ha_____` Next `he_` Node `he` Task (TODO Unit) "Purchase good round trip tickets" `he` Empty @List Unit
-  `ha_____` Next `he_` Node `he` Task (TODO Unit) "Book some room nearby Klong Toei" `he` Empty @List Unit
-  `ha_____` Next `he_` Node `he` Task (DONE Unit) "Can I take my longboard with me?" `he` Empty @List Unit
-  `ha_____` Next `ha_` Node `he` Task (DONE Unit) "Schedule activities on this week" `ha` List `ha` Some `ha` Construct
-   `ha____` Next `he_` Node `he` Task (TODO Unit) "Take some snacks from Chiang Mai" `he` Empty @List Unit
-   `he____` Last `he_` Node `he` Task (TODO Unit) "Book a yoga session some evening" `he` Empty @List Unit
-  `he_____` Last `ha_` Node `he` Task (DONE Unit) "Try to team up with ex coworkers" `ha` List `ha` Some `ha` Construct
-   `he____` Last `he_` Node `he` Task (TODO Unit) "Discuss my pitching text to them" `he` Empty @List Unit
- `he______` Last `ha_` Tree `he` Task (TODO Unit) "Hang out with guys this Saturday" `ho` to @(Scrolling Tree)
-  `ha_____` Next `he_` Node `he` Task (TODO Unit) "Invite him, her, them and others" `he` Empty @List Unit
-  `ha_____` Next `ha_` Node `he` Task (TODO Unit) "Clean the room, pick a boardgame" `ha` List `ha` Some `ha` Construct
-   `ha____` Next `he_` Node `he` Task (DONE Unit) "(5) Oath, Pax Pamir and DerrocAr" `he` Empty @List Unit
-   `he____` Last `he_` Node `he` Task (TODO Unit) "(2-4) Arcs, Brass or Sammu Ramat" `he` Empty @List Unit
-  `he_____` Last `ha_` Node `he` Task (DONE Unit) "Download Switch local coop games" `ha` List `ha` Some `ha` Construct
-   `ha____` Next `he_` Node `he` Task (TODO Unit) "Check if controllers are charged" `he` Empty @List Unit
-   `ha____` Next `he_` Node `he` Task (TODO Unit) "Prioritize on Boomerang Fu first" `he` Empty @List Unit
-   `he____` Last `he_` Node `he` Task (TODO Unit) "Keep Talking and Nobody Explodes" `he` Empty @List Unit
-
-main = unwrap (draft `he'he` initial)
+main = draft `he'he` start

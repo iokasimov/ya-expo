@@ -1,87 +1,71 @@
 import Ya
 
-import "base" System.IO (IO, print)
+import "base" System.IO (IO)
+import "ya-expo" Ya.Expo.Instances
 import "ya-ascii" Ya.ASCII
 import "ya-expo" Ya.Expo.ASCII
-import "ya-expo" Ya.Expo.Instances
 
-import qualified "ya-expo" Ya.Expo.Terminal as Console
+import "ya-expo" Ya.Expo.Terminal as Console
 
 type Title = List ASCII
 
 type Mark = Unit `ML` Unit
 
-pattern TODO e = This e :: Mark
-pattern DONE e = That e :: Mark
-
-type Move = Unit `ML` Unit
-
-pattern Down x = This x :: Move
-pattern Lift x = That x :: Move
-
-type Quit = Unit
+pattern TODO = This Unit
+pattern DONE = That Unit
 
 type Task = Mark `LM` Title
 
 pattern Task m t = These m t :: Task
 
-type Command = Move `ML` Mark `ML` Quit
-
-pattern Move x = This (This x) :: Command
-pattern Mark x = This (That x) :: Command
-pattern Quit x = That x :: Command
-
 pattern Bullet = This Unit
 pattern Cursor = That Unit
 
-type Shifted = Shafted List
+print cursor (These status task) = enter @IO
+ `yuk___` IO (hand `yokl` Forth `ha` Console.output)
+ `yuk___` IO (mark `yokl` Forth `ha` Console.output)
+ `yuk___` IO (task `yokl` Forth `ha` Console.output)
+ `yuk___` IO (Console.output `he` Signal Newline) where
 
-string cursor (These status title) = enter @IO
- `yuk__` Forward `he` hand cursor `yokl` Console.output
- `yuk__` Forward `he` mark status `yokl` Console.output
- `yuk__` Forward @List `he` title `yokl` Console.output
- `yuk__` Once `he_` Caret Newline `yokl` Console.output
+ hand = is @Title `he__` is `hu` "  -  " `la` is `hu` "  -> " `li` cursor
+ mark = is @Title `he__` is `hu` "TODO " `la` is `hu` "DONE " `li` status
 
-hand = is @Title `ha__` is `hu` "   * " `la` is `hu` "   > "
-mark = is @Title `ha__` is `hu` "TODO " `la` is `hu` "DONE "
+type Move = Scroller List
+
+pattern Lift x = This x :: Move
+pattern Down x = That x :: Move
 
 press k f p = Maybe `he___` k `hd'q` p `yui` Unit `yiu` f Unit
 
-type Project = Scrolling List Task
+apply = press `he` Lower J `he` Down
+ `lo'ys'la` press `he` Lower K `he` Lift
+ `la____` Wrong `hv` is @(Number `ML` Symbol `ML` Caret)
 
-type Application = State Project `JNT` Halts `JNT` IO
+start = to @(Scrolling List) `ha` Construct
+ `ha_` Next `he` Task TODO "Apply to that new position"
+ `ha_` Next `he` Task TODO "Find a way to fix ligatures"
+ `ha_` Next `he` Task TODO "Organize a boardgame session"
+ `he_` Last `he` Task DONE "Buy a water gun for Songkran"
 
-process = enter @Application
- `yuk_____` Console.prepare `lu'yp` Console.clear
- `yuk_____` State `he__` Transition `he` auto
+draft = enter @(State `WR` Scrolling List Task `JNT` IO)
+ `yuk___` IO (Console.prepare `lu'yp` Console.clear)
+ `yuk___` State `ho` New
+  `he___` Event `he` auto
   `ha_'he` Scope @(Shafted List Task) at
    `ho'he` Scope @(Reverse List Task) at
- `yok_____'yokl` string Bullet
- `yuk_____` State `he__` Transition `he` auto
+   `ho'he` Scope @(List Task) self
+ `yok___` IO `ha_'yokl` Prior `ha` print Bullet
+ `yuk___` State `ho` New `he__` Event `he` auto
   `ha_'he` Scope @(Focused Task) at
- `yok_____'yokl` string Cursor
- `yuk_____` State `he__` Transition `he` auto
+ `yok___` IO `ha_'yokl` Forth `ha` print Cursor
+ `yuk___` State `ho` New `he__` Event `he` auto
   `ha_'he` Scope @(Shafted List Task) at
    `ho'he` Scope @(Forward List Task) at
- `yok_____'yokl` string Bullet
- `yuk_____` Console.input `yok__` Retry
-  `ha___` match @Letter @ASCII
-   `ho__` press `he` Lower K `he` (Move `ha` Down)
- `lo'ys'la` press `he` Lower J `he` (Move `ha` Lift)
- `lo'ys'la` press `he` Lower Q `he` (Quit)
- `lo'ys'la` press `he` Upper T `he` (Mark `ha` TODO)
- `lo'ys'la` press `he` Upper D `he` (Mark `ha` DONE)
-     `la` Wrong `hv` is @(Number `ML` Symbol `ML` Caret)
- `yok_____` State `ho` to `ha__` Transition `ha_` scroll `ho'ho` (`yui` Unit)
-  `la___` State `ho` to `ha__` Transition `ha_` switch `ho'ho` (`yui` Unit)
-  `ho_'ha'he` Scope @(Focused Task) at `ho'he` Scope @Mark at
-  `la___` Close `ho` to @Application
- `yok_____` Again `ha` Once
+   `ho'he` Scope @(List Task) self
+ `yok___` IO `ha_'yokl` Forth `ha` print Bullet
+ `yuk___` IO `he___` Console.input
+    `yok` Retry `ha` apply `ha` match @Letter @ASCII
+ `yok___` State `ho` New `ha` Event `ha` scroll
+ `yok___` Again `ha` Once
 
-start = to @(Scrolling List) `ha` as @(Nonempty List) @Task `he__` is
- `li` Task `he` TODO () `he` "Apply to that new position"
- `lu` Task `he` DONE () `he` "Find a way to fix ligatures"
- `lu` Task `he` TODO () `he` "Organize a boardgame session"
- `lu` Task `he` DONE () `he` "Buy a water gun for Songkran"
-
-main = unwrap (process `he'he` start)
+main = draft `he'he` start

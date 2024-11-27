@@ -1,22 +1,23 @@
 import Ya
 
-import "ya-expo" Ya.Expo.Instances ()
 import "ya-ascii" Ya.ASCII
+import "ya-expo" Ya.Expo.ASCII
+import "ya-expo" Ya.Expo.Instances
 
-import qualified "ya-expo" Ya.Expo.Terminal as Terminal
+import "base" System.IO (IO)
 
-import "base" System.IO (print)
+import qualified "ya-expo" Ya.Expo.Terminal as Console
 
-type Task = List ASCII
+type Title = List ASCII
 
--- example = is
- -- `li` is @Task "Apply to that new position"
- -- `lu` is @Task "Find a way to fix ligatures"
- -- `lu` is @Task "Organize a boardgame session"
- -- `lu` is @Task "Buy a water gun for Songkran"
+initial = Construct `ho` Nonempty @List
+ `ha_` Next `he` "Apply to that new position"
+ `ha_` Next `he` "Find a way to fix ligatures"
+ `ha_` Next `he` "Organize a boardgame session"
+ `he_` Last `he` "Buy a water gun for Songkran"
 
-main = print "typechecked"
--- main = as @(Nonempty List) @Task example
- -- `yokl` by @Fore
- -- `haaa` (`yokl` by @Fore `ha` Terminal.output)
- -- `ho'yuk` Terminal.output (Signal Newline)
+print ttl = enter @IO
+ `yuk___` IO (ttl `yokl` Forth `ha` Console.output)
+ `yuk___` IO (Console.output `he` Signal Newline)
+
+main = initial `yokl` Forth `ha` print `ha` is @Title

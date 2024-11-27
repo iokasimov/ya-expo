@@ -1,73 +1,60 @@
 import Ya
 
 import "base" System.IO (IO)
+import "ya-expo" Ya.Expo.Instances
 import "ya-ascii" Ya.ASCII
 import "ya-expo" Ya.Expo.ASCII
-import "ya-expo" Ya.Expo.Instances
 
-import qualified "ya-expo" Ya.Expo.Terminal as Console
+import "ya-expo" Ya.Expo.Terminal as Console
 
 type Title = List ASCII
-
-type Mark = Unit `ML` Unit
-
-pattern TODO e = This e :: Mark
-pattern DONE e = That e :: Mark
-
-type Move = Unit `ML` Unit
-
-pattern Down x = This x :: Move
-pattern Lift x = That x :: Move
-
-type Task = Mark `LM` Title
-
-pattern Task m t = These m t :: Task
-
-type Command = Move `ML` Mark
-
-pattern Move x = This x :: Command
-pattern Mark x = That x :: Command
 
 pattern Bullet = This Unit
 pattern Cursor = That Unit
 
-string cursor (These status title) = enter @IO
- `yuk__` Forward `he` hand cursor `yokl` Console.output
- `yuk__` Forward `he` mark status `yokl` Console.output
- `yuk__` Forward @List `he` title `yokl` Console.output
- `yuk__` Once `he_` Caret Newline `yokl` Console.output
+print cursor title = enter @IO
+ `yuk___` IO (point `yokl` Forth `ha` Console.output)
+ `yuk___` IO (title `yokl` Forth `ha` Console.output)
+ `yuk___` IO (Console.output `he` Signal Newline) where
 
-hand = is @Title `ha__` is `hu` "  -  " `la` is `hu` "  -> "
-mark = is @Title `ha__` is `hu` "TODO " `la` is `hu` "DONE "
+ point = is @Title `he__` is `hu` "  -  " `la` is `hu` "  -> " `li` cursor
+
+type Move = Scroller List
+
+pattern Lift x = This x :: Move
+pattern Down x = That x :: Move
 
 press k f p = Maybe `he___` k `hd'q` p `yui` Unit `yiu` f Unit
 
-draft = enter @(State `WR` Scrolling List Task `JNT` IO)
- `yuk___` Console.prepare `lu'yp` Console.clear
- `yuk___` State `he__` Transition `he` auto
-  `ha_'he` Scope @(Shafted List Task) at
-   `ho'he` Scope @(Reverse List Task) at
- `yok___'yokl` string Bullet
- `yuk___` State `he__` Transition `he` auto
-  `ha_'he` Scope @(Focused Task) at
- `yok___'yokl` string Cursor
- `yuk___` State `he__` Transition `he` auto
-  `ha_'he` Scope @(Shafted List Task) at
-   `ho'he` Scope @(Forward List Task) at
- `yok___'yokl` string Bullet
- `yuk___` Console.input `yok___` Retry
- `ha____` match @(Cased Latin) @ASCII
-  `ho___` press K (Move `ha` Down) `lo'ys'la` press J (Move `ha` Lift)
-    `la_` press T (Mark `ha` TODO) `lo'ys'la` press D (Mark `ha` DONE)
-    `la_` is @(Number `ML` Symbol `ML` Caret) `hu` Wrong ()
- `yok___` State `ha__` Transition `ha_` scroll `ho'ho` (`yui` ())
-  `la___` State `ha__` Transition `ha_` switch `ho'ho` (`yui` ())
-    `ho_'ha'he` Scope @(Focused Task) at `ho'he` Scope @Mark at
+apply = press `he` Lower J `he` Down
+ `lo'ys'la` press `he` Lower K `he` Lift
+ `la____` Wrong `hv` is @(Number `ML` Symbol `ML` Caret)
+
+start = to @(Scrolling List) `ha` Construct
+ `ha_` Next `he` "Apply to that new position"
+ `ha_` Next `he` "Find a way to fix ligatures"
+ `ha_` Next `he` "Organize a boardgame session"
+ `he_` Last `he` "Buy a water gun for Songkran"
+
+draft = enter @(State `WR` Scrolling List Title `JNT` IO)
+ `yuk___` IO (Console.prepare `lu'yp` Console.clear)
+ `yuk___` State `ho` New
+  `he___` Event `he` auto
+  `ha_'he` Scope @(Shafted List Title) at
+   `ho'he` Scope @(Reverse List Title) at
+   `ho'he` Scope @(List Title) self
+ `yok___` IO `ha_'yokl` Prior `ha` print Bullet
+ `yuk___` State `ho` New `he__` Event `he` auto
+  `ha_'he` Scope @(Focused Title) at
+ `yok___` IO `ha_'yokl` Forth `ha` print Cursor
+ `yuk___` State `ho` New `he__` Event `he` auto
+  `ha_'he` Scope @(Shafted List Title) at
+   `ho'he` Scope @(Forward List Title) at
+   `ho'he` Scope @(List Title) self
+ `yok___` IO `ha_'yokl` Forth `ha` print Bullet
+ `yuk___` IO `he___` Console.input
+    `yok` Retry `ha` apply `ha` match @Letter @ASCII
+ `yok___` State `ho` New `ha` Event `ha` scroll
  `yok___` Again `ha` Once
 
-main = draft `he___'he` to @(Scrolling List)
- `ha` as @(Nonempty List) @Task `he__` is
- `li` Task `he` TODO () `he` "Apply to that new position"
- `lu` Task `he` DONE () `he` "Find a way to fix ligatures"
- `lu` Task `he` TODO () `he` "Organize a boardgame session"
- `lu` Task `he` DONE () `he` "Buy a water gun for Songkran"
+main = draft `he'he` start

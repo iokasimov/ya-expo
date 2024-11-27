@@ -19,6 +19,8 @@ prepare = do
  hSetEcho stdin Base.False
  putStr "\ESC[?25l"
 
+-- type Buffering = Block `ML` Line `ML` Char
+
 input :: IO ASCII
 input = getChar `yo` char_to_ascii
 

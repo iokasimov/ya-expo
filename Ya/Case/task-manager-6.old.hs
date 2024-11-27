@@ -1,6 +1,6 @@
 import Ya
 
-import "base" System.IO (IO)
+import "base" System.IO (IO, print)
 import "ya-ascii" Ya.ASCII
 import "ya-expo" Ya.Expo.ASCII
 import "ya-expo" Ya.Expo.Instances
@@ -26,23 +26,15 @@ pattern Lift x = That x :: Scroller List
 pattern Range x = This x :: Scroller Tree
 pattern Level x = That x :: Scroller Tree
 
-type Fold = Unit `ML` Unit
-
-pattern Show x = This x :: Fold
-pattern Hide x = That x :: Fold
-
 type Quit = Unit
 
 type Task = Mark `LM` Title
 
-type Item = Fold `LM` Task
-
 pattern Task m t = These m t :: Task
 
-type Command = Move `ML` Fold `ML` Mark `ML` Quit
+type Command = ((Move) `ML` Mark) `ML` Quit
 
-pattern Move x = This (This (This x)) :: Command
-pattern Fold x = This (This (That x)) :: Command
+pattern Move x = This (This x) :: Command
 pattern Mark x = This (That x) :: Command
 pattern Quit x = That x :: Command
 
@@ -53,13 +45,11 @@ pattern Cursor = That Unit
 
 type Shifted = Shafted List
 
-string prefix cursor (These fold (These status title)) = enter @IO
+string prefix cursor (These status title) = enter @IO
  `yuk__` Blinking `ha` On `he` Unit `yi__` Console.styled
  `yuk__` Forward `he` hand cursor `yokl` Console.output
  `yuk__` Blinking `ha` Off `he` Unit `yi_` Console.styled
  `yuk__` Forward `he` prefix `yokl` Console.output
- `yuk__` Once `he_` Caret Space `yokl` Console.output
- `yuk__` Once `he_` folded fold `yokl` Console.output
  `yuk__` Once `he_` Caret Space `yokl` Console.output
  `yuk__` Emphasize `ha` On `he` Unit `yi_` Console.styled
  `yuk__` Forward `he` mark status `yokl` Console.output
@@ -69,9 +59,6 @@ string prefix cursor (These fold (These status title)) = enter @IO
  `yuk__` Forward @List `he` title `yokl` Console.output
  `yuk__` titled status `he` Off Unit `yi` Console.styled
  `yuk__` Once `he_` Caret Newline `yokl` Console.output
-
-folded = Glyph `ha` Symbol `ha` Punctuation
- `ha_____` is `hu` Asterisk Unit `la` is `hu` Plus Unit
 
 titled = is `hu` Underline `la` is `hu` Crossing
 
@@ -89,23 +76,20 @@ block_sl prefix cursor (U_T_I_TT_I (These current (T'TT'I (Reverse (T'TT'I (U_I_
  `yuk__` fs `yokl` block_tree (tab `he` prefix) Bullet
  `yuk__` intro @_ @IO Unit
 
-block_tree prefix cursor (R_U_I_T_I (Recursive (U_I_T_II (These focus@(These fold task) subtree)))) =
+block_tree prefix cursor tree =
  let pointer = is `hu` prefix `la` is `hu` (prefix `yu` level) `li` cursor in
  let aligner = that `ha` push @List (Caret Space) `ha` that `ha` push @List level in
-      string pointer cursor focus `yu` Unit
- `lu'yp` 
-  (is `hu` ((Forward subtree `yokl` Construct `ho` block_tree (aligner prefix) Bullet) `yu` Unit)
-  `la` is `hu` enter
-  `li` fold
-  )
+      this `ho` is @Task `ho` string pointer cursor `ho'yu` Unit
+ `lo'yp` (that `ho` Forward `ho_'yokl` Construct `ho` block_tree (aligner prefix) Bullet) `ho'yu` Unit
+ `li` unwrap (unwrap (unwrap tree))
 
-print cursor x = enter @IO
+render cursor x = enter @IO
  `yuk__` x `yokl` block_sl "" cursor
  `ho_'yuk` Console.output `he` Caret Newline
 
 tab = that `ha` push @List level
 
-level = Glyph `ha` Symbol `ha` Punctuation `ha` Hyphen `he` Unit
+level = Glyph `ha` Symbol `ha` Punctuation `ha` Asterisk `he` Unit
 
 hand = is @Title `ha__` is `hu` "    " `la` is `hu` "--> "
 mark = is @Title `ha__` is `hu` "TODO" `la` is `hu` "DONE"
@@ -118,33 +102,31 @@ apply = press `he` Lower P `he` (Move `ha` Outline `ha` Down)
  `lo'ys'la` press `he` Lower J `he` (Move `ha` Project `ha` Range `ha` Lift)
  `lo'ys'la` press `he` Lower D `he` (Move `ha` Project `ha` Level `ha` Down)
  `lo'ys'la` press `he` Lower U `he` (Move `ha` Project `ha` Level `ha` Lift)
- `lo'ys'la` press `he` Lower S `he` (Fold `ha` Show)
- `lo'ys'la` press `he` Lower H `he` (Fold `ha` Hide)
  `lo'ys'la` press `he` Upper T `he` (Mark `ha` TODO)
  `lo'ys'la` press `he` Upper D `he` (Mark `ha` DONE)
  `lo'ys'la` press `he` Lower Q `he` (Quit)
  `la____` Wrong `hv` is @(Number `ML` Symbol `ML` Caret)
 
-type Project = Scrolling Tree `WR_` Fold `LM` Task
+type Project = Scrolling Tree Task
 
-type Outline = Scrolling List `WR_` Project
+type Outline = Scrolling List Project
 
 type Application = State Outline `JNT` Halts `JNT` IO
 
 process = enter @Application
  `yuk_____` Console.prepare `lu'yp` Console.clear
- `yuk_____` Caret `he` Newline `yi` Console.output
- `yuk_____` State `he__` Transition `he` auto
+ `yuk_____` Console.output `he` Caret Newline
+ `yuk_____` State `he__` Transition `he` auto 
     `ha_'he` Scope @(Shafted List Project) at
      `ho'he` Scope @(Reverse List Project) at
- `yok_____` print Bullet
+ `yok_____` render Bullet
  `yuk_____` State `he__` Transition `he` auto
      `ha'he` Scope @(Focused Project) at
- `yok_____` print Cursor
+ `yok_____` render Cursor
  `yuk_____` State `he__` Transition `he` auto
     `ha_'he` Scope @(Shafted List Project) at
      `ho'he` Scope @(Forward List Project) at
- `yok_____` print Bullet
+ `yok_____` render Bullet
  `yuk_____` Console.input `yok_` Retry `ha_` match @Letter @ASCII `ho` apply
  `yok_____` State `ho` to `ha__` Transition `ha_` scroll @List `ho'ho` (`yui` Unit)
   `la_____` State `ho` to `ha__` Transition `ha_` scroll @Tree `ho'ho` (`yui` Unit)
@@ -152,15 +134,9 @@ process = enter @Application
      `ho'he` Scope @Project self
   `la_____` State `ho` to `ha__` Transition `ha_` switch `ho'ho` (`yui` Unit)
   `ho_'ha'he` Scope @(Focused Project) at
-   `ho'he'he` Scope @(Leveled Tree Item) at
-   `ho'he'he` Scope @(Focused `WR` Tree Item) at
-   `ho'he'he'he'he` Scope @Fold at
-  `la_____` State `ho` to `ha__` Transition `ha_` (\m x -> Unit `lu_` x `yo`(`yio`(`yoi` is `hu` m)))
-  `ho_'ha'he` Scope @(Focused Project) at
-   `ho'he'he` Scope @(Leveled Tree Item) at
-   `ho'he'he` Scope @(Focused `WR` Tree Item) at
-      `ho'he` Scope @(Tree Item) at
-
+   `ho'he'he` Scope @(Leveled Tree Task) at
+   `ho'he'he` Scope @(Focused `WR` Tree Task) at
+   `ho'he'he'he'he` Scope @Mark at
   `la_____` Close `ho` to @Application
  `yok_____` Again `ha` Same
 
@@ -192,4 +168,4 @@ initial = Construct `ho` to @(Scrolling List)
    `ha____` Next `he_` Node `he` Task (TODO Unit) "Prioritize on Boomerang Fu first" `he` Empty @List Unit
    `he____` Last `he_` Node `he` Task (TODO Unit) "Keep Talking and Nobody Explodes" `he` Empty @List Unit
 
-main = unwrap (process `he____'he` (initial `yo'yo` (Show () `lu`)))
+main = unwrap (process `he'he` initial)

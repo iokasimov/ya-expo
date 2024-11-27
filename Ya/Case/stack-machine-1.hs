@@ -36,5 +36,5 @@ main = (initial `yokl` Forth `ha__` load `la` eval) `he'he` Empty @List Unit
  `yi__` is `hu` "[ERR] No operands!" `ho_'yokl` Forth `ha` output `la_` this `he'ho` trace where
 
  trace x = is @(Nonempty List ASCII) "[OK] Trace: " `yokl` Forth `ha` output
-  `yuk___` New `he____` x `yokl` Forth `ha__` integer `ho_'yokl` Forth `ha` output
-  `ho_'yuk` New `ha` output `he` Caret Space
+  `yuk___` IO `he____` x `yokl` Forth `ha__` integer `ho_'yokl` Forth `ha` output
+  `ho_'yuk` IO `ha` output `he` Caret Space

@@ -1,42 +1,45 @@
 import Ya
 
-import "base" System.IO (IO, print)
-import "ya-expo" Ya.Expo.Instances ()
+import "base" System.IO (IO)
+import "ya-expo" Ya.Expo.Instances
 import "ya-ascii" Ya.ASCII
 import "ya-expo" Ya.Expo.ASCII
 
-import "ya-expo" Ya.Expo.Terminal as Terminal
+import "ya-expo" Ya.Expo.Terminal as Console
 
-type Task = List ASCII
+type Title = List ASCII
 
--- line point title =
- -- (on @List point `yokl` way @Fore `ha` output)
- -- `yuk` (title `yokl` way @Fore `ha` output)
- -- `yuk` Newline `hu` Signal `hu` output
+pattern Bullet = This Unit
+pattern Cursor = That Unit
 
-pressed k p =
- q (k `lu` p) `yui` () `yiu` ()
+print cursor title = enter @IO
+ `yuk___` IO (point `yokl` Forth `ha` Console.output)
+ `yuk___` IO (title `yokl` Forth `ha` Console.output)
+ `yuk___` IO (Console.output `he` Signal Newline) where
 
-key x = is @(Optional _)
- `li__` (Maybe `ha` pressed x `he_` Lower `ho` Letter `he` J)
- `lu'ys` (Maybe `ha` pressed x `he_` Lower `ho` Letter `he` K)
+ point = is @Title `he__` is `hu` "  -  " `la` is `hu` "  -> " `li` cursor
 
--- init = as @(Nonempty List) @Task
- -- `lii` is @Task "Apply to that new position"
-  -- `lu` is @Task "Find a way to fix ligatures"
-  -- `lu` is @Task "Organize a boardgame session"
-  -- `lu` is @Task "Buy a water gun for Songkran"
+initial = to @(Scrolling List) `ha` Construct
+ `ha_` Next `he` "Apply to that new position"
+ `ha_` Next `he` "Find a way to fix ligatures"
+ `ha_` Next `he` "Organize a boardgame session"
+ `he_` Last `he` "Buy a water gun for Songkran"
 
-main = print "typechecked"
--- main = forever
- -- `yi'yi'yi` enter @(State `TI` Scrolling List Task `JNT` IO)
-   -- `yuk` Terminal.prepare `yuk` Terminal.clear
-   -- `yuk` State `yi` auto `hu` Transition `haa_` (has @(Shafted List Task) `hu` Attribute) `ho_` rep (Passed ())
-     -- `yok'yokl` line "  - " `ho` way @Back
-   -- `yuk` State `yi` auto `hu` Transition `haa_` (has @(Focused Task) `hu` Attribute)
-     -- `yok'yokl` line " -> "
-   -- `yuk` State `yi` auto `hu` Transition `haa_` (has @(Shafted List Task) `hu` Attribute) `ho_` rep (Future ())
-     -- `yok'yokl` line "  - " `ho` way @Fore
-   -- `yuk` until `yi` input `yo` key
-     -- -- `yok` State `ha` scroll @List @Task `haaa` Up `rf` Down
- -- `__yiiiii` transform @(Scrolling List) init
+draft = enter @(State `WR` Scrolling List Title `JNT` IO)
+ `yuk___` IO (Console.prepare `lu'yp` Console.clear)
+ `yuk___` State `ho` New `he__` Transition `he` auto
+  `ha_'he` Scope @(Shafted List Title) at
+   `ho'he` Scope @(Reverse List Title) at
+   `ho'he` Scope @(List Title) self
+ -- `yok___'yokl` Default `ha` Prior `ha` print Bullet
+ `yok___` IO `ha_'yokl` Prior `ha` print Bullet
+ `yuk___` State `ho` New `he__` Transition `he` auto
+  `ha_'he` Scope @(Focused Title) at
+ `yok___` IO `ha_'yokl` Forth `ha` print Cursor
+ `yuk___` State `ho` New `he__` Transition `he` auto
+  `ha_'he` Scope @(Shafted List Title) at
+   `ho'he` Scope @(Forward List Title) at
+   `ho'he` Scope @(List Title) self
+ `yok___` IO `ha_'yokl` Forth `ha` print Bullet
+
+main = draft `he'he` initial
