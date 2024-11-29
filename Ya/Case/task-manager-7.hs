@@ -2,9 +2,8 @@ import Ya
 
 import "base" System.IO (IO)
 import "ya-ascii" Ya.ASCII
-import "ya-expo" Ya.Expo.ASCII
+import "ya-console" Ya.Console
 import "ya-expo" Ya.Expo.Instances
-import "ya-expo" Ya.Expo.Terminal
 
 import qualified "ya-expo" Ya.Expo.Terminal as Console
 
@@ -46,19 +45,19 @@ pattern Cursor = That Unit
 type Shifted = Shafted List
 
 string prefix cursor (These status title) = enter @IO
- `yuk__` Blinking `ha` On `he` Unit `yi__` Console.styled
- `yuk__` Forward `he` hand cursor `yokl` Console.output
- `yuk__` Blinking `ha` Off `he` Unit `yi_` Console.styled
- `yuk__` Forward `he` prefix `yokl` Console.output
- `yuk__` Once `he_` Caret Space `yokl` Console.output
- `yuk__` Emphasize `ha` On `he` Unit `yi_` Console.styled
- `yuk__` Forward `he` mark status `yokl` Console.output
- `yuk__` Emphasize `ha` Off `he` Unit `yi` Console.styled
- `yuk__` Once `he_` Caret Space `yokl` Console.output
- `yuk__` titled status `he` On Unit `yi` Console.styled
- `yuk__` Forward @List `he` title `yokl` Console.output
- `yuk__` titled status `he` Off Unit `yi` Console.styled
- `yuk__` Once `he_` Caret Newline `yokl` Console.output
+ `yuk__` Blinking `ha` On `he` Unit `yi__` styled
+ `yuk__` Forward `he` hand cursor `yokl` output
+ `yuk__` Blinking `ha` Off `he` Unit `yi_` styled
+ `yuk__` Forward `he` prefix `yokl` output
+ `yuk__` Once `he_` Caret Space `yokl` output
+ `yuk__` Emphasize `ha` On `he` Unit `yi_` styled
+ `yuk__` Forward `he` mark status `yokl` output
+ `yuk__` Emphasize `ha` Off `he` Unit `yi` styled
+ `yuk__` Once `he_` Caret Space `yokl` output
+ `yuk__` titled status `he` On Unit `yi` styled
+ `yuk__` Forward @List `he` title `yokl` output
+ `yuk__` titled status `he` Off Unit `yi` styled
+ `yuk__` Once `he_` Caret Newline `yokl` output
 
 titled = is `hu` Underline `la` is `hu` Crossing
 
@@ -69,7 +68,7 @@ block_sl prefix cursor (U_T_I_TT_I (These (T'TT'I (U_T_I_TT_I (These focus (U_T_
  `yuk__` intro @_ @IO Unit
 block_sl prefix cursor (U_T_I_TT_I (These current (T'TT'I (Reverse (T'TT'I (U_I_II (That (R_U_I_T_I (Recursive (U_I_T_II (These x xs))))))))))) =
  let (U_T_I_TT_I (These focus (T'TT'I (U_T_I_TT_I (These rs fs))))) = x in enter
- `yuk__` Console.output (Caret Newline)
+ `yuk__` output (Caret Newline)
  `yuk__` focus `yokl` string prefix Bullet
  `yuk__` rs `yokl` block_tree (tab `he` prefix) Bullet
  `yuk__` block_sl (tab `he` prefix) cursor (U_T_I_TT_I (These current (T'TT'I (Reverse (T'TT'I ((xs `yo`R_U_I_T_I)))))))
@@ -84,7 +83,7 @@ block_tree prefix cursor (R_U_I_T_I (Recursive (U_I_T_II (These focus subtree)))
 
 print cursor x = enter @IO
  `yuk__` x `yokl` block_sl "" cursor
- `ho_'yuk` Console.output `he` Caret Newline
+ `ho_'yuk` output `he` Caret Newline
 
 tab = that `ha` push @List level
 
@@ -113,8 +112,8 @@ type Outline = Scrolling List Project
 type Application = State Outline `JNT` Halts `JNT` IO
 
 process = enter @Application
- `yuk_____` Console.prepare `lu'yp` Console.clear
- `yuk_____` Caret `he` Newline `yi` Console.output
+ `yuk_____` prepare `lu'yp` clear
+ `yuk_____` Caret `he` Newline `yi` output
  `yuk_____` State `he__` Transition `he` auto
     `ha_'he` Scope @(Shafted List Project) at
      `ho'he` Scope @(Reverse List Project) at
@@ -126,7 +125,7 @@ process = enter @Application
     `ha_'he` Scope @(Shafted List Project) at
      `ho'he` Scope @(Forward List Project) at
  `yok_____` print Bullet
- `yuk_____` Console.input `yok_` Retry `ha_` match @Letter @ASCII `ho` apply
+ `yuk_____` input `yok_` Retry `ha_` match @Letter @ASCII `ho` apply
  `yok_____` State `ho` to `ha__` Transition `ha_` scroll @List `ho'ho` (`yui` Unit)
   `la_____` State `ho` to `ha__` Transition `ha_` scroll @Tree `ho'ho` (`yui` Unit)
   `ho_'ha'he` Scope @(Focused Project) at

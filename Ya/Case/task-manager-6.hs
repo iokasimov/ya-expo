@@ -1,11 +1,8 @@
-import Ya
-
-import "base" System.IO (IO)
-import "ya-expo" Ya.Expo.Instances
+import "ya" Ya
 import "ya-ascii" Ya.ASCII
-import "ya-expo" Ya.Expo.ASCII
-
-import "ya-expo" Ya.Expo.Terminal as Console
+import "ya-console" Ya.Console
+import "ya-expo" Ya.Expo.Instances
+import "base" System.IO (IO)
 
 type Title = List ASCII
 
@@ -22,10 +19,10 @@ pattern Bullet = This Unit
 pattern Cursor = That Unit
 
 print cursor (These status task) = enter @IO
- `yuk___` IO (hand `yokl` Forth `ha` Console.output)
- `yuk___` IO (mark `yokl` Forth `ha` Console.output)
- `yuk___` IO (task `yokl` Forth `ha` Console.output)
- `yuk___` IO (Console.output `he` Signal Newline) where
+ `yuk___` Raw (hand `yokl` Forth `ha` output)
+ `yuk___` Raw (mark `yokl` Forth `ha` output)
+ `yuk___` Raw (task `yokl` Forth `ha` output)
+ `yuk___` Raw (output `he` Caret Newline) where
 
  hand = is @Title `he__` is `hu` "  -  " `la` is `hu` "  -> " `li` cursor
  mark = is @Title `he__` is `hu` "TODO " `la` is `hu` "DONE " `li` status
@@ -57,7 +54,7 @@ start = to @(Scrolling List) `ha` Construct
 type Application = State `WR` Scrolling List Task `JNT` IO
 
 draft = enter @Application
- `yuk___` Usual (Console.prepare `lu'yp` Console.clear)
+ `yuk___` Usual (prepare `lu'yp` clear)
  `yuk___` State `ho` New
   `he___` Event `he` auto
   `ha_'he` Scope @(Shafted List Task) at
@@ -72,7 +69,7 @@ draft = enter @Application
    `ho'he` Scope @(Forward List Task) at
    `ho'he` Scope @(List Task) self
  `yok___` Usual `ha_'yokl` Forth `ha` print Bullet
- `yuk___` Usual `he___` Console.input
+ `yuk___` Usual `he___` input
     `yok` Retry `ha` apply `ha` match @Letter @ASCII
  `yok___` State `ho` New `ha__` Event `ha_` scroll `ho'ho` (`yui` Unit)
   `la___` State `ho` New `ha__` Event `ha_` switch `ho'ho` (`yui` Unit)

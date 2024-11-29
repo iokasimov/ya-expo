@@ -1,12 +1,10 @@
-import Ya
-
+import "ya" Ya
 import "ya-ascii" Ya.ASCII
-import "ya-expo" Ya.Expo.ASCII
+import "ya-console" Ya.Console
+
 import "ya-expo" Ya.Expo.Instances
 
 import "base" System.IO (IO)
-
-import qualified "ya-expo" Ya.Expo.Terminal as Console
 
 type Title = List ASCII
 
@@ -17,7 +15,7 @@ initial = Construct `ho` Nonempty @List
  `he_` Last `he` "Buy a water gun for Songkran"
 
 print ttl = enter @IO
- `yuk___` IO (ttl `yokl` Forth `ha` Console.output)
- `yuk___` IO (Console.output `he` Signal Newline)
+ `yuk___` Raw (ttl `yokl` Forth `ha` output)
+ `yuk___` Raw (output `he` Caret Newline)
 
 main = initial `yokl` Forth `ha` print `ha` is @Title

@@ -32,10 +32,10 @@ pattern Bullet = This Unit
 pattern Cursor = That Unit
 
 string cursor (These status title) = enter @IO
- `yuk__` Forward `he` hand cursor `yokl` Console.output
- `yuk__` Forward `he` mark status `yokl` Console.output
- `yuk__` Forward @List `he` title `yokl` Console.output
- `yuk__` Once `he_` Caret Newline `yokl` Console.output
+ `yuk__` Forward `he` hand cursor `yokl` output
+ `yuk__` Forward `he` mark status `yokl` output
+ `yuk__` Forward @List `he` title `yokl` output
+ `yuk__` Once `he_` Caret Newline `yokl` output
 
 hand = is @Title `ha__` is `hu` "  -  " `la` is `hu` "  -> "
 mark = is @Title `ha__` is `hu` "TODO " `la` is `hu` "DONE "
@@ -43,7 +43,7 @@ mark = is @Title `ha__` is `hu` "TODO " `la` is `hu` "DONE "
 press k f p = Maybe `he___` k `hd'q` p `yui` Unit `yiu` f Unit
 
 draft = enter @(State `WR` Scrolling List Task `JNT` IO)
- `yuk___` Console.prepare `lu'yp` Console.clear
+ `yuk___` prepare `lu'yp` clear
  `yuk___` State `he__` Transition `he` auto
   `ha_'he` Scope @(Shafted List Task) at
    `ho'he` Scope @(Reverse List Task) at
@@ -55,7 +55,7 @@ draft = enter @(State `WR` Scrolling List Task `JNT` IO)
   `ha_'he` Scope @(Shafted List Task) at
    `ho'he` Scope @(Forward List Task) at
  `yok___'yokl` string Bullet
- `yuk___` Console.input `yok___` Retry
+ `yuk___` input `yok___` Retry
  `ha____` match @(Cased Latin) @ASCII
   `ho___` press K (Move `ha` Down) `lo'ys'la` press J (Move `ha` Lift)
     `la_` press T (Mark `ha` TODO) `lo'ys'la` press D (Mark `ha` DONE)

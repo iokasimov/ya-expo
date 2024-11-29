@@ -37,10 +37,10 @@ pattern Cursor = That Unit
 type Shifted = Shafted List
 
 string cursor (These status title) = enter @IO
- `yuk__` Forward `he` hand cursor `yokl` Console.output
- `yuk__` Forward `he` mark status `yokl` Console.output
- `yuk__` Forward @List `he` title `yokl` Console.output
- `yuk__` Once `he_` Caret Newline `yokl` Console.output
+ `yuk__` Forward `he` hand cursor `yokl` output
+ `yuk__` Forward `he` mark status `yokl` output
+ `yuk__` Forward @List `he` title `yokl` output
+ `yuk__` Once `he_` Caret Newline `yokl` output
 
 hand = is @Title `ha__` is `hu` "   * " `la` is `hu` "   > "
 mark = is @Title `ha__` is `hu` "TODO " `la` is `hu` "DONE "
@@ -52,7 +52,7 @@ type Project = Scrolling List Task
 type Application = State Project `JNT` Halts `JNT` IO
 
 process = enter @Application
- `yuk_____` Console.prepare `lu'yp` Console.clear
+ `yuk_____` prepare `lu'yp` clear
  `yuk_____` State `he__` Transition `he` auto
   `ha_'he` Scope @(Shafted List Task) at
    `ho'he` Scope @(Reverse List Task) at
@@ -64,7 +64,7 @@ process = enter @Application
   `ha_'he` Scope @(Shafted List Task) at
    `ho'he` Scope @(Forward List Task) at
  `yok_____'yokl` string Bullet
- `yuk_____` Console.input `yok__` Retry
+ `yuk_____` input `yok__` Retry
   `ha___` match @Letter @ASCII
    `ho__` press `he` Lower K `he` (Move `ha` Down)
  `lo'ys'la` press `he` Lower J `he` (Move `ha` Lift)

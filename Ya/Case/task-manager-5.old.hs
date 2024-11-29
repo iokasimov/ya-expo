@@ -37,11 +37,11 @@ pattern Cursor = That Unit
 type Shifted = Shafted List
 
 string prefix cursor (These status title) = enter @IO
- `yuk__` Forward `he` prefix `yokl` Console.output
- `yuk__` Forward `he` hand cursor `yokl` Console.output
- `yuk__` Forward `he` mark status `yokl` Console.output
- `yuk__` Forward @List `he` title `yokl` Console.output
- `yuk__` Once `he_` Caret Newline `yokl` Console.output
+ `yuk__` Forward `he` prefix `yokl` output
+ `yuk__` Forward `he` hand cursor `yokl` output
+ `yuk__` Forward `he` mark status `yokl` output
+ `yuk__` Forward @List `he` title `yokl` output
+ `yuk__` Once `he_` Caret Newline `yokl` output
 
 block_tree prefix cursor tree =
       this `ho` is @Task `ho` string prefix cursor
@@ -57,7 +57,7 @@ block_scrolling_list_tree prefix cursor (U_T_I_TT_I (These focus (U_T_I_TT_I (Th
 
 block_project :: Title -> (Unit `ML` Unit) -> Project -> IO Unit
 block_project prefix cursor project = enter @IO
- `yuk__` Console.output `he` Caret Newline
+ `yuk__` output `he` Caret Newline
  `yuk__` block_scrolling_list_tree prefix cursor `ha` unwrap @AR
     `ha` to @(Scrolling List `T'TT'I` Tree) `he` project
  `yuk__` enter @IO where
@@ -74,7 +74,7 @@ type Outline = Scrolling List Project
 type Application = State Outline `JNT` Halts `JNT` IO
 
 draft = enter @Application
- `yuk___` Console.prepare `lu'yp` Console.clear
+ `yuk___` prepare `lu'yp` clear
  `yuk___` State `he___` Transition `he` auto
  `ha__'he` Scope @(Shafted List Project) at
    `ho'he` Scope @(Reverse List Project) at
@@ -86,7 +86,7 @@ draft = enter @Application
  `ha__'he` Scope @(Shafted List Project) at
    `ho'he` Scope @(Forward List Project) at
  `yok___'yokl` block_project (Empty @List Unit) Bullet
- `yuk___` Console.input `yok__` Retry
+ `yuk___` input `yok__` Retry
   `ha___` match @Letter @ASCII
    `ho__` press `he` Lower K `he` (Move `ha` Down)
  `lo'ys'la` press `he` Lower J `he` (Move `ha` Lift)

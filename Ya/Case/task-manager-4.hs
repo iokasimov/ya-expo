@@ -1,11 +1,8 @@
-import Ya
-
-import "base" System.IO (IO)
-import "ya-expo" Ya.Expo.Instances
+import "ya" Ya
 import "ya-ascii" Ya.ASCII
-import "ya-expo" Ya.Expo.ASCII
-
-import "ya-expo" Ya.Expo.Terminal as Console
+import "ya-console" Ya.Console
+import "ya-expo" Ya.Expo.Instances
+import "base" System.IO (IO)
 
 type Title = List ASCII
 
@@ -22,10 +19,10 @@ pattern Bullet = This Unit
 pattern Cursor = That Unit
 
 print cursor (These status task) = enter @IO
- `yuk___` IO (hand `yokl` Forth `ha` Console.output)
- `yuk___` IO (mark `yokl` Forth `ha` Console.output)
- `yuk___` IO (task `yokl` Forth `ha` Console.output)
- `yuk___` IO (Console.output `he` Signal Newline) where
+ `yuk___` Raw (hand `yokl` Forth `ha` output)
+ `yuk___` Raw (mark `yokl` Forth `ha` output)
+ `yuk___` Raw (task `yokl` Forth `ha` output)
+ `yuk___` Raw (output `he` Caret Newline) where
 
  hand = is @Title `he__` is `hu` "  -  " `la` is `hu` "  -> " `li` cursor
  mark = is @Title `he__` is `hu` "TODO " `la` is `hu` "DONE " `li` status
@@ -48,22 +45,22 @@ start = to @(Scrolling List) `ha` Construct
  `he_` Last `he` Task DONE "Buy a water gun for Songkran"
 
 draft = enter @(State `WR` Scrolling List Task `JNT` IO)
- `yuk___` IO (Console.prepare `lu'yp` Console.clear)
+ `yuk___` Raw (prepare `lu'yp` clear)
  `yuk___` State `ho` New
   `he___` Event `he` auto
   `ha_'he` Scope @(Shafted List Task) at
    `ho'he` Scope @(Reverse List Task) at
    `ho'he` Scope @(List Task) self
- `yok___` IO `ha_'yokl` Prior `ha` print Bullet
+ `yok___` Raw `ha_'yokl` Prior `ha` print Bullet
  `yuk___` State `ho` New `he__` Event `he` auto
   `ha_'he` Scope @(Focused Task) at
- `yok___` IO `ha_'yokl` Forth `ha` print Cursor
+ `yok___` Raw `ha_'yokl` Forth `ha` print Cursor
  `yuk___` State `ho` New `he__` Event `he` auto
   `ha_'he` Scope @(Shafted List Task) at
    `ho'he` Scope @(Forward List Task) at
    `ho'he` Scope @(List Task) self
- `yok___` IO `ha_'yokl` Forth `ha` print Bullet
- `yuk___` IO `he___` Console.input
+ `yok___` Raw `ha_'yokl` Forth `ha` print Bullet
+ `yuk___` Raw `he___` input
     `yok` Retry `ha` apply `ha` match @Letter @ASCII
  `yok___` State `ho` New `ha` Event `ha` scroll
  `yok___` Again `ha` Once
