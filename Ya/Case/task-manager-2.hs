@@ -2,7 +2,7 @@ import "ya" Ya
 import "ya-ascii" Ya.ASCII
 import "ya-console" Ya.Console
 
-import "ya-expo" Ya.Expo.Instances
+import "ya-expo" Ya.Expo.Instances ()
 
 import "base" System.IO (IO)
 

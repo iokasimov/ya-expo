@@ -51,6 +51,12 @@ start = to @(Scrolling List) `ha` Construct
  `ha_` Next `he` Task (TODO ()) "Organize a boardgame session"
  `he_` Last `he` Task (DONE ()) "Buy a water gun for Songkran"
 
+-- type Project = Scrolling Tree Task
+
+-- type Outline = Scrolling List Project
+
+-- type Application = State Outline `JNT` Halts `JNT` IO
+
 type Application = State `WR` Scrolling List Task `JNT` IO
 
 draft = enter @Application

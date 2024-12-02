@@ -21,9 +21,3 @@ main = is `ho_'yokl` gap `ho'ho` auto `ho` Event `ho` State `ho` Forth `ho_'he'h
  `lo_'yp` is @(Nonempty List Integer)
  `he___` Construct `ha` Next 2 `ha` Next 5 `ha` Next 1 `ha` Next 2 `ha` Next 3 `ha` Next 4 `ha` Next 7 `ha` Next 7 `he` Last 6
  `yokl_` Forth `ha` print
-
--- main = peak
- -- `li` Construct `ha` Next 2 `ha` Next 5 `ha` Next 1 `ha` Next 2 `ha` Next 3 `ha` Next 4 `ha` Next 7 `ha` Next 7 `he` Last 6
- -- `he__'he` 0
- -- `yi_` this
- -- `yokl` Forth `ha` print
