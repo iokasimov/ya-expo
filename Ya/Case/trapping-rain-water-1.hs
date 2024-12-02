@@ -1,44 +1,29 @@
 import Ya
 import "ya-expo" Ya.Expo.Instances ()
+import "ya-console" Ya.Console
 
 import "base" GHC.Num (Integer, (-), (+))
 import "base" Data.Ord (max, min)
 import "base" System.IO (print)
 
-trap x l r = min l r - x
+totals :: Nonempty List (Integer `LM` Integer `LM` Integer) -> State Integer (Nonempty List Integer)
+totals items = items `yokl` (trap `hj'hj`) `ho'ho` auto `ho` Transition `ho` State `ho` Forth
 
--- \x -> 
+peak xs = xs `yokl` Prior `ha` State `ha` Transition `ha_` max `ho'ho` auto
 
- --  -- `haaaaa` max `ho` (auto @Integer `yioi`)
- -- `haaa` max `ho` change @Integer `ho` State
- -- `hoo'yuk` auto `hu` Transition `hu` State
+gap = (trap `hj'hj`)
 
--- auto `yioi` max
+trap left right origin all = min left right - origin + all
 
--- totals items = items
---  `yokl` (trap `hj'hj`) `ho` (+)
---  `ho` modify `ho` State `ho` by @Fore
+main = is `ho_'yokl` gap `ho'ho` auto `ho` Event `ho` State `ho` Forth `ho_'he'he` (0 `yi`) `ho` this
+ `ha___` is `ho_'yokl` max `ho'ho` auto `ho` Event `ho` State `ho` Forth `ho_'he'he` (0 `yi`) `ho` this
+ `lo_'yp` is `ho_'yokl` max `ho'ho` auto `ho` Event `ho` State `ho` Prior `ho_'he'he` (0 `yi`) `ho` this
+ `lo_'yp` is @(Nonempty List Integer)
+ `he___` Construct `ha` Next 2 `ha` Next 5 `ha` Next 1 `ha` Next 2 `ha` Next 3 `ha` Next 4 `ha` Next 7 `ha` Next 7 `he` Last 6
+ `yokl_` Forth `ha` print
 
--- levels = as @(Nonempty List) @Integer
- -- (2 `lu` 5 `lu` 1 `lu` 2 `lu` 3 `lu` 4 `lu` 7 `lu` 7 `lu` 6)
-
--- peak xs = xs `yokl` by @Fore `ha` State `ha` Transition `haa` max `ho'ho` auto
-
--- main = this (peak levels `he'he` 0) `yokl` by @Fore `ha` print
-
--- main = levels `yokl` by @Fore `ha` print
-
--- `lu'ho'yp`
--- x `lu'yio'yp` y
-
--- main' = is @(Nonempty List Integer)
- -- `lu'yip'yp` this `ha'yokl` by @Fore `ha` State `ha` Transition `haa` max `ho'ho` auto
- -- `lu'yip'yp` this `ha'yokl` by @Back `ha` State `ha` Transition `haa` max `ho'ho` auto
-
--- main = print (that (levels
- -- `lu'yp` this (levels `yokl` by @Fore `ha` State `ha` Transition `haa` max `ho'ho` auto `heeee'he` 0)
- -- `lu'yp` this (levels `yokl` by @Back `ha` State `ha` Transition `haa` max `ho'ho` auto `heeee'he` 0)
- -- `yokl` by @Fore `ha` State `ha` Transition `haa` (trap `hj'hj`) `ho` (+) `ho'ho` auto
- -- `heeee'he` 0))
-
-main = print "typechecked"
+-- main = peak
+ -- `li` Construct `ha` Next 2 `ha` Next 5 `ha` Next 1 `ha` Next 2 `ha` Next 3 `ha` Next 4 `ha` Next 7 `ha` Next 7 `he` Last 6
+ -- `he__'he` 0
+ -- `yi_` this
+ -- `yokl` Forth `ha` print
