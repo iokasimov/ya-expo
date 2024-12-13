@@ -24,8 +24,7 @@ remnant = Valid `hv` Empty @List
   `la` Error `ha` Missing `ha` Closed `ha` this @Shape `ha` top @(Nonempty List)
 
 main = Nonempty @List @Bracket `ha` Next (Opened Angle) `he` Last (Closed Angle)
- `yokl` Forth `ha__` deposit `la` analyze
- `he___'he` Empty @List ()
+ `yokl` Forth `ha__` deposit `la` analyze `he___'he` Empty @List Unit
  `yok_` Try `ha` remnant `ha'he` that @(List Shape)
  `yi__` is @(List ASCII)
  `ha__` is `hu` "[ERROR] Missing or mismatching bracket!"

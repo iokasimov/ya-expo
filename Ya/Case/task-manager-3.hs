@@ -25,9 +25,9 @@ pattern Down x = That x :: Move
 
 press k f p = Maybe `he___` k `hd'q` p `yui` Unit `yiu` f Unit
 
-apply = press `he` Lower J `he` Down
+apply = Wrong `hv` is @(ASCII `MN` Glyph `ML_` Glyph `MN` Letter)
+ `la____` press `he` Lower J `he` Down
  `lo'ys'la` press `he` Lower K `he` Lift
- `la____` Wrong `hv` is @(Number `ML` Symbol `ML` Caret)
 
 start = to @(Scrolling List) `ha` Construct
  `ha_` Next `he` "Apply to that new position"
@@ -52,7 +52,7 @@ draft = enter @(State `WR` Scrolling List Title `JNT` IO)
    `ho'he` Scope @(List Title) self
  `yok___` Raw `ha_'yokl` Forth `ha` print Bullet
  `yuk___` Raw `he___` input
-    `yok` Retry `ha` apply `ha` match @Letter @ASCII
+    `yok` Retry `ha` apply `ha_` on @Glyph `ho'ho` on @Letter `ho` row
  `yok___` State `ho` New `ha` Event `ha` scroll
  `yok___` Again `ha` Once
 

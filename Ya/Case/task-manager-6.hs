@@ -39,11 +39,11 @@ pattern Mark x = That x :: Command
 
 press k f p = Maybe `he___` k `hd'q` p `yui` Unit `yiu` f Unit
 
-apply = press `he` Lower J `he` (Move `ha` Down)
+apply = Wrong `hv` is @(ASCII `MN` Glyph `ML_` Glyph `MN` Letter)
+ `la____` press `he` Lower J `he` (Move `ha` Down)
  `lo'ys'la` press `he` Lower K `he` (Move `ha` Lift)
  `lo'ys'la` press `he` Upper T `he` (Mark `ha` TODO)
  `lo'ys'la` press `he` Upper D `he` (Mark `ha` DONE)
- `la____` Wrong `hv` is @(Number `ML` Symbol `ML` Caret)
 
 start = to @(Scrolling List) `ha` Construct
  `ha_` Next `he` Task (TODO ()) "Apply to that new position"
@@ -76,7 +76,7 @@ draft = enter @Application
    `ho'he` Scope @(List Task) self
  `yok___` Usual `ha_'yokl` Forth `ha` print Bullet
  `yuk___` Usual `he___` input
-    `yok` Retry `ha` apply `ha` match @Letter @ASCII
+    `yok` Retry `ha` apply `ha_` on @Glyph `ho'ho` on @Letter `ho` row
  `yok___` State `ho` New `ha__` Event `ha_` scroll `ho'ho` (`yui` Unit)
   `la___` State `ho` New `ha__` Event `ha_` switch `ho'ho` (`yui` Unit)
  `ho_'ha'he` Scope @(Focused Task) at `ho'he` Scope @Mark at

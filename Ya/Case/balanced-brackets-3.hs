@@ -23,9 +23,12 @@ compare closed opened = opened `hd'q` closed
 remnant = Valid `hv` Empty @List
   `la` Error `ha` Missing `ha` Closed `ha` this @Shape `ha` top @(Nonempty List)
 
-main = Nonempty @List @Bracket `ha` Next (Opened Angle) `he` Last (Closed Angle)
- `yokl` Forth `ha__` deposit `la` analyze
- `he___'he` Empty @List ()
+main = is @(Nonempty List ASCII)
+ `he__` "fn main() { println('hello, <world>!') }"
+ `yokl` Forth @(State `WR` List Shape `JNT` Error Imbalance)
+ `ha__` is `hu` enter `la` (deposit `la` analyze) `ho'yu` Unit
+ `ha__` on @Glyph `ho'ho` on @Symbol `ho` row `ho'ho` on @Bracket `ho` row
+ `he___'he` Empty @List Unit
  `yok_` Try `ha` remnant `ha'he` that @(List Shape)
  `yi__` is @(List ASCII)
  `ha__` is `hu` "[ERROR] Missing or mismatching bracket!"

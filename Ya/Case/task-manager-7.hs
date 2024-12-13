@@ -125,7 +125,7 @@ process = enter @Application
     `ha_'he` Scope @(Shafted List Project) at
      `ho'he` Scope @(Forward List Project) at
  `yok_____` print Bullet
- `yuk_____` input `yok_` Retry `ha_` match @Letter @ASCII `ho` apply
+ `yuk_____` input `yok_` Retry `ha_` on @Letter @ASCII `ho` apply
  `yok_____` State `ho` to `ha__` Transition `ha_` scroll @List `ho'ho` (`yui` Unit)
   `la_____` State `ho` to `ha__` Transition `ha_` scroll @Tree `ho'ho` (`yui` Unit)
   `ho_'ha'he` Scope @(Focused Project) at
