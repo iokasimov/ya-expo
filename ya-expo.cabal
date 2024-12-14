@@ -14,6 +14,14 @@ library
   ghc-options: -Wall -fno-warn-tabs -fno-strictness -fno-warn-orphans -fprint-potential-instances -Wno-missing-signatures
   build-depends: ya, ya-ascii, ya-console, base
 
+executable baby-steps
+  main-is: Ya/Case/baby-steps.hs
+  build-depends: ya, ya-ascii, ya-console, ya-expo, base, ghc-prim
+  default-extensions: AllowAmbiguousTypes, DataKinds, ConstraintKinds, ExistentialQuantification, ExtendedDefaultRules, GADTs, QuantifiedConstraints, InstanceSigs, FlexibleContexts, FlexibleInstances, KindSignatures, LiberalTypeSynonyms, LambdaCase, FunctionalDependencies, MultiParamTypeClasses, NoImplicitPrelude, OverloadedStrings, PackageImports, PatternSynonyms, PolyKinds, RankNTypes, ViewPatterns, ScopedTypeVariables, StandaloneDeriving, TupleSections, TypeApplications, TypeFamilies, TypeFamilyDependencies, TypeOperators, DerivingVia
+  default-language: Haskell2010
+  ghc-options: -Wall -fno-warn-tabs -fno-strictness -fno-warn-orphans -fprint-potential-instances -Wno-missing-signatures
+
+
 executable stack-machine-1
   main-is: Ya/Case/stack-machine-1.hs
   build-depends: ya, ya-ascii, ya-console, ya-expo, base, ghc-prim
