@@ -32,9 +32,9 @@ initial = Construct
  `ha_` Next `he` Immediate 4
  `he_` Last `he` Operation ((+) `hj`)
 
-main = (initial `yokl` Forth `ha__` load `la` eval) `he'he` Empty @List Unit
- `yi__` is `hu` "[ERR] No operands!" `ho_'yokl` Forth `ha` output `la_` this `he'ho` trace where
+main = (initial `yokl` Forth `ha` Usual `ha__` load `la` eval) `he'he` Empty @List Unit
+ `yi__` is `hu` "[ERR] No operands!" `ho_'yokl` Forth `ha` Raw `ha` output `la_` this `he'ho` trace where
 
- trace x = is @(Nonempty List ASCII) "[OK] Trace: " `yokl` Forth `ha` output
-  `yuk___` Raw `he____` x `yokl` Forth `ha__` integer `ho_'yokl` Forth `ha` output
+ trace x = is @(Nonempty List ASCII) "[OK] Trace: " `yokl` Forth `ha` Raw `ha` output
+  `yuk___` Raw `he____` x `yokl` Forth `ha`Usual `ha__` integer `ho_'yokl` Forth `ha` Raw `ha` output
   `ho_'yuk` Raw `ha` output `he` Caret Space

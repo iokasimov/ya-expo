@@ -19,9 +19,9 @@ pattern Bullet = This Unit
 pattern Cursor = That Unit
 
 print cursor (These status task) = enter @IO
- `yuk___` Raw (hand `yokl` Forth `ha` output)
- `yuk___` Raw (mark `yokl` Forth `ha` output)
- `yuk___` Raw (task `yokl` Forth `ha` output)
+ `yuk___` Raw (hand `yokl` Forth `ha` Usual `ha` output)
+ `yuk___` Raw (mark `yokl` Forth `ha` Usual `ha` output)
+ `yuk___` Raw (task `yokl` Forth `ha` Usual `ha` output)
  `yuk___` Raw (output `he` Caret Newline) where
 
  hand = is @Title `he__` is `hu` "  -  " `la` is `hu` "  -> " `li` cursor
@@ -51,15 +51,15 @@ draft = enter @(State `WR` Scrolling List Task `JNT` IO)
   `ha_'he` Scope @(Shafted List Task) at
    `ho'he` Scope @(Reverse List Task) at
    `ho'he` Scope @(List Task) self
- `yok___` Raw `ha_'yokl` Prior `ha` print Bullet
+ `yok___` Raw `ha_'yokl` Prior `ha` Usual `ha` print Bullet
  `yuk___` State `ho` New `he__` Event `he` auto
   `ha_'he` Scope @(Focused Task) at
- `yok___` Raw `ha_'yokl` Forth `ha` print Cursor
+ `yok___` Raw `ha_'yokl` Forth `ha` Usual `ha` print Cursor
  `yuk___` State `ho` New `he__` Event `he` auto
   `ha_'he` Scope @(Shafted List Task) at
    `ho'he` Scope @(Forward List Task) at
    `ho'he` Scope @(List Task) self
- `yok___` Raw `ha_'yokl` Forth `ha` print Bullet
+ `yok___` Raw `ha_'yokl` Forth `ha` Usual `ha` print Bullet
  `yuk___` Raw `he___` input
     `yok` Retry `ha` apply `ha_` on @Glyph `ho'ho` on @Letter `ho` row
  `yok___` State `ho` New `ha` Event `ha` scroll
