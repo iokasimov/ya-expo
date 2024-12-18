@@ -18,9 +18,8 @@ remnant = Valid `hv` Empty @List
  `la` Error `hv'he` Nonempty @List
 
 main = Nonempty @List @Parenthesis `ha` Next (Opened Unit) `he` Last (Closed Unit)
- `yokl` Forth `ha` Usual `ha__` deposit `la` analyze `he___'he` Empty @List Unit
+ `yokl` Run `ho` Forth `ha__` deposit `la` analyze `he___'he` Empty @List Unit
  `yok_` Try `ha` remnant `ha'he` that @(List Unit)
- `yi__` is @(List ASCII)
- `ha__` is `hu` "[ERROR] We missed some bracket, oh my!"
-   `la` is `hu` "[VALID] Everything is seem to be good!"
- `yokl` Forth `ha` Raw `ha` output
+ `yi__` is `hu` "[ERROR] We missed some bracket, oh my!" `ho` is @(List ASCII)
+   `la` is `hu` "[VALID] Everything is seem to be good." `ho` is @(List ASCII)
+ `yokl` Run `ho` Forth `ha` output

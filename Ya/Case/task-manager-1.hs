@@ -15,7 +15,7 @@ initial = Nonempty @List
  `he_` Last `he` "Buy a water gun for Songkran"
 
 print ttl = enter @IO
- `yuk___` Raw (ttl `yokl` Forth `ha` Raw `ha` output)
- `yuk___` Raw (output `he` Caret Newline)
+ `yuk___` Run (ttl `yokl` Forth `ha` Run `ha` output)
+ `yuk___` Run (output `he` Caret Newline)
 
-main = initial `yokl` Forth `ha` Raw `ha` print `ha` is @Title
+main = initial `yokl` Forth `ha` Run `ha` print `ha` is @Title

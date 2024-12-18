@@ -12,9 +12,9 @@ pattern Bullet = This Unit
 pattern Cursor = That Unit
 
 print cursor title = enter @IO
- `yuk___` Raw (point `yokl` Forth `ha` Usual `ha` output)
- `yuk___` Raw (title `yokl` Forth `ha` Usual `ha` output)
- `yuk___` Raw (output `he` Caret Newline) where
+ `yuk___` Run (point `yokl` Forth `ha` Usual `ha` output)
+ `yuk___` Run (title `yokl` Forth `ha` Usual `ha` output)
+ `yuk___` Run (output `he` Caret Newline) where
 
  point = is @Title `he__` is `hu` "  -  " `la` is `hu` "  -> " `li` cursor
 
@@ -36,22 +36,22 @@ start = to @(Scrolling List) `ha` Construct
  `he_` Last `he` "Buy a water gun for Songkran"
 
 draft = enter @(State `WR` Scrolling List Title `JNT` IO)
- `yuk___` Raw (prepare `lu'yp` clear)
+ `yuk___` Run (prepare `lu'yp` clear)
  `yuk___` State `ho` New
   `he___` Event `he` auto
   `ha_'he` Scope @(Shafted List Title) at
    `ho'he` Scope @(Reverse List Title) at
    `ho'he` Scope @(List Title) self
- `yok___` Raw `ha_'yokl` Prior `ha` Usual `ha` print Bullet
+ `yok___` Run `ha_'yokl` Prior `ha` Usual `ha` print Bullet
  `yuk___` State `ho` New `he__` Event `he` auto
   `ha_'he` Scope @(Focused Title) at
- `yok___` Raw `ha_'yokl` Forth `ha` Usual `ha` print Cursor
+ `yok___` Run `ha_'yokl` Forth `ha` Usual `ha` print Cursor
  `yuk___` State `ho` New `he__` Event `he` auto
   `ha_'he` Scope @(Shafted List Title) at
    `ho'he` Scope @(Forward List Title) at
    `ho'he` Scope @(List Title) self
- `yok___` Raw `ha_'yokl` Forth `ha` Usual `ha` print Bullet
- `yuk___` Raw `he___` input
+ `yok___` Run `ha_'yokl` Forth `ha` Usual `ha` print Bullet
+ `yuk___` Run `he___` input
     `yok` Retry `ha` apply `ha_` on @Glyph `ho'ho` on @Letter `ho` row
  `yok___` State `ho` New `ha` Event `ha` scroll
  `yok___` Again `ha` Once

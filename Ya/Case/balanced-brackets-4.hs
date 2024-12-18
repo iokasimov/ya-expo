@@ -29,13 +29,13 @@ remnant = Valid `hv` Empty @List
 
 main = is @(Nonempty List ASCII)
  `he__` "fn main() { println('hello, <world>!') ]"
- `yokl` Forth `ha` Usual @(State `WR` List Shape `JNT` Error Imbalance)
+ `yokl` Forth `ha` Run @(State `WR` List Shape `JNT` Error Imbalance)
  `ha__` is `hu` enter `la` (deposit `la` analyze) `ho'yu` Unit
  `ha__` on @Glyph `ho'ho` on @Symbol `ho` row `ho'ho` on @Bracket `ho` row
  `he___'he` Empty @List Unit
  `yok_` Try `ha` remnant `ha'he` that @(List Shape)
  `yi__` that @(List ASCII) `ha__` mismatch `la` missing `la` balance
- `yokl` Forth `ha` Usual `ha` output where
+ `yokl` Forth `ha` Run `ha` output where
 
  mismatch (These opened closed) =
   "[ERROR] Mismatched bracket shapes - "

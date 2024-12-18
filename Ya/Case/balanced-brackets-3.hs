@@ -23,7 +23,7 @@ remnant = Valid `hv` Empty @List
 
 main = is @(Nonempty List ASCII)
  `he__` "fn main() { println('hello, <world>!') }"
- `yokl` Forth `ha` Usual @(State `WR` List Shape `JNT` Error Imbalance)
+ `yokl` Forth `ha` Run @(State `WR` List Shape `JNT` Error Imbalance)
  `ha__` is `hu` enter `la` (deposit `la` analyze) `ho'yu` Unit
  `ha__` on @Glyph `ho'ho` on @Symbol `ho` row `ho'ho` on @Bracket `ho` row
  `he___'he` Empty @List Unit
@@ -31,4 +31,4 @@ main = is @(Nonempty List ASCII)
  `yi__` is @(List ASCII)
  `ha__` is `hu` "[ERROR] Missing or mismatching bracket!"
    `la` is `hu` "[VALID] Everything is seem to be good!"
- `yokl` Forth `ha` Def `ha` output
+ `yokl` Forth `ha` Run `ha` output
