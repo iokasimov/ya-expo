@@ -34,11 +34,13 @@ draft = enter @(State `WR` Scrolling List Title `JNT` IO)
  `yok___` Run `ha_'yokl` Prior `ha` Run `ha` print Bullet
  `yuk___` State `ho` New `he__` Transition `he` auto
   `ha_'he` Scope @(Focused Title) at
- `yok___` Run `ha_'yokl` Forth `ha` Run `ha` print Cursor
+ -- `yok___` Run `ha_'yokl` Forth `ha` Run `ha` print Cursor
+ `yok___'yokl` Forth `ha` Run `ha` print Bullet
  `yuk___` State `ho` New `he__` Transition `he` auto
   `ha_'he` Scope @(Shafted List Title) at
    `ho'he` Scope @(Forward List Title) at
    `ho'he` Scope @(List Title) self
- `yok___` Run `ha_'yokl` Forth `ha` Run `ha` print Bullet
+ `yok___'yokl` Forth `ha` Run `ha` print Bullet
+ -- `yok___` Run `ha_'yokl` Forth `ha` Run `ha` print Bullet
 
 main = draft `he'he` initial

@@ -39,10 +39,10 @@ apply = Wrong `hv` is @(ASCII `MN` Glyph `ML_` Glyph `MN` Letter)
  `lo'ys'la` press `he` Lower K `he` Lift
 
 start = to @(Scrolling List) `ha` Construct
- `ha_` Next `he` Task TODO "Apply to that new position"
- `ha_` Next `he` Task TODO "Find a way to fix ligatures"
- `ha_` Next `he` Task TODO "Organize a boardgame session"
- `he_` Last `he` Task DONE "Buy a water gun for Songkran"
+ `ha_` Item `ha` Next `he` Task TODO "Apply to that new position"
+ `ha_` Item `ha` Next `he` Task TODO "Find a way to fix ligatures"
+ `ha_` Item `ha` Next `he` Task TODO "Organize a boardgame session"
+ `he_` Item `ha` Last `he` Task DONE "Buy a water gun for Songkran"
 
 draft = enter @(State `WR` Scrolling List Task `JNT` IO)
  `yuk___` Run (prepare `lu'yp` clear)
