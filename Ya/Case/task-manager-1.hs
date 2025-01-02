@@ -1,21 +1,18 @@
 import "ya" Ya
+import "ya-world" Ya.World
 import "ya-ascii" Ya.ASCII
 import "ya-console" Ya.Console
 
-import "ya-expo" Ya.Expo.Instances ()
-
-import "base" System.IO (IO)
-
 type Title = List ASCII
 
-initial = Nonempty @List
- `ha_` Next `he` "Apply to that new position"
- `ha_` Next `he` "Find a way to fix ligatures"
- `ha_` Next `he` "Organize a boardgame session"
- `he_` Last `he` "Buy a water gun for Songkran"
+initial = Nonempty @List @Title
+ `ha` Item "Apply to that new position" `ha` Maybe `ha` Next
+ `ha` Item "Find a way to fix ligatures" `ha` Maybe `ha` Next
+ `ha` Item "Organize a boardgame session" `ha` Maybe `ha` Next
+ `ha` Item "Buy a water gun for Songkran" `ha` Maybe `hv` Last
 
-print ttl = enter @IO
- `yuk___` Run (ttl `yokl` Forth `ha` Run `ha` output)
- `yuk___` Run (output `he` Caret Newline)
+print title = enter @World
+ `yuk___` Run `hv____` title `yokl` Forth `ha` Run `ha` output
+ `yuk___` Run `hv____` output `ha` Caret `hv` Newline
 
-main = initial `yokl` Forth `ha` Run `ha` print `ha` is @Title
+main = initial `yokl` Forth `ha` Run `ha` print

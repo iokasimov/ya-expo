@@ -1,6 +1,7 @@
 import Ya
 
 import "base" System.IO (IO)
+import "ya-world" Ya.World
 import "ya-ascii" Ya.ASCII
 import "ya-expo" Ya.Expo.ASCII
 import "ya-expo" Ya.Expo.Instances
