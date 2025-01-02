@@ -4,8 +4,6 @@ import Ya.Expo.Instances ()
 import Ya.Expo.ASCII
 import Ya.Expo.Terminal
 
-import "base" System.IO (print)
-
 type Mismatch = Shape `LM` Shape
 
 type Imbalance = Mismatch `ML` Bracket
@@ -27,7 +25,7 @@ pattern Missing x = That x :: Imbalance
  -- `_yi'rfz` Error `ha` Missing `ha` Opened
  -- `ha` this @Shape `ha` unwrap top `ha` on @(Nonempty List) @Shape
 
-main = print "typechecked"
+-- main = "typechecked"
 -- main = is @Bracket
      -- `yi` Opened Angle
      -- `lm` Opened Curly
