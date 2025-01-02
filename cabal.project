@@ -1,4 +1,5 @@
 packages: .
   ../ya/ya.cabal
+  ../ya-world/ya-world.cabal
   ../ya-ascii/ya-ascii.cabal
   ../ya-console/ya-console.cabal
