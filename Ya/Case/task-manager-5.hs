@@ -17,13 +17,13 @@ pattern Cursor = That Unit
 
 type Move = Scroller List
 
-pattern Lift x = This x :: Move
-pattern Down x = That x :: Move
+pattern Lift x = This x
+pattern Down x = That x
 
 type Command = Move `ML` Mark
 
-pattern Move x = This x :: Command
-pattern Mark x = That x :: Command
+pattern Move x = This x
+pattern Mark x = That x
 
 print cursor (These status task) = enter @World
  `yuk___` Run `hv____` hand `yokl` Forth `ha` Run `ha` output
@@ -43,31 +43,31 @@ apply = is @(ASCII `MN` Glyph `ML_` Glyph `MN` Letter) `hu` Wrong Unit
  `lo'ys'la` press `hv` Upper D `hv` (Mark `ha` DONE)
 
 start = to @(Scrolling List) `ha` Nonempty @List @Task
- `ha` Item (TODO Unit `lu` "Apply to that new position") `ha` Maybe `ha` Next
- `ha` Item (TODO Unit `lu` "Find a way to fix ligatures")`ha` Maybe `ha` Next
- `ha` Item (TODO Unit `lu` "Organize a boardgame session") `ha` Maybe `ha` Next
- `ha` Item (DONE Unit `lu` "Buy a water gun for Songkran") `ha` Maybe `hv` Last
+ `ha` Item (it TODO `lu` "Apply to that new position") `ha` Maybe `ha` Next
+ `ha` Item (it TODO `lu` "Find a way to fix ligatures")`ha` Maybe `ha` Next
+ `ha` Item (it TODO `lu` "Organize a boardgame session") `ha` Maybe `ha` Next
+ `ha` Item (it DONE `lu` "Buy a water gun for Songkran") `ha` Maybe `hv` Last
 
 draft = enter @(State `WR` Scrolling List Task `JNT` World)
  `yuk___` World `hv__` prepare `lu'yp` clear
- `yuk___` State `ho` New `hv___` Transition `hv` auto
+ `yuk___` State `ho` New `hv___` Event `hv` auto
  `ha__'he` Scope `hv` at @(Shafted List Task)
   `ho_'he` Scope `hv` at @(Reverse List Task)
   `ho_'he` Scope `hv` self @(List Task)
  `yok___` World `ha_'yokl` Prior `ha` Run `ha` print Bullet
- `yuk___` State `ho` New `hv___` Transition `hv` auto
+ `yuk___` State `ho` New `hv___` Event `hv` auto
  `ha__'he` Scope `hv` at @(Focused Task)
  `yok___` World `ha_'yokl` Forth `ha` Run `ha` print Cursor
- `yuk___` State `ho` New `hv___` Transition `hv` auto
+ `yuk___` State `ho` New `hv___` Event `hv` auto
  `ha__'he` Scope `hv` at @(Shafted List Task)
   `ho_'he` Scope `hv` at @(Forward List Task)
   `ho_'he` Scope `hv` self @(List Task)
  `yok___` World `ha_'yokl` Forth `ha` Run `ha` print Bullet
  `yuk___` World `hv___` input
     `yok` Retry `ha` apply `ha_` on @Glyph `ho'ho` on @Letter `ho` row
- `yok___` State `ho` New `ha__` Event `ha_` scroll `ho'ho` (`yui` Unit)
-  `la___` State `ho` New `ha__` Event `ha_` switch `ho'ho` (`yui` Unit)
- `ho_'ha'he` Scope @(Focused Task) at `ho'he` Scope @Mark at
+ `yok___` State `ho` New `ha__` Event `ha` (scroll `ho'ho'yui` Unit)
+  `la___` State `ho` New `ha__` Event `ha` (switch `ho'ho'yui` Unit)
+ `ho_'ha'he` Scope `hv` at @(Focused Task) `ho'he` (Scope `hv` at @Mark)
  `yok___` Again `ha` Once
 
 main = draft `he'he'hv` start

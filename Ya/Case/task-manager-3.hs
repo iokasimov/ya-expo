@@ -22,7 +22,7 @@ pattern Down x = That x :: Move
 
 press k f p = Maybe `hv___` k `hd'q` p `yui` Unit `yiu` f Unit
 
-apply = is @(ASCII `MN` Glyph `ML_` Glyph `MN` Letter) `hu` Wrong Unit
+apply = is @(ASCII `MN` Glyph `ML_` Glyph `MN` Letter) `hu` it Wrong
  `la____` press `hv` Lower J `hv` Down
  `lo'ys'la` press `hv` Lower K `hv` Lift
 
