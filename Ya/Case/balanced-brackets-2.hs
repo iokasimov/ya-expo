@@ -1,9 +1,8 @@
 import "ya" Ya
 import "ya-ascii" Ya.ASCII
 import "ya-console" Ya.Console
-import "ya-expo" Ya.Expo.Instances
 
-type Imbalance = (Shape `LM` Shape) `ML` (Shape `ML` Shape)
+type Imbalance = (Shape `LM` Shape) `ML_` (Shape `ML` Shape)
 
 pattern Mismatch x = This x :: Imbalance
 pattern Missing x = That x :: Imbalance
@@ -18,16 +17,16 @@ analyze bracket = enter @(State `WR` List Shape `JNT` Error Imbalance)
 
 compare closed opened = opened `hd'q` closed
 
-remnant = Empty @List `hu` Valid Unit
+remnant = Empty @List `hu` it Valid
   `la` Error `ha` Missing `ha` Closed `ha` this @Shape `ha` top @(Nonempty List)
 
 main = Nonempty @List
  `ha` Item (Opened Round) `ha` Maybe `ha` Next
  `ha` Item (Closed Angle) `ha` Maybe `hv` Last
  `yokl` Forth `ha` Run `ha__` deposit `la` analyze
- `he'he'hv___` Empty @List Unit
+ `he'he'hv___` it `hv` Empty @List
  `yok_` Try `ha` remnant `ha'he` that @(List Shape)
  `yi__` is @(List ASCII)
- `ha__` is `hu` "[ERROR] Missing or mismatching bracket!"
-   `la` is `hu` "[VALID] Everything is seem to be good!"
+ `ha__` "[ERROR] Missing or mismatching bracket!"
+   `lv` "[VALID] Everything is seem to be good!"
  `yokl` Forth `ha` Run `ha` output

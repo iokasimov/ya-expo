@@ -10,10 +10,10 @@ deposit bracket = enter @(State `WR` List _ `JNT` Halts)
 
 analyze _______ = enter @(State `WR` List _ `JNT` Halts)
  `yuk__` New `ha` State `ha` Event `hv` pop @List
- `yok__` Try `ha__` None `hu` Error Unit `la` Some `hu` Valid Unit
+ `yok__` Try `ha__` None `hu` it Error `la` Some `hu` it Valid
 
-remnant = Empty @List `hu` Valid Unit
- `la` Nonempty @List `he'hu` Error Unit
+remnant = Empty @List `hu` it Valid
+ `la` Nonempty @List `he'hu` it Error
 
 main = Nonempty @List @Parenthesis
  `ha` Item (Opened Unit) `ha` Maybe `ha` Next

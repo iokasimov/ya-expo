@@ -2,7 +2,6 @@ import "ya" Ya
 import "ya-world" Ya.World
 import "ya-ascii" Ya.ASCII
 import "ya-console" Ya.Console
-import "ya-expo" Ya.Expo.Instances
 
 type Mismatch = Shape `LM` Shape
 
@@ -23,7 +22,7 @@ analyze bracket = enter @(State `WR` List Shape `JNT` Error Imbalance)
 
 compare closed opened = opened `hd'q` closed
 
-remnant = Valid -- `hv` Empty @List
+remnant = Empty @List `hu` it Valid
   `la` Error `ha` Missing `ha` Closed `ha` this @Shape `ha` top @(Nonempty List)
 
 main = is @(Nonempty List ASCII)
@@ -31,14 +30,14 @@ main = is @(Nonempty List ASCII)
  `yokl` Forth `ha` Run @(State `WR` List Shape `JNT` Error Imbalance)
  `ha__` is `hu` enter `la` (deposit `la` analyze) `ho'yu` Unit
  `ha__` on @Glyph `ho'ho` on @Symbol `ho` row `ho'ho` on @Bracket `ho` row
- `he___'he` Empty @List Unit
+ `he'he'hv___`it `hv` Empty @List
  `yok_` Try `ha` remnant `ha'he` that @(List Shape)
  `yi__` that @(List ASCII) `ha__` mismatch `la` missing `la` balance
  `yokl` Forth `ha` Run `ha` output where
 
  mismatch (These opened closed) =
   "[ERROR] Mismatched bracket shapes - "
-  `yokl` Prior `ha` New `ha` State `ha` Event `ha` push `he___'he` List
+  `yokl` Prior `ha` New `ha` State `ha` Event `ha` push `he'he'hv___` List
   `ha__` Item `ha` Glyph `ha` Symbol `ha` Bracket `ha` Opened `hv` opened `ha` Maybe `ha` Next
   `ha__` Item `ha` Caret `hv` Space `ha` Maybe `ha` Next
   `hv__` Item `ha` Glyph `ha` Symbol `ha` Bracket `ha` Closed `hv` closed `ha` Maybe `hv` Last
@@ -46,7 +45,7 @@ main = is @(Nonempty List ASCII)
  missing bracket =
   "[ERROR] Missing bracket - "
   `yokl` Prior `ha` New `ha` State `ha` Event `ha` push
-  `he___'he` intro @_ @List `ha` Glyph `ha`Symbol `ha` Bracket `hv` bracket
+  `he'he'hv___` intro @_ @List `ha` Glyph `ha`Symbol `ha` Bracket `hv` bracket
 
- balance _ = Empty @List Unit
+ balance _ = it `hv` Empty @List
   `lu` "[VALID] Everything is seem to be good!"
