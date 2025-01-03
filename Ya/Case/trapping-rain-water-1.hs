@@ -1,6 +1,7 @@
 import Ya
-import "ya-expo" Ya.Expo.Instances ()
 import "ya-console" Ya.Console
+
+import "ya-expo" Ya.Expo.Instances ()
 
 import "base" GHC.Num (Integer, (-), (+))
 import "base" Data.Ord (max, min)
@@ -10,9 +11,9 @@ gap = (trap `hj'hj`) where
 
  trap left right origin all = min left right - origin + all
 
-main = is `ho_'yokl` gap `ho'ho` auto `ho` Event `ho` State `ho` New `ho` Forth `ho_'he'he` (0 `yi`) `ho` this
- `ha___` is `ho_'yokl` max `ho'ho` auto `ho` Event `ho` State `ho` New `ho` Forth `ho_'he'he` (0 `yi`) `ho` this
- `lo_'yp` is `ho_'yokl` max `ho'ho` auto `ho` Event `ho` State `ho` New `ho` Prior `ho_'he'he` (0 `yi`) `ho` this
+main = is `ho_'yokl` gap `ho'ho` auto `ho` Event `ho` State `ho` New `ho` Forth `ho_'he'he'hv` 0 `ho_` this
+ `ha___` is `ho_'yokl` max `ho'ho` auto `ho` Event `ho` State `ho` New `ho` Forth `ho_'he'he'hv` 0 `ho_` this
+ `lo_'yp` is `ho_'yokl` max `ho'ho` auto `ho` Event `ho` State `ho` New `ho` Prior `ho_'he'he'hv` 0 `ho_` this
  `lo_'yp` is @(Nonempty List Integer)
  `hv___` Nonempty @List
  `ha` Item 2 `ha` Maybe `ha` Next
