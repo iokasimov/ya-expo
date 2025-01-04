@@ -1,5 +1,3 @@
-{-# LANGUAGE UnboxedTuples #-}
-{-# LANGUAGE MagicHash #-}
 module Ya.Expo.Instances where
 
 import Ya
