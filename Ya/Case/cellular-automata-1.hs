@@ -1,4 +1,5 @@
 import Ya
+import Ya.World
 import Ya.ASCII
 import Ya.Expo.Instances ()
 import Ya.Expo.ASCII

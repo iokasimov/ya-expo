@@ -18,7 +18,7 @@ analyze bracket = enter @(State `WR` List Shape `JNT` Error Imbalance)
 
 compare closed opened = opened `hd'q` closed
 
-remnant = Empty @List `hu` it Valid
+remnant = Empty @List `hu` by Valid
   `la` Error `ha` Missing `ha` Closed `ha` this @Shape `ha` top @(Nonempty List)
 
 main = is @(Nonempty List ASCII)
@@ -26,7 +26,7 @@ main = is @(Nonempty List ASCII)
  `yokl` Forth `ha` Run @(State `WR` List Shape `JNT` Error Imbalance)
  `ha__` is `hu` enter `la` (deposit `la` analyze) `ho'yu` Unit
  `ha__` on @Glyph `ho'ho` on @Symbol `ho` row `ho'ho` on @Bracket `ho` row
- `he'he'hv___`it `hv` Empty @List
+ `he'he'hv___`by `hv` Empty @List
  `yok_` Try `ha` remnant `ha'he` that @(List Shape)
  `yi__` is @(List ASCII)
  `ha__` "[ERROR] Missing or mismatching bracket!"

@@ -17,14 +17,14 @@ analyze bracket = enter @(State `WR` List Shape `JNT` Error Imbalance)
 
 compare closed opened = opened `hd'q` closed
 
-remnant = Empty @List `hu` it Valid
+remnant = Empty @List `hu` by Valid
   `la` Error `ha` Missing `ha` Closed `ha` this @Shape `ha` top @(Nonempty List)
 
 main = Nonempty @List
  `ha` Item (Opened Round) `ha` Maybe `ha` Next
  `ha` Item (Closed Angle) `ha` Maybe `hv` Last
  `yokl` Forth `ha` Run `ha__` deposit `la` analyze
- `he'he'hv___` it `hv` Empty @List
+ `he'he'hv___` by `hv` Empty @List
  `yok_` Try `ha` remnant `ha'he` that @(List Shape)
  `yi__` is @(List ASCII)
  `ha__` "[ERROR] Missing or mismatching bracket!"

@@ -130,7 +130,7 @@ process = enter @Application
  `yok_____` State `ho` to `ha__` Transition `ha_` scroll @List `ho'ho` (`yui` Unit)
   `la_____` State `ho` to `ha__` Transition `ha_` scroll @Tree `ho'ho` (`yui` Unit)
   `ho_'ha'he` Scope @(Focused Project) at
-     `ho'he` Scope @Project self
+     `ho'he` Scope @Project it
   `la_____` State `ho` to `ha__` Transition `ha_` (\m x -> Unit `lu_` x `yo`(`yui` m))
   `ho_'ha'he` Scope @(Focused Project) at
    `ho'he'he` Scope @(Leveled Tree Task) at

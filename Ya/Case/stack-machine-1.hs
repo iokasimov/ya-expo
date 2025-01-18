@@ -38,4 +38,4 @@ main = error `la` this `he'ho` trace
 
  trace x = is @(Nonempty List ASCII) "[OK] Trace: " `yokl` Forth `ha` Raw `ha` output
   `yuk___` Raw `hv____` x `yokl` Forth `ha` Run `ha__` integer `ho_'yokl` Forth `ha` Raw `ha` output
-  `ho_'yuk` Raw `ha` output `hv` Caret Space
+  `ho_'yuk` Raw `ha` output `ha` Caret `hv` by Space

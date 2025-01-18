@@ -16,7 +16,7 @@ tap = is `ho'yokl` (gap `ho'ho` auto `ho` Event `ho` State `ho` New `ho` Forth) 
  `lo'yp` is `ho'yokl` (max `ho'ho` auto `ho` Event `ho` State `ho` New `ho` Prior) `ho'he'he'hv` 0 `ho` this
  `lo'yp` is @(Nonempty List Integer)
 
-main = tap `hv_` Nonempty @List
+main = tap `ha` Nonempty @List
  `ha` Item 2 `ha` Maybe `ha` Next
  `ha` Item 5 `ha` Maybe `ha` Next
  `ha` Item 1 `ha` Maybe `ha` Next
@@ -27,4 +27,3 @@ main = tap `hv_` Nonempty @List
  `ha` Item 7 `ha` Maybe `ha` Next
  `ha` Item 6 `ha` Maybe `hv` Last
  `yokl_` Forth `ha` Run `ha` print
-

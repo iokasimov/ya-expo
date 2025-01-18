@@ -40,25 +40,25 @@ pattern Mark x = That x :: Command
 
 press k f p = Maybe `he___` k `hd'q` p `yui` Unit `yiu` f Unit
 
-apply = Wrong `hv` is @(ASCII `MN` Glyph `ML_` Glyph `MN` Letter)
- `la____` press `he` Lower J `he` (Move `ha` Down)
- `lo'ys'la` press `he` Lower K `he` (Move `ha` Lift)
- `lo'ys'la` press `he` Upper T `he` (Mark `ha` TODO)
- `lo'ys'la` press `he` Upper D `he` (Mark `ha` DONE)
+apply = is @(ASCII `MN` Glyph `ML_` Glyph `MN` Letter) `hu` Wrong Unit
+ `la____` press `hv` Lower J `hv` (Move `ha` Down)
+ `lo'ys'la` press `hv` Lower K `hv` (Move `ha` Lift)
+ `lo'ys'la` press `hv` Upper T `hv` (Mark `ha` TODO)
+ `lo'ys'la` press `hv` Upper D `hv` (Mark `ha` DONE)
 
-start = to @(Scrolling List) `ha` Construct
- `ha_` Next `he` Task (TODO ()) "Apply to that new position"
- `ha_` Next `he` Task (TODO ()) "Find a way to fix ligatures"
- `ha_` Next `he` Task (TODO ()) "Organize a boardgame session"
- `he_` Last `he` Task (DONE ()) "Buy a water gun for Songkran"
+start = to @(Scrolling List) `ha` Nonempty @List @Task
+ `ha` Item (by TODO `lu` "Apply to that new position") `ha` Maybe `ha` Next
+ `ha` Item (by TODO `lu` "Find a way to fix ligatures") `ha` Maybe `ha` Next
+ `ha` Item (by TODO `lu` "Organize a boardgame session") `ha` Maybe `ha` Next
+ `ha` Item (by DONE `lu` "Buy a water gun for Songkran") `ha` Maybe `hv` Last
 
--- type Project = Scrolling Tree Task
+type Project = Scrolling Tree Task
 
--- type Outline = Scrolling List Project
+type Outline = Scrolling List Project
 
--- type Application = State Outline `JNT` Halts `JNT` IO
+type Application = State Outline `JNT` Halts `JNT` IO
 
-type Application = State `WR` Scrolling List Task `JNT` IO
+-- type Application = State `WR` Scrolling List Task `JNT` IO
 
 draft = enter @Application
  `yuk___` Run (prepare `lu'yp` clear)
@@ -66,7 +66,7 @@ draft = enter @Application
   `he___` Event `he` auto
   `ha_'he` Scope @(Shafted List Task) at
    `ho'he` Scope @(Reverse List Task) at
-   `ho'he` Scope @(List Task) self
+   `ho'he` Scope @(List Task) it
  `yok___` Run `ha_'yokl` Prior `ha` Run `ha` print Bullet
  `yuk___` State `ho` New `he__` Event `he` auto
   `ha_'he` Scope @(Focused Task) at
@@ -74,7 +74,7 @@ draft = enter @Application
  `yuk___` State `ho` New `he__` Event `he` auto
   `ha_'he` Scope @(Shafted List Task) at
    `ho'he` Scope @(Forward List Task) at
-   `ho'he` Scope @(List Task) self
+   `ho'he` Scope @(List Task) it
  `yok___` Run `ha_'yokl` Forth `ha` Run `ha` print Bullet
  `yuk___` Run `he___` input
     `yok` Retry `ha` apply `ha_` on @Glyph `ho'ho` on @Letter `ho` row

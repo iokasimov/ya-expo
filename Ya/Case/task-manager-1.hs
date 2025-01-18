@@ -13,6 +13,6 @@ initial = Nonempty @List @Title
 
 print title = enter @World
  `yuk___` Run `hv____` title `yokl` Forth `ha` Run `ha` output
- `yuk___` Run `hv____` output `ha` Caret `hv` Newline
+ `yuk___` Run `hv____` output `ha` Caret `hv` by Newline
 
 main = initial `yokl` Forth `ha` Run `ha` print
