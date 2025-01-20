@@ -8,11 +8,15 @@ type Tile = Unit `ML` Unit
 pattern Idle = This Unit
 pattern Ship = That Unit
 
-type Shot = Unit `ML` Unit `ML` Unit
+type Nail = Unit `ML` Unit
 
-pattern Miss i = This (This i)
-pattern Bang i = This (That i)
+pattern Bang i = This i
 pattern Sunk i = That i
+
+type Shot = Nail `ML` Unit
+
+pattern Nail i = This i
+pattern Miss i = That i
 
 type Ship = Nonempty List Unit
 

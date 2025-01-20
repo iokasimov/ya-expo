@@ -10,18 +10,27 @@ type Tile = Unit `ML` Unit
 pattern Idle = This Unit
 pattern Ship = That Unit
 
-type Shot = Unit `ML` Unit `ML` Unit
+type Nail = Unit `ML` Unit
 
-pattern Miss i = This (This i)
-pattern Bang i = This (That i)
+pattern Bang i = This i
 pattern Sunk i = That i
 
-type Ship = Nonempty List Unit
+type Shot = Nail `ML` Unit
+
+pattern Nail i = This i
+pattern Miss i = That i
 
 type Mark = Shot `ML` Integer
 
 pattern Shot e = This e
 pattern Mist e = That e
+
+type Board = Nonempty List
+ 
+type Personal = Board Tile
+type Opponent = Board Shot
+
+type Ship = Nonempty List Unit
 
 fleet = Nonempty @List @Ship
  `ha_` Item `ha` Nonempty @List
@@ -38,14 +47,13 @@ window ship = ship `yukl` Forth
  `ha` New `ha` State `ha` Event
  `ha` extend @List `hv` by Fore
 
-match ship = Interrupt `hu_` auto `hv` ship `la` auto `li` check `hv` ship
-
-check tile = tile
+match ship = ship
  `yokl` Run `ho` Forth
- `ha__` Miss `ho` Shot `ho` Error
-   `la` Bang `ho` Shot `ho` Valid
-   `la` Sunk `ho` Shot `ho` Error
+ `ha__` Bang `ho` Nail `ho` Shot `ho` Valid
+   `la` Sunk `ho` Nail `ho` Shot `ho` Error
+   `la` Miss `ho` Shot `ho` Error
    `la` (+1) `ho` Mist `ho` Valid
+ `yi__` auto `ha__` Same `hu` ship `la` is
 
 chance = enter @(State `WR` Sliding List Mark)
  `yuk___` State `ho` New `hv__` Event `hv` match `ha_'he` Scope `hv` at @(List Mark)
