@@ -53,11 +53,12 @@ match ship = ship
    `la` Sunk `ho` Nail `ho` Shot `ho` Error
    `la` Miss `ho` Shot `ho` Error
    `la` (+1) `ho` Mist `ho` Valid
- `yi__` auto `ha__` Same `hu` ship `la` is
+
+mount ship = Same `hu` ship `la` is `li` match ship
 
 chance = enter @(State `WR` Sliding List Mark)
- `yuk___` State `ho` New `hv__` Event `hv` match `ha_'he` Scope `hv` at @(List Mark)
- `yuk___` State `ho` New `hv__` Event `ha` slide `hv` by Future
+ `yuk___` State `ho` New `hv__` Event `hv_` mount `ho` auto `ha_'he` Scope `hv` at @(List Mark)
+ `yuk___` State `ho` New `hv__` Event `hv_` slide `hv` by Future
  `yok___` Retry `ha` Perhaps `ha` not
 
 rewind = State `ha` Event `hv_` auto `ho'ho` to @(Sliding List) `ha` to @List
@@ -92,9 +93,9 @@ main = print `ha` that `hv_` distribute fleet `he'he'hv` to known where
       `ho_` unwrap @AR `ha` this `ha'he` at @(Forward List Mark)
       `ho_'yokl` Forth `ha` Run `ha` render
 
- render = Miss `hu` Hyphen `hv` Unit
-  `la__` Bang `hu` Plus `hv` Unit
+ render = Bang `hu` Plus `hv` Unit
   `la__` Sunk `hu` Hash `hv` Unit
+  `la__` Miss `hu` Hyphen `hv` Unit
   `ho___` intro `ha` Glyph `ha` Symbol `ha` Punctuate
   `la__` integer
   `ho___'yokl` Forth `ha` Run `ha` output
