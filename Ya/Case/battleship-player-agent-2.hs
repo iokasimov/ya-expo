@@ -97,6 +97,6 @@ main = print `ha` that `hv_` distribute fleet `he'he'hv` to known where
   `la__` Sunk `hu` Hash `hv` Unit
   `la__` Miss `hu` Hyphen `hv` Unit
   `ho___` intro `ha` Glyph `ha` Symbol `ha` Punctuate
-  `la__` integer
+  `la__` integer `ho_'yo` Glyph `ha` Digit
   `ho___'yokl` Forth `ha` Run `ha` output
   `ho___'yuk` World `ha` output `ha` Caret `hv` by Space
