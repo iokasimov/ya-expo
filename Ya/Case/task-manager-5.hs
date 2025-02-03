@@ -36,7 +36,7 @@ print cursor (These status task) = enter @World
 
 press k f p = Maybe `hv___` k `hd'q` p `yui` Unit `yiu` f Unit
 
-apply = is @(ASCII `MN` Glyph `ML_` Glyph `MN` Letter) `hu` Wrong Unit
+apply = is @(ASCII `MN` Glyph `ML_` Glyph `MN` Letter) `hu` by Wrong
  `la____` press `hv` Lower J `hv` (Move `ha` Down)
  `lo'ys'la` press `hv` Lower K `hv` (Move `ha` Lift)
  `lo'ys'la` press `hv` Upper T `hv` (Mark `ha` TODO)

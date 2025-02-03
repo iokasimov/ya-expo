@@ -19,7 +19,8 @@ analyze bracket = enter @(State `WR` List Shape `JNT` Error Imbalance)
 compare closed opened = opened `hd'q` closed
 
 remnant = Empty @List `hu` by Valid
-  `la` Error `ha` Missing `ha` Closed `ha` this @Shape `ha` top @(Nonempty List)
+  `la` Error `ha` Missing `ha` Closed
+  `ha` this @Shape `ha` top @(Nonempty List)
 
 main = is @(Nonempty List ASCII)
  `hv__` "fn main() { println('hello, <world>!') }"

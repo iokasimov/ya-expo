@@ -47,7 +47,7 @@ window ship = ship `yukl` Forth
  `ha` New `ha` State `ha` Event
  `ha` extend @List `hv` by Fore
 
-match = enter @(State Opponent `JNT` Halts Unit)
+match = enter @(State Opponent `JNT` Halts)
  `yuk____` State `ho` Old
  `hv_____` Event `hv` pop @List
  `ha___'he` Scope `hv` at @(Shafted List Mark)

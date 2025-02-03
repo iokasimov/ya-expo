@@ -53,7 +53,7 @@ type Target = Maybe Ship
 
 shoot' = by Miss `lv` Nail `hv` by Bang `ho_` Shot `ha__` this @Tile
 
-type Playing = State `WR_` Target `LM` Fleet `LM` Board Cell `JNT_` Halts Result
+type Playing = State `WR_` Target `LM` Fleet `LM` Board Cell `JNT_` Reach Result
 
 -- + None: If there is `Some Ship` - we need to remove it from `Fleet`, stop
 
@@ -65,7 +65,7 @@ type Playing = State `WR_` Target `LM` Fleet `LM` Board Cell `JNT_` Halts Result
  -- , if there is `None Ship` - do nothing
  -- , if there is `Some Ship` - we need to remove it from `Fleet`
 
-hunt = enter @(State `WR_` Target `LM` Fleet `LM` Board Cell `JNT_` Halts Result)
+hunt = enter @(State `WR_` Target `LM` Fleet `LM` Board Cell `JNT_` Reach Result)
  `yuk__` State `ho` New `hv__` Event `ha` extend @List `hv` by Fore `ha_` Scope `hv` at @(Board Cell)
  `yok__` Run `ha__` None `hu` sink `ho'yu` (Interrupt `hv` by Smash) `la` intro `ha` Continue @Cell
  `yok__` Check @Result `ha'yo` this @Tile
@@ -76,11 +76,11 @@ type Result = Ship `ML` Unit
 pattern Fault e = This e
 pattern Smash e = That e
 
-sink = enter @(State `WR_` Target `LM` Fleet `LM` Board Cell `JNT_` Halts Result)
+sink = enter @(State `WR_` Target `LM` Fleet `LM` Board Cell `JNT_` Reach Result)
  `yuk__` Old `ha` State `hv__` Event `hv` auto `ha_` Scope `hv` at @Target
- `yok__` Try `ha` is @(Halts Result Ship) `ha__` Interrupt `ha` Smash `la` Valid
+ `yok__` Try `ha` is @(Reach Result Ship) `ha__` Interrupt `ha` Smash `la` Valid
  `yok__` Old `ha` State `ha__` Event `ha` defeat `ho_'ha` Scope `hv` at @Fleet
- `yok__` Try `ha` is @(Halts Result Fleet)
+ `yok__` Try `ha` is @(Reach Result Fleet)
  `yok__` New `ha` State `ha__` Event `ha` switch `ho_'ha` Scope `hv` at @Fleet
 
 defeat ship fleet = Interrupt `ha` Smash `la` Continue @Fleet
@@ -96,7 +96,7 @@ wreck ship = enter @(State `WR` Scrolling List Ship `JNT` Reach `WR` List Ship)
  `yok____` Try `ha` is @(Progress `WR` List Ship `WR` _)
  `yuk____` Again `hv` Once ship
 
-bomb = enter @(State `WR_` Target `LM` Fleet `LM` Board Cell `JNT_` Halts Result)
+bomb = enter @(State `WR_` Target `LM` Fleet `LM` Board Cell `JNT_` Reach Result)
  `yuk___` State `ho` New `hv___` Event `hv_` hit `ha_` Scope `hv` at @Target
  `yuk___` State `ho` Old `hv___` Event `hv` auto `ha_` Scope `hv` at @Fleet
 
@@ -108,7 +108,7 @@ window ship = ship `yukl` Forth
  `ha` New `ha` State `ha` Event
  `ha` extend @List `hv` by Fore
 
-match = enter @(State Opponent `JNT` Halts Unit)
+match = enter @(State Opponent `JNT` Reach Unit)
  `yuk____` State `ho` Old
  `hv_____` Event `hv` pop @List
  `ha___'he` Scope `hv` at @(Shafted List Mark)

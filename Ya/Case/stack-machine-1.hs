@@ -15,13 +15,13 @@ pattern Immediate x = This x
 pattern Operation x = That x
 
 load value = enter @(State `WR` List _ `JNT` Halts)
- `yuk_` New `ha` State `ha` Transition `hv` push @List value
+ `yuk_` New `ha` State `ha` Event `hv` push @List value
 
 eval binop = enter @(State `WR` List _ `JNT` Halts)
- `yuk_` New `ha` State `ha` Transition `hv` pop @List
- `lu'yp` New `ha` State `ha` Transition `hv` pop @List
+ `yuk_` New `ha` State `ha` Event `hv` pop @List
+ `lu'yp` New `ha` State `ha` Event `hv` pop @List
  `yok_` Try `ha` Maybe `ha` (`yip'yo` binop)
- `yok_` New `ha` State `ha` Transition `ha` push @List
+ `yok_` New `ha` State `ha` Event `ha` push @List
 
 initial = Construct
  `ha` (Item `hv` Immediate 1) `ha` Maybe `ha` Next
