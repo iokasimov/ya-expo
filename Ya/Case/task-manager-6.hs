@@ -47,9 +47,9 @@ apply = is @(ASCII `MN` Glyph `ML_` Glyph `MN` Letter) `hu` Wrong Unit
  `lo'ys'la` press `hv` Upper D `hv` (Mark `ha` DONE)
 
 start = to @(Scrolling List) `ha` Nonempty @List @Task
- `ha` Item (by TODO `lu` "Apply to that new position") `ha` Maybe `ha` Next
- `ha` Item (by TODO `lu` "Find a way to fix ligatures") `ha` Maybe `ha` Next
- `ha` Item (by TODO `lu` "Organize a boardgame session") `ha` Maybe `ha` Next
+ `ha` Item (by TODO `lu` "Apply to that new position") `ha` Next
+ `ha` Item (by TODO `lu` "Find a way to fix ligatures") `ha` Next
+ `ha` Item (by TODO `lu` "Organize a boardgame session") `ha` Next
  `ha` Item (by DONE `lu` "Buy a water gun for Songkran") `ha` Maybe `hv` Last
 
 type Project = Scrolling Tree Task

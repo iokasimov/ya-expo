@@ -17,13 +17,13 @@ tap = is `ho'yokl` (gap `ho'ho` auto `ho` Event `ho` State `ho` New `ho` Forth) 
  `lo'yp` is @(Nonempty List Integer)
 
 main = tap `ha` Nonempty @List
- `ha` Item 2 `ha` Maybe `ha` Next
- `ha` Item 5 `ha` Maybe `ha` Next
- `ha` Item 1 `ha` Maybe `ha` Next
- `ha` Item 2 `ha` Maybe `ha` Next
- `ha` Item 3 `ha` Maybe `ha` Next
- `ha` Item 4 `ha` Maybe `ha` Next
- `ha` Item 7 `ha` Maybe `ha` Next
- `ha` Item 7 `ha` Maybe `ha` Next
+ `ha` Item 2 `ha` Next
+ `ha` Item 5 `ha` Next
+ `ha` Item 1 `ha` Next
+ `ha` Item 2 `ha` Next
+ `ha` Item 3 `ha` Next
+ `ha` Item 4 `ha` Next
+ `ha` Item 7 `ha` Next
+ `ha` Item 7 `ha` Next
  `ha` Item 6 `ha` Maybe `hv` Last
  `yokl_` Forth `ha` Run `ha` print

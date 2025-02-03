@@ -33,16 +33,16 @@ type Personal = Board Tile
 type Opponent = Board Mark
 
 submarine = Nonempty @List
- `ha` Item Unit `ha` Maybe `ha` Next
- `ha` Item Unit `ha` Maybe `ha` Next
+ `ha` Item Unit `ha` Next
+ `ha` Item Unit `ha` Next
  `ha` Item Unit `ha` Maybe `hv` Last
 
 destroyer = Nonempty @List
- `ha` Item Unit `ha` Maybe `ha` Next
+ `ha` Item Unit `ha` Next
  `ha` Item Unit `ha` Maybe `hv` Last
 
 fleet = Nonempty @List @Ship
- `ha_` Item `hv` submarine `ha_` Maybe `ha_` Next
+ `ha_` Item `hv` submarine `ha_` Next
  `ha_` Item `hv` destroyer `ha_` Maybe `hv_` Last
 
 window ship = ship `yukl` Forth
@@ -101,15 +101,15 @@ distribute fleet = fleet
   `ho_'yuk` New `hv` rewind
 
 enemy = Nonempty @List
- `ha` Item Idle `ha` Maybe `ha` Next
- `ha` Item Ship `ha` Maybe `ha` Next
- `ha` Item Ship `ha` Maybe `ha` Next
- `ha` Item Ship `ha` Maybe `ha` Next
- `ha` Item Idle `ha` Maybe `ha` Next
- `ha` Item Ship `ha` Maybe `ha` Next
- `ha` Item Ship `ha` Maybe `ha` Next
- `ha` Item Idle `ha` Maybe `ha` Next
- `ha` Item Idle `ha` Maybe `ha` Next
+ `ha` Item Idle `ha` Next
+ `ha` Item Ship `ha` Next
+ `ha` Item Ship `ha` Next
+ `ha` Item Ship `ha` Next
+ `ha` Item Idle `ha` Next
+ `ha` Item Ship `ha` Next
+ `ha` Item Ship `ha` Next
+ `ha` Item Idle `ha` Next
+ `ha` Item Idle `ha` Next
  `ha` Item Idle `ha` Maybe `hv` Last
 
 known = enemy `yu` Mist 0

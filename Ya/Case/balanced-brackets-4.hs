@@ -38,8 +38,8 @@ main = is @(Nonempty List ASCII)
  mismatch (These opened closed) =
   "[ERROR] Mismatched bracket shapes - "
   `yokl` Prior `ha` New `ha` State `ha` Event `ha` push `he'he'hv___` List
-  `ha__` Item `ha` Glyph `ha` Symbol `ha` Bracket `ha` Opened `hv` opened `ha` Maybe `ha` Next
-  `ha__` Item `ha` Caret `hv` by Space `ha` Maybe `ha` Next
+  `ha__` Item `ha` Glyph `ha` Symbol `ha` Bracket `ha` Opened `hv` opened `ha` Next
+  `ha__` Item `ha` Caret `hv` by Space `ha` Next
   `hv__` Item `ha` Glyph `ha` Symbol `ha` Bracket `ha` Closed `hv` closed `ha` Maybe `hv` Last
 
  missing bracket =

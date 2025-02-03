@@ -33,16 +33,16 @@ type Personal = Board Tile
 type Opponent = Board Mark
 
 submarine = Nonempty @List
- `ha` Item Unit `ha` Maybe `ha` Next
- `ha` Item Unit `ha` Maybe `ha` Next
+ `ha` Item Unit `ha` Next
+ `ha` Item Unit `ha` Next
  `ha` Item Unit `ha` Maybe `hv` Last
 
 destroyer = Nonempty @List
- `ha` Item Unit `ha` Maybe `ha` Next
+ `ha` Item Unit `ha` Next
  `ha` Item Unit `ha` Maybe `hv` Last
 
 fleet = Nonempty @List @Ship
- `ha_` Item `hv` submarine `ha_` Maybe `ha_` Next
+ `ha_` Item `hv` submarine `ha_` Next
  `ha_` Item `hv` destroyer `ha_` Maybe `hv_` Last
 
 type Cell = Tile `LM` Mark
@@ -90,7 +90,7 @@ defeat ship fleet = Interrupt `ha` Smash `la` Continue @Fleet
 
 wreck ship = enter @(State `WR` Scrolling List Ship `JNT` Reach `WR` List Ship)
  `yuk____` New `ha` State `hv___` Event `hv__` auto `ho'yoi` (`hd'q` Same ship) `ha__'he` Scope `hv` at @(Focused Ship)
- `yok____` New `ha` State `hv___` Event `hv__` scroll `hv` by Next `ho'yoi` Continue
+ `yok____` New `ha` State `hv___` Event `hv__` scroll `hv` by Fore `ho'yoi` Continue
   `lv____` New `ha` State `hv___` Event `hv__` auto `ho_'yoi` Reach `ha` to @List `ha__'he` Scope `hv` at @(Shafted List Ship)
  -- TODO: can we replace it with `Retry`?
  `yok____` Try `ha` is @(Progress `WR` List Ship `WR` _)
@@ -159,16 +159,17 @@ distribute fleet = fleet
   `ho_'yuk` New `hv` chance
   `ho_'yuk` New `hv` rewind
 
+-- TODO: modify `Next`/`Last` patterns
 enemy = Nonempty @List
- `ha` Item (by Idle) `ha` Maybe `ha` Next
- `ha` Item (by Ship) `ha` Maybe `ha` Next
- `ha` Item (by Ship) `ha` Maybe `ha` Next
- `ha` Item (by Ship) `ha` Maybe `ha` Next
- `ha` Item (by Idle) `ha` Maybe `ha` Next
- `ha` Item (by Ship) `ha` Maybe `ha` Next
- `ha` Item (by Ship) `ha` Maybe `ha` Next
- `ha` Item (by Idle) `ha` Maybe `ha` Next
- `ha` Item (by Idle) `ha` Maybe `ha` Next
+ `ha` Item (by Idle) `ha` Next
+ `ha` Item (by Ship) `ha` Next
+ `ha` Item (by Ship) `ha` Next
+ `ha` Item (by Ship) `ha` Next
+ `ha` Item (by Idle) `ha` Next
+ `ha` Item (by Ship) `ha` Next
+ `ha` Item (by Ship) `ha` Next
+ `ha` Item (by Idle) `ha` Next
+ `ha` Item (by Idle) `ha` Next
  `ha` Item (by Idle) `ha` Maybe `hv` Last
 
 known = enemy `yu` Mist 0

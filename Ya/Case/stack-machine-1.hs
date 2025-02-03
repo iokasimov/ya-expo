@@ -24,10 +24,10 @@ eval binop = enter @(State `WR` List _ `JNT` Halts)
  `yok_` New `ha` State `ha` Event `ha` push @List
 
 initial = Construct
- `ha` (Item `hv` Immediate 1) `ha` Maybe `ha` Next
- `ha` (Item `hv` Immediate 2) `ha` Maybe `ha` Next
- `ha` (Item `hv` Operation ((+) `hj`)) `ha` Maybe `ha` Next
- `ha` (Item `hv` Immediate 4) `ha` Maybe `ha` Next
+ `ha` (Item `hv` Immediate 1) `ha` Next
+ `ha` (Item `hv` Immediate 2) `ha` Next
+ `ha` (Item `hv` Operation ((+) `hj`)) `ha` Next
+ `ha` (Item `hv` Immediate 4) `ha` Next
  `ha` (Item `hv` Operation ((+) `hj`)) `ha` Maybe `hv` Last
 
 main = error `la` this `he'ho` trace

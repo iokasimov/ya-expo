@@ -21,7 +21,7 @@ remnant = Empty @List `hu` by Valid
   `la` Error `ha` Missing `ha` Closed `ha` this @Shape `ha` top @(Nonempty List)
 
 main = Nonempty @List
- `ha` Item (Opened Round) `ha` Maybe `ha` Next
+ `ha` Item (Opened Round) `ha` Next
  `ha` Item (Closed Angle) `ha` Maybe `hv` Last
  `yokl` Forth `ha` Run `ha__` deposit `la` analyze
  `he'he'hv___` by `hv` Empty @List

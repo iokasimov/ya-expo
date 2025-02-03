@@ -19,25 +19,25 @@ type Fleet = Nonempty List Ship
 
 fleet = Nonempty @List @Ship
  `ha_` Item `ha` Nonempty @List
-  `ha` Item Unit `ha` Maybe `ha` Next
-  `ha` Item Unit `ha` Maybe `ha` Next
+  `ha` Item Unit `ha` Next
+  `ha` Item Unit `ha` Next
   `ha` Item Unit `ha` Maybe `hv` Last
  `ha_` Maybe `ha_` Next
  `ha_` Item `ha` Nonempty @List
-  `ha` Item Unit `ha` Maybe `ha` Next
+  `ha` Item Unit `ha` Next
   `ha` Item Unit `ha` Maybe `hv` Last
  `ha_` Maybe `hv_` Last
 
 enemy = Nonempty @List
- `ha` Item Idle `ha` Maybe `ha` Next
- `ha` Item Ship `ha` Maybe `ha` Next
- `ha` Item Ship `ha` Maybe `ha` Next
- `ha` Item Ship `ha` Maybe `ha` Next
- `ha` Item Idle `ha` Maybe `ha` Next
- `ha` Item Ship `ha` Maybe `ha` Next
- `ha` Item Ship `ha` Maybe `ha` Next
- `ha` Item Idle `ha` Maybe `ha` Next
- `ha` Item Idle `ha` Maybe `ha` Next
+ `ha` Item Idle `ha` Next
+ `ha` Item Ship `ha` Next
+ `ha` Item Ship `ha` Next
+ `ha` Item Ship `ha` Next
+ `ha` Item Idle `ha` Next
+ `ha` Item Ship `ha` Next
+ `ha` Item Ship `ha` Next
+ `ha` Item Idle `ha` Next
+ `ha` Item Idle `ha` Next
  `ha` Item Idle `ha` Maybe `hv` Last
 
 type Shot = Unit `ML` Unit `ML` Unit

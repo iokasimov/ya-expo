@@ -34,12 +34,12 @@ type Ship = Nonempty List Unit
 
 fleet = Nonempty @List @Ship
  `ha_` Item `ha` Nonempty @List
-  `ha` Item Unit `ha` Maybe `ha` Next
-  `ha` Item Unit `ha` Maybe `ha` Next
+  `ha` Item Unit `ha` Next
+  `ha` Item Unit `ha` Next
   `ha` Item Unit `ha` Maybe `hv` Last
- `ha_` Maybe `ha_` Next
+ `ha_` Next
  `ha_` Item `ha` Nonempty @List
-  `ha` Item Unit `ha` Maybe `ha` Next
+  `ha` Item Unit `ha` Next
   `ha` Item Unit `ha` Maybe `hv` Last
  `ha_` Maybe `hv_` Last
 
@@ -71,15 +71,15 @@ distribute fleet = fleet
   `ho_'yuk` New `hv` rewind
 
 known = Nonempty @List
- `ha` Item (Mist 0) `ha` Maybe `ha` Next
- `ha` Item (Mist 0) `ha` Maybe `ha` Next
- `ha` Item (Mist 0) `ha` Maybe `ha` Next
- `ha` Item (Mist 0) `ha` Maybe `ha` Next
- `ha` Item (Mist 0) `ha` Maybe `ha` Next
- `ha` Item (Mist 0) `ha` Maybe `ha` Next
- `ha` Item (Mist 0) `ha` Maybe `ha` Next
- `ha` Item (Mist 0) `ha` Maybe `ha` Next
- `ha` Item (Mist 0) `ha` Maybe `ha` Next
+ `ha` Item (Mist 0) `ha` Next
+ `ha` Item (Mist 0) `ha` Next
+ `ha` Item (Mist 0) `ha` Next
+ `ha` Item (Mist 0) `ha` Next
+ `ha` Item (Mist 0) `ha` Next
+ `ha` Item (Mist 0) `ha` Next
+ `ha` Item (Mist 0) `ha` Next
+ `ha` Item (Mist 0) `ha` Next
+ `ha` Item (Mist 0) `ha` Next
  `ha` Item (Mist 0) `ha` Maybe `hv` Last
 
 main = print `ha` that `hv_` distribute fleet `he'he'hv` to known where
