@@ -26,7 +26,7 @@ pattern Shot e = This e
 pattern Mist e = That e
 
 type Board = Nonempty List
- 
+
 type Personal = Board Tile
 type Opponent = Board Shot
 

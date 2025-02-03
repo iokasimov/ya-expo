@@ -1,83 +1,153 @@
-import "ya" Ya
-import "ya-world" Ya.World
-import "ya-ascii" Ya.ASCII
-import "ya-console" Ya.Console
-
-import "ya-expo" Ya.Expo.Instances
+import Ya
+import Ya.World
+import Ya.ASCII
+import Ya.Console
 
 import "base" GHC.Num (Integer, (-), (+))
--- import "base" System.IO (print)
 
 type Tile = Unit `ML` Unit
 
-pattern Idle = This Unit
-pattern Ship = That Unit
+pattern Idle e = This e
+pattern Ship e = That e
 
-type Ship = Nonempty List Unit
+type Nail = Unit `ML` Unit
 
-type Fleet = Nonempty List Ship
-
-fleet = Nonempty @List @Ship
- `ha_` Item `ha` Nonempty @List
-  `ha` Item Unit `ha` Maybe `ha` Next
-  `ha` Item Unit `ha` Maybe `ha` Next
-  `ha` Item Unit `ha` Maybe `hv` Last
- `ha_` Maybe `ha_` Next
- `ha_` Item `ha` Nonempty @List
-  `ha` Item Unit `ha` Maybe `ha` Next
-  `ha` Item Unit `ha` Maybe `hv` Last
- `ha_` Maybe `hv_` Last
-
-enemy = Nonempty @List
- `ha` Item Idle `ha` Maybe `ha` Next
- `ha` Item Ship `ha` Maybe `ha` Next
- `ha` Item Ship `ha` Maybe `ha` Next
- `ha` Item Ship `ha` Maybe `ha` Next
- `ha` Item Idle `ha` Maybe `ha` Next
- `ha` Item Ship `ha` Maybe `ha` Next
- `ha` Item Ship `ha` Maybe `ha` Next
- `ha` Item Idle `ha` Maybe `ha` Next
- `ha` Item Idle `ha` Maybe `ha` Next
- `ha` Item Idle `ha` Maybe `hv` Last
-
-type Shot = Unit `ML` Unit `ML` Unit
-
-pattern Miss i = This (This i)
-pattern Bang i = This (That i)
+pattern Bang i = This i
 pattern Sunk i = That i
+
+type Shot = Nail `ML` Unit
+
+pattern Nail i = This i
+pattern Miss i = That i
 
 type Mark = Shot `ML` Integer
 
-pattern Shot e = This e :: Mark
-pattern Mist e = That e :: Mark
+pattern Shot e = This e
+pattern Mist e = That e
 
-type Board = Nonempty List `WR_` Mark `LM` Tile
+type Board = Sliding List
 
-sunk x = enter @(State `WR` Scrolling List Ship `JNT` Progress `WR` Shafted List Ship)
- `yuk____` New `ha` State `hv__` Event `hv_` auto `ho'yoi` (`hd'q` Same x) `ha_'he` Scope `hv` at @(Focused Ship)
- `yok____` New `ha` State `hv__` Event `hv_` scroll `hv` by Next `ho'yoi` Continue
-  `lv____` New `ha` State `hv__` Event `hv_` auto `ho'yoi` Interrupt `ha_'he` Scope `hv` at @(Shafted List Ship)
- `yok____` Try `ha` is @(Progress `WR` Shafted List Ship `WR` _)
- `yok____` Again `ha` Once
+type Ship = Nonempty List Unit
 
-known = enemy `yu` Mist 0
+type Personal = Board Tile
+type Opponent = Board Mark
+
+submarine = Nonempty @List
+ `ha` Item Unit `ha` Maybe `ha` Next
+ `ha` Item Unit `ha` Maybe `ha` Next
+ `ha` Item Unit `ha` Maybe `hv` Last
+
+destroyer = Nonempty @List
+ `ha` Item Unit `ha` Maybe `ha` Next
+ `ha` Item Unit `ha` Maybe `hv` Last
+
+fleet = Nonempty @List @Ship
+ `ha_` Item `hv` submarine `ha_` Maybe `ha_` Next
+ `ha_` Item `hv` destroyer `ha_` Maybe `hv_` Last
+
+type Cell = Tile `LM` Mark
+
+type Fleet = Nonempty List Ship
+
+type Target = Maybe Ship
+
+shoot' = by Miss `lv` Nail `hv` by Bang `ho_` Shot `ha__` this @Tile
+
+type Playing = State `WR_` Target `LM` Fleet `LM` Board Cell `JNT_` Halts Result
+
+-- + None: If there is `Some Ship` - we need to remove it from `Fleet`, stop
+
+-- + Some: If there is `Ship` tile
+ -- , if there is `None Ship` - start collecting a new ship
+ -- , if there is `Some Ship` - add a current tile to this
+
+-- . Some: If there is `Idle` tile
+ -- , if there is `None Ship` - do nothing
+ -- , if there is `Some Ship` - we need to remove it from `Fleet`
+
+hunt = enter @(State `WR_` Target `LM` Fleet `LM` Board Cell `JNT_` Halts Result)
+ `yuk__` State `ho` New `hv__` Event `ha` extend @List `hv` by Fore `ha_` Scope `hv` at @(Board Cell)
+ `yok__` Run `ha__` None `hu` sink `ho'yu` (Interrupt `hv` by Smash) `la` intro `ha` Continue @Cell
+ `yok__` Check @Result `ha'yo` this @Tile
+ `yok__` Run `ha__` None `hu` sink `la` Some `hu` bomb
+
+type Result = Ship `ML` Unit
+
+pattern Fault e = This e
+pattern Smash e = That e
+
+sink = enter @(State `WR_` Target `LM` Fleet `LM` Board Cell `JNT_` Halts Result)
+ `yuk__` Old `ha` State `hv__` Event `hv` auto `ha_` Scope `hv` at @Target
+ `yok__` Try `ha` is @(Halts Result Ship) `ha__` Interrupt `ha` Smash `la` Valid
+ `yok__` Old `ha` State `ha__` Event `ha` defeat `ho_'ha` Scope `hv` at @Fleet
+ `yok__` Try `ha` is @(Halts Result Fleet)
+ `yok__` New `ha` State `ha__` Event `ha` switch `ho_'ha` Scope `hv` at @Fleet
+
+defeat ship fleet = Interrupt `ha` Smash `la` Continue @Fleet
+  `la` is `ho'he` this @Ship `ho` Fault `ho` Interrupt
+  `li` wreck ship `he'he'hv`  to @(Scrolling List) fleet
+  `lu` fleet
+
+wreck ship = enter @(State `WR` Scrolling List Ship `JNT` Reach `WR` List Ship)
+ `yuk____` New `ha` State `hv___` Event `hv__` auto `ho'yoi` (`hd'q` Same ship) `ha__'he` Scope `hv` at @(Focused Ship)
+ `yok____` New `ha` State `hv___` Event `hv__` scroll `hv` by Next `ho'yoi` Continue
+  `lv____` New `ha` State `hv___` Event `hv__` auto `ho_'yoi` Reach `ha` to @List `ha__'he` Scope `hv` at @(Shafted List Ship)
+ -- TODO: can we replace it with `Retry`?
+ `yok____` Try `ha` is @(Progress `WR` List Ship `WR` _)
+ `yuk____` Again `hv` Once ship
+
+bomb = enter @(State `WR_` Target `LM` Fleet `LM` Board Cell `JNT_` Halts Result)
+ `yuk___` State `ho` New `hv___` Event `hv_` hit `ha_` Scope `hv` at @Target
+ `yuk___` State `ho` Old `hv___` Event `hv` auto `ha_` Scope `hv` at @Fleet
+
+hit = auto `ha` Some
+ `ha__` None @Ship `hu` enter
+   `la` push `hv` Unit `ho` that
 
 window ship = ship `yukl` Forth
  `ha` New `ha` State `ha` Event
  `ha` extend @List `hv` by Fore
 
-match ship = Interrupt `hu_` auto `hv` ship `la` auto `li` check `hv` ship
+match = enter @(State Opponent `JNT` Halts Unit)
+ `yuk____` State `ho` Old
+ `hv_____` Event `hv` pop @List
+ `ha___'he` Scope `hv` at @(Shafted List Mark)
+   `ho_'he` Scope `hv` at @(Reverse List Mark)
+   `ho_'he` Scope `hv` it @(List Mark)
+ `yok____` Check `ha` out
+ `yuk____` State `ho` Old
+ `hv_____` Event `hv` pop @List
+ `ha___'he` Scope `hv` at @(Shafted List Mark)
+   `ho_'he` Scope `hv` at @(Forward List Mark)
+   `ho_'he` Scope `hv` it @(List Mark)
+ `yok____` Check `ha` out
+ `yuk____` State `ho` Old
+ `hv_____` Event `hv` auto
+ `ha___'he` Scope `hv` at @(List Mark)
+ `yok____` Check `ha` inner
+ `yok____` State `ho` New
+ `ha_____` Event `ha` switch
+ `ho_'ha'he` Scope `hv` at @(List Mark)
 
-check tile = tile
+out = None `hu` by Continue
+ `la__` Nail `hu` by Interrupt
+   `la` Miss `hu` by Continue
+   `la` Mist `hu` by Continue
+
+inner ship = ship
  `yokl` Run `ho` Forth
- `ha__` Miss `ho` Shot `ho` Error
-   `la` Bang `ho` Shot `ho` Valid
-   `la` Sunk `ho` Shot `ho` Error
+ `ha__` Bang `ho` Nail `ho` Shot `ho` Valid
+   `la` Sunk `ho` Nail `hu` Error Unit
+   `la` Miss `ho` Shot `hu` Error Unit
    `la` (+1) `ho` Mist `ho` Valid
 
+mount board = Same `hu` board
+ `la` is `ho'he` that @Opponent
+ `li` match `he'he'hv` board
+
 chance = enter @(State `WR` Sliding List Mark)
- `yuk___` State `ho` New `hv__` Event `hv` match `ha_'he` Scope `hv` at @(List Mark)
- `yuk___` State `ho` New `hv__` Event `ha` slide `hv` by Future
+ `yuk___` State `ho` New `hv__` Event `hv_` auto `ho'ho` mount
+ `yuk___` State `ho` New `hv__` Event `ha` slide `hv` by Fore
  `yok___` Retry `ha` Perhaps `ha` not
 
 rewind = State `ha` Event `hv_` auto `ho'ho` to @(Sliding List) `ha` to @List
@@ -89,78 +159,49 @@ distribute fleet = fleet
   `ho_'yuk` New `hv` chance
   `ho_'yuk` New `hv` rewind
 
-main = print `ha` that `hv_` distribute fleet `he'he'hv` to known
+enemy = Nonempty @List
+ `ha` Item (by Idle) `ha` Maybe `ha` Next
+ `ha` Item (by Ship) `ha` Maybe `ha` Next
+ `ha` Item (by Ship) `ha` Maybe `ha` Next
+ `ha` Item (by Ship) `ha` Maybe `ha` Next
+ `ha` Item (by Idle) `ha` Maybe `ha` Next
+ `ha` Item (by Ship) `ha` Maybe `ha` Next
+ `ha` Item (by Ship) `ha` Maybe `ha` Next
+ `ha` Item (by Idle) `ha` Maybe `ha` Next
+ `ha` Item (by Idle) `ha` Maybe `ha` Next
+ `ha` Item (by Idle) `ha` Maybe `hv` Last
 
--- TODO: replace this expression with a `Mapping` instance
-print = this `ha'he` at @(Shafted List Mark)
-      `ho_` (unwrap @AR `ha` this `ha'he` at @(Reverse List Mark))
-      `ho_'yokl` Prior `ha` Run `ha` render
- -- `lo_'yp` is `hu_` output `ha` Glyph `ha` Symbol `ha` Bracket `hv` Opened Square
- `lo_'yp` this `ha'he` at @(List Mark)
-      `ho_'yokl` Forth `ha` Run `ha` render
- -- `lo_'yp` is `hu_` output `ha` Glyph `ha` Symbol `ha` Bracket `hv` Closed Square
- `lo_'yp` this `ha'he` at @(Shafted List Mark)
-      `ho_` unwrap @AR `ha` this `ha'he` at @(Forward List Mark)
-      `ho_'yokl` Forth `ha` Run `ha` render
+known = enemy `yu` Mist 0
 
-render = Miss `hu` Hyphen `hv` Unit
- `la__` Bang `hu` Plus `hv` Unit
- `la__` Sunk `hu` Hash `hv` Unit
- `ho___` intro `ha` Glyph `ha` Symbol `ha` Punctuate
- `la__` integer
- `ho___'yokl` Forth `ha` Run `ha` output
- `ho___'yuk` World `ha` output `ha` Caret `hv` by Space
+guess = that `hv_` distribute fleet `he'he'hv` to known
 
--- title x = output `ha` Caret `hv` Newline
- -- `yuk_____` World `hv_____` is @(List ASCII) x
-    -- `yokl_` Forth `ha` Run `ha` output
+shoot (These x _) = x `lu_` by Miss `lv` Nail `hv` by Bang `ho_` Shot `li` x
 
--- main = fleet
- -- `yokl_` is -- intro @(State `WR` Sliding List Mark `JNT` World)
- -- `ho__'yukl` Forth `ha` New `ha` State `ha` Event `ha` extend @List `hv` it Fore
-  -- `ho__'yok` New `ha` extent
-  -- `ho__'yuk` (State `ho` New `hv__` Event `hv` fits `ha_'he` Scope `hv` at @(List Mark))
-  -- `ho__'yuk` Run `ha` title `hv` "Probs: "
-  -- `ho__'yuk` Run `hv` frame
-  -- `ho__'yuk` New `hv` rewind
-  -- `ho__'yuk` Run `ha` title `hv` "Reset: "
-  -- `ho__'yuk` Run `hv` frame
- -- `ho__` Forth `ha` Run
- -- `he'he'hv_____` to @(Sliding List) `hv` known where
+fresh = to @List `hv` enemy
+ `lu'yp` to @List `hv` guess
+ `yi` to @(Sliding List)
 
- -- `yuk_____` World (is @(List _) "Enemy: " `yokl` Forth `ha` Run `ha` output)
- -- `yuk_____` World (enemy `yokl_` Forth `ha` Run -- `ha` output
-   -- `ha___` (output `ha` Glyph `ha` Symbol `ha` Punctuate `ha__` Hyphen `la` Hash
-    -- `ho__'yuk` Run `ha` output `ha` Caret `hv` Space))
- -- `yuk_____` World (output `ha` Caret `hv` Newline)
- -- `yuk_____` World (is @(List _) "Known: " `yokl` Forth `ha` Run `ha` output)
- -- `yuk_____` World (known `yokl` Forth `ha` Run `ha` render)
- -- `yuk_____` World (output `ha` Caret `hv` Newline)
- 
- -- `ho___'yuk` New `hv` probs
- -- `ho___'yuk` Run `ha` title `hv` "Gauge: "
- -- `ho___'yuk` Run `hv` frame
- -- `ho___'yuk` New `ha` State `ha` Event `ha` slide `hv` it Fore
- -- `ho___'yok` enter `lv` Again `ha` Once `hv` Unit
+main = hunt `he'he'hv__` by `hv` None @Ship `lu` fleet `lu` fresh
+ `yi__` "Ship has not been found!" `lv` "You won!"
+  `ho_'yokl` Forth `ha` Run `ha` output
+  `la_` is @(Equipped _ _) `ho'he` that `ho` that @(Board Cell) `ho` to @List
+  `ho_'yokl` Forth `ha` Run `ha` render where
 
- -- `ho___'yuk` New `ha` State `ha` Event `ha` slide `hv` it Fore
- -- `ho___'yok` World `hv` print "The end!" `lv` World `hv` print "Continue..."
- -- `ho___'yuk` Run `ha` title `hv` "Slide: "
- -- `ho___'yuk` Run `hv` frame
+ mark = intro `ha` Glyph `ha` Symbol `ha` Punctuate
+  `ha__` Bang `hu` by Plus `la` Sunk `hu` by Hash `la` Miss `hu` by Hyphen
+  `la__` integer `ho_'yo` Glyph `ha` Digit
 
--- I spend the whole day on a relatively simple question: how to implement `remove` function
--- without left it tied to exact specified meaning?
--- * Should I remove all occurencies of a copy of the same item?
--- * Should I stop after removing first occurrencies?
--- * What if I would like to apply some another predicate on filtering out an element instead of total equivalence relation?
+ tile = Glyph `ha` Symbol `ha` Punctuate
+  `ha___` by Hyphen `lv` by Plus
 
--- main = print known
+ cell (These him me) = enter @(State _)
+  `yuk_` New `ha` State `ha` Event `ha` push
+    `ha` Glyph `ha` Symbol `ha` Punctuate `hv` by Bar
+  `yuk_` New `ha` State `ha` Event `ha` push `hv` tile him
+  `he'he'hv___` mark me
 
--- main = print `ha` this `ha`at @(List Mark) `ha` unwrap @AR `ha`that `ha` extend (Fore Unit) `ha` to @(Sliding List) `hv` known
-
--- main = enemy `yokl` Forth `ha` Run `ha` print `ha_` These `he` Capacity 0
-
--- main = enemy `yokl__` Forth `ha` Run
- -- `ha___` output `ha` Glyph `ha` Symbol `ha` Punctuate `ha__` Hyphen `la` Hash
-  -- `ho__'yuk` Run `ha` output `ha` Caret `hv` Space
+ render info = that `hv` cell info
+  `yokl` Forth `ha` World `ha` output
+  `yuk_` World `ha` output `ha` Caret `hv` by Space
+  `yuk_` World `ha` output `ha` Caret `hv` by Space
 

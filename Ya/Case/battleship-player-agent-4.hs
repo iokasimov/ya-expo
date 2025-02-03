@@ -32,22 +32,24 @@ type Ship = Nonempty List Unit
 type Personal = Board Tile
 type Opponent = Board Mark
 
+submarine = Nonempty @List
+ `ha` Item Unit `ha` Maybe `ha` Next
+ `ha` Item Unit `ha` Maybe `ha` Next
+ `ha` Item Unit `ha` Maybe `hv` Last
+
+destroyer = Nonempty @List
+ `ha` Item Unit `ha` Maybe `ha` Next
+ `ha` Item Unit `ha` Maybe `hv` Last
+
 fleet = Nonempty @List @Ship
- `ha_` Item `ha` Nonempty @List
-  `ha` Item Unit `ha` Maybe `ha` Next
-  `ha` Item Unit `ha` Maybe `ha` Next
-  `ha` Item Unit `ha` Maybe `hv` Last
- `ha_` Maybe `ha_` Next
- `ha_` Item `ha` Nonempty @List
-  `ha` Item Unit `ha` Maybe `ha` Next
-  `ha` Item Unit `ha` Maybe `hv` Last
- `ha_` Maybe `hv_` Last
+ `ha_` Item `hv` submarine `ha_` Maybe `ha_` Next
+ `ha_` Item `hv` destroyer `ha_` Maybe `hv_` Last
 
 window ship = ship `yukl` Forth
  `ha` New `ha` State `ha` Event
  `ha` extend @List `hv` by Fore
 
-match = enter @(State Opponent `JNT` Halts)
+match = enter @(State Opponent `JNT` Halts Unit)
  `yuk____` State `ho` Old
  `hv_____` Event `hv` pop @List
  `ha___'he` Scope `hv` at @(Shafted List Mark)
@@ -114,8 +116,9 @@ known = enemy `yu` Mist 0
 
 type Cell = Tile `LM` Mark
 
-main = to @List enemy
- `lu'yp` to @List (that `hv_` distribute fleet `he'he'hv` to known)
+guess = that `hv_` distribute fleet `he'he'hv` to known
+
+main = to @List enemy `lu'yp` to @List guess
  `yokl` Forth `ha` World `ha` render where
 
  mark = intro `ha` Glyph `ha` Symbol `ha` Punctuate
