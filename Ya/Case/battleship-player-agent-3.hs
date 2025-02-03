@@ -36,12 +36,12 @@ fleet = Nonempty @List @Ship
  `ha_` Item `ha` Nonempty @List
   `ha` Item Unit `ha` Next
   `ha` Item Unit `ha` Next
-  `ha` Item Unit `ha` Maybe `hv` Last
+  `ha` Item Unit `ha` Last `hv` Unit
  `ha_` Next
  `ha_` Item `ha` Nonempty @List
   `ha` Item Unit `ha` Next
-  `ha` Item Unit `ha` Maybe `hv` Last
- `ha_` Maybe `hv_` Last
+  `ha` Item Unit `ha` Last `hv` Unit
+ `ha_` Last `hv_` Unit
 
 window ship = ship `yukl` Forth
  `ha` New `ha` State `ha` Event
@@ -108,7 +108,7 @@ known = Nonempty @List
  `ha` Item (Shot `ha` Nail `hv` by Bang) `ha` Next
  `ha` Item (Shot `ha` Nail `hv` by Bang) `ha` Next
  `ha` Item (Mist 0) `ha` Next
- `ha` Item (Mist 0) `ha` Maybe `hv` Last
+ `ha` Item (Mist 0) `ha` Last `hv` Unit
 
 main = print `ha` that `hv_` distribute fleet `he'he'hv` to known where
 

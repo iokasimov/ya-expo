@@ -17,7 +17,7 @@ remnant = Empty @List `hu` by Valid
 
 main = Nonempty @List @Parenthesis
  `ha` Item (Opened Unit) `ha` Next
- `ha` Item (Closed Unit) `ha` Maybe `hv` Last
+ `ha` Item (Closed Unit) `ha` Last `hv` Unit
  `yokl` Run `ho` Forth `ha__` deposit `la` analyze
  `he'he'hv___` Empty @List Unit
  `yok_` Try `ha` remnant `ha'he` that @(List Unit)

@@ -35,15 +35,15 @@ type Opponent = Board Mark
 submarine = Nonempty @List
  `ha` Item Unit `ha` Next
  `ha` Item Unit `ha` Next
- `ha` Item Unit `ha` Maybe `hv` Last
+ `ha` Item Unit `ha` Last `hv` Unit
 
 destroyer = Nonempty @List
  `ha` Item Unit `ha` Next
- `ha` Item Unit `ha` Maybe `hv` Last
+ `ha` Item Unit `ha` Last `hv` Unit
 
 fleet = Nonempty @List @Ship
  `ha_` Item `hv` submarine `ha_` Next
- `ha_` Item `hv` destroyer `ha_` Maybe `hv_` Last
+ `ha_` Item `hv` destroyer `ha_` Last `hv_` Unit
 
 type Cell = Tile `LM` Mark
 
@@ -170,7 +170,7 @@ enemy = Nonempty @List
  `ha` Item (by Ship) `ha` Next
  `ha` Item (by Idle) `ha` Next
  `ha` Item (by Idle) `ha` Next
- `ha` Item (by Idle) `ha` Maybe `hv` Last
+ `ha` Item (by Idle) `ha` Last `hv` Unit
 
 known = enemy `yu` Mist 0
 

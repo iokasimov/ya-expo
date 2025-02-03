@@ -24,12 +24,12 @@ fleet = Nonempty @List @Ship
  `ha_` Item `ha` Nonempty @List
   `ha` Item Unit `ha` Next
   `ha` Item Unit `ha` Next
-  `ha` Item Unit `ha` Maybe `hv` Last
+  `ha` Item Unit `ha` Last `hv` Unit
  `ha_` Next
  `ha_` Item `ha` Nonempty @List
   `ha` Item Unit `ha` Next
-  `ha` Item Unit `ha` Maybe `hv` Last
- `ha_` Maybe `hv_` Last
+  `ha` Item Unit `ha` Last `hv` Unit
+ `ha_` Last `hv_` Unit
 
 title = is @(List ASCII) "SHIPS: " `yokl` Forth `ha` World `ha` output
 

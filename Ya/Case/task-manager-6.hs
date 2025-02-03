@@ -50,7 +50,7 @@ start = to @(Scrolling List) `ha` Nonempty @List @Task
  `ha` Item (by TODO `lu` "Apply to that new position") `ha` Next
  `ha` Item (by TODO `lu` "Find a way to fix ligatures") `ha` Next
  `ha` Item (by TODO `lu` "Organize a boardgame session") `ha` Next
- `ha` Item (by DONE `lu` "Buy a water gun for Songkran") `ha` Maybe `hv` Last
+ `ha` Item (by DONE `lu` "Buy a water gun for Songkran") `ha` Maybe `hv` Unit
 
 type Project = Scrolling Tree Task
 

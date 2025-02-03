@@ -28,7 +28,7 @@ initial = Construct
  `ha` (Item `hv` Immediate 2) `ha` Next
  `ha` (Item `hv` Operation ((+) `hj`)) `ha` Next
  `ha` (Item `hv` Immediate 4) `ha` Next
- `ha` (Item `hv` Operation ((+) `hj`)) `ha` Maybe `hv` Last
+ `ha` (Item `hv` Operation ((+) `hj`)) `ha` Last `hv` Unit
 
 main = error `la` this `he'ho` trace
  `hv_______` initial `yokl` Forth `ha` Run `ha__` load `la` eval

@@ -22,7 +22,7 @@ remnant = Empty @List `hu` by Valid
 
 main = Nonempty @List
  `ha` Item (Opened Round) `ha` Next
- `ha` Item (Closed Angle) `ha` Maybe `hv` Last
+ `ha` Item (Closed Angle) `ha` Last `hv` Unit
  `yokl` Forth `ha` Run `ha__` deposit `la` analyze
  `he'he'hv___` by `hv` Empty @List
  `yok_` Try `ha` remnant `ha'he` that @(List Shape)
