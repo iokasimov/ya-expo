@@ -9,10 +9,10 @@ initial = Nonempty @List @Title
  `ha` Item "Apply to that new position" `ha` Next
  `ha` Item "Find a way to fix ligatures" `ha` Next
  `ha` Item "Organize a boardgame session" `ha` Next
- `ha` Item "Buy a water gun for Songkran" `ha` Last `hv` Unit
+ `ha` Item "Buy a water gun for Songkran" `ha` Last
 
 print title = enter @World
  `yuk___` Run `hv____` title `yokl` Forth `ha` Run `ha` output
  `yuk___` Run `hv____` output `ha` Caret `hv` by Newline
 
-main = initial `yokl` Forth `ha` Run `ha` print
+main = by initial `yokl` Forth `ha` Run `ha` print
