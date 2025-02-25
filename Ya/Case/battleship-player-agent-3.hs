@@ -43,7 +43,7 @@ fleet = Nonempty @List @Ship
   `ha` Item Unit `ha` Last `hv` Unit
  `ha_` Last `hv_` Unit
 
-window ship = ship `yukl` Forth
+window' ship = ship `yukl` Forth
  `ha` New `ha` State `ha` Event
  `ha` extend @List `hv` by Fore
 
@@ -94,7 +94,7 @@ rewind = State `ha` Event `hv_` auto `ho'ho` to @(Sliding List) `ha` to @List
 distribute fleet = fleet
  `yokl` Forth `ha` Run
  `ha__` intro @(State _)
-  `ho_'yok` New `ha` window
+  `ho_'yok` New `ha` window'
   `ho_'yuk` New `hv` chance
   `ho_'yuk` New `hv` rewind
 
