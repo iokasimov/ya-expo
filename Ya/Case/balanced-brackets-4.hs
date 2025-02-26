@@ -9,31 +9,32 @@ type Missing = Shape `ML` Shape
 
 type Imbalance = Mismatch `ML` Missing
 
-pattern Mismatch x = This x :: Imbalance
-pattern Missing x = That x :: Imbalance
+pattern Mismatch x = This x
+pattern Missing x = That x
 
 deposit bracket = enter @(State `WR` List Shape `JNT` Error Imbalance)
  `yuk__` New `ha` State `ha` Event `hv` push @List bracket
 
 analyze bracket = enter @(State `WR` List Shape `JNT` Error Imbalance)
  `yuk__` New `ha` State `ha` Event `hv` pop @List
- `yok__` Try `ha__` None `hu_` Error `ha` Missing `ha` Opened `hv` bracket `la` Valid
- `yok__` Try `ha__` Error `ha` Mismatch `la` Valid `ha_` compare bracket
+ `yok__` Try @Imbalance `ha__` None `hu_` Error `ha` Missing `ha` Opened `hv` bracket `la` Valid
+ `yok__` Try @Imbalance `ha__` Error `ha` Mismatch `la` Valid `ha_` compare bracket
 
 compare closed opened = opened `hd'q` closed
 
 remnant = Empty @List `hu` by Valid
-  `la` Error `ha` Missing `ha` Closed `ha` this @Shape `ha` top @(Nonempty List)
+  `la` Error @Imbalance `ha` Missing `ha` Closed `ha` this @Shape `ha` top @(Nonempty List)
 
-main = is @(Nonempty List ASCII)
- `hv__` "fn main() { println('hello, <world>!') ]"
- `yokl` Forth `ha` Run @(State `WR` List Shape `JNT` Error Imbalance)
- `ha__` is `hu` enter `la` (deposit `la` analyze) `ho'yu` Unit
- `ha__` on @Glyph `ho'ho` on @Symbol `ho` row `ho'ho` on @Bracket `ho` row
- `he'he'hv___`by `hv` Empty @List
- `yok_` Try `ha` remnant `ha'he` that @(List Shape)
- `yi__` that @(List ASCII) `ha__` mismatch `la` missing `la` balance
- `yokl` Forth `ha` Run `ha` output where
+inspect code = code
+ `yokl_` Forth `ha` Run @(State `WR` List Shape `JNT` Error Imbalance)
+ `ha___` Some `hu` enter `la_` is @Bracket `ho_` (deposit `la` analyze) `ho'yu` Unit
+ `ha___` on @Glyph `ho'ho` on @Symbol `ho` row `ho'ho` on @Bracket `ho` row
+ `he'he'hv____`by `hv` Empty @List
+ `yok__` Try @Imbalance `ha` remnant `ha'he` that @(List Shape)
+
+main = that @(List ASCII) `ha__` mismatch `la` missing `la` balance
+ `li___` inspect `ha` is @(Nonempty List ASCII) `hv` "fn main() { println('hello, <world>!') }"
+ `yokl_` Forth `ha` Run `ha` output where
 
  mismatch (These opened closed) =
   "[ERROR] Mismatched bracket shapes - "

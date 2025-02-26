@@ -4,16 +4,16 @@ import "ya-console" Ya.Console
 
 type Imbalance = (Shape `LM` Shape) `ML_` (Shape `ML` Shape)
 
-pattern Mismatch x = This x :: Imbalance
-pattern Missing x = That x :: Imbalance
+pattern Mismatch x = This x
+pattern Missing x = That x
 
 deposit bracket = enter @(State `WR` List Shape `JNT` Error Imbalance)
  `yuk__` New `ha` State `ha` Event `hv` push @List bracket
 
 analyze bracket = enter @(State `WR` List Shape `JNT` Error Imbalance)
  `yuk__` New `ha` State `ha` Event `hv` pop @List
- `yok__` Try `ha__` None `hu_` Error `ha` Missing `ha` Opened `hv` bracket `la` Valid
- `yok__` Try `ha__` Error `ha` Mismatch `la` Valid `ha_` compare bracket
+ `yok__` Try @Imbalance `ha__` None `hu_` Error `ha` Missing `ha` Opened `hv` bracket `la` Valid
+ `yok__` Try @Imbalance `ha__` Error `ha` Mismatch `la` Valid `ha_` compare bracket
 
 compare closed opened = opened `hd'q` closed
 
@@ -25,7 +25,7 @@ main = Nonempty @List
  `ha` Item (Closed Angle) `ha` Last `hv` Unit
  `yokl` Forth `ha` Run `ha__` deposit `la` analyze
  `he'he'hv___` by `hv` Empty @List
- `yok_` Try `ha` remnant `ha'he` that @(List Shape)
+ `yok_` Try @Imbalance `ha` remnant `ha'he` that @(List Shape)
  `yi__` is @(List ASCII)
  `ha__` "[ERROR] Missing or mismatching bracket!"
    `lv` "[VALID] Everything is seem to be good!"
