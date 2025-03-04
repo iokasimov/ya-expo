@@ -10,7 +10,7 @@ type Mark = Scroller List
 pattern TODO e = This e
 pattern DONE e = That e
 
-type Task = Mark `LM` Title
+type Task = Mark `P` Title
 
 pattern Bullet e = This e
 pattern Cursor e = That e
@@ -20,7 +20,7 @@ type Move = Scroller List
 pattern Lift x = This x
 pattern Down x = That x
 
-type Command = Move `ML` Mark
+type Command = Move `S` Mark
 
 pattern Move x = This x
 pattern Mark x = That x
@@ -37,7 +37,7 @@ mark status = is @Title `hv__` TODO `hu` "TODO " `la` DONE `hu` "DONE " `li` sta
 
 press k f p = Maybe `hv___` k `hd'q` p `yui` Unit `yiu` f Unit
 
-apply = is @(ASCII `MN` Glyph `ML_` Glyph `MN` Letter) `hu` by Wrong
+apply = is @(ASCII `MN` Glyph `S_` Glyph `MN` Letter) `hu` by Wrong
  `la____` press `hv` Lower J `hv` (Move `ha` Down)
  `lo'ys'la` press `hv` Lower K `hv` (Move `ha` Lift)
  `lo'ys'la` press `hv` Upper T `hv` (Mark `ha` TODO)

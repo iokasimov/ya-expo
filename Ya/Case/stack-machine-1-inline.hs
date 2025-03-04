@@ -13,9 +13,9 @@ import Prelude ((+))
 
 type Immediate v = v
 
-type Operation v = v `LM` v `ARR` v
+type Operation v = v `P` v `ARR` v
 
-type Command v = Immediate v `ML` Operation v
+type Command v = Immediate v `S` Operation v
 
 pattern Immediate x = This x :: Command v
 

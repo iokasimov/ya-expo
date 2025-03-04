@@ -5,12 +5,12 @@ import "ya-console" Ya.Console
 
 type Title = List ASCII
 
-type Mark = Unit `ML` Unit
+type Mark = Unit `S` Unit
 
 pattern TODO e = This e
 pattern DONE e = That e
 
-type Task = Mark `LM` Title
+type Task = Mark `P` Title
 
 pattern Bullet = This Unit
 pattern Cursor = That Unit
@@ -31,7 +31,7 @@ pattern Down x = That x
 
 press k f p = Maybe `hv___` k `hd'q` p `yui` Unit `yiu` f Unit
 
-apply = is @(ASCII `MN` Glyph `ML_` Glyph `MN` Letter) `hu` Wrong Unit
+apply = is @(ASCII `MN` Glyph `S_` Glyph `MN` Letter) `hu` Wrong Unit
  `la____` press `hv` Lower J `hv` Down
  `lo'ys'la` press `hv` Lower K `hv` Lift
 

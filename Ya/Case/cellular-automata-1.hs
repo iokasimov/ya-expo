@@ -11,7 +11,7 @@ import "base" Text.Show (show)
 import "base" Data.Eq (Eq ((==), (/=)))
 import "base" System.IO (print)
 
-type Cell = () `ML` ()
+type Cell = () `S` ()
 pattern Dead = This ()
 pattern Alive = That ()
 

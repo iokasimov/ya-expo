@@ -8,7 +8,7 @@ import "ya-expo" Ya.Expo.Instances
 import "base" GHC.Num (Integer, (-), (+))
 -- import "base" System.IO (print)
 
-type Tile = Unit `ML` Unit
+type Tile = Unit `S` Unit
 
 pattern Idle = This Unit
 pattern Ship = That Unit
@@ -40,18 +40,18 @@ enemy = Nonempty @List
  `ha` Item Idle `ha` Next
  `ha` Item Idle `ha` Maybe `hv` Last
 
-type Shot = Unit `ML` Unit `ML` Unit
+type Shot = Unit `S` Unit `S` Unit
 
 pattern Miss i = This (This i)
 pattern Bang i = This (That i)
 pattern Sunk i = That i
 
-type Mark = Shot `ML` Integer
+type Mark = Shot `S` Integer
 
 pattern Shot e = This e :: Mark
 pattern Mist e = That e :: Mark
 
-type Board = Nonempty List `WR_` Mark `LM` Tile
+type Board = Nonempty List `WR_` Mark `P` Tile
 
 sunk x = enter @(State `WR` Scrolling List Ship `JNT` Progress `WR` Shafted List Ship)
  `yuk____` New `ha` State `hv__` Event `hv_` auto `ho'yoi` (`hd'q` Same x) `ha_'he` Scope `hv` at @(Focused Ship)

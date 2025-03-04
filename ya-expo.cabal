@@ -21,7 +21,6 @@ executable baby-steps
   default-language: Haskell2010
   ghc-options: -Wall -fno-warn-tabs -fno-strictness -fno-warn-orphans -fprint-potential-instances -Wno-missing-signatures -Wno-missing-pattern-synonym-signatures
 
-
 executable stack-machine-1
   main-is: Ya/Case/stack-machine-1.hs
   build-depends: ya, ya-world, ya-ascii, ya-console, ya-expo, base, ghc-prim

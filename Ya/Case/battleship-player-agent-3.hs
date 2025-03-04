@@ -5,22 +5,22 @@ import Ya.Console
 
 import "base" GHC.Num (Integer, (-), (+))
 
-type Tile = Unit `ML` Unit
+type Tile = Unit `S` Unit
 
 pattern Idle = This Unit
 pattern Ship = That Unit
 
-type Nail = Unit `ML` Unit
+type Nail = Unit `S` Unit
 
 pattern Bang i = This i
 pattern Sunk i = That i
 
-type Shot = Nail `ML` Unit
+type Shot = Nail `S` Unit
 
 pattern Nail i = This i
 pattern Miss i = That i
 
-type Mark = Shot `ML` Integer
+type Mark = Shot `S` Integer
 
 pattern Shot e = This e
 pattern Mist e = That e
@@ -87,7 +87,7 @@ mount board = Same `hu` board
 chance = enter @(State `WR` Sliding List Mark)
  `yuk___` State `ho` New `hv____` Event `hv_` auto `ho'ho` mount
  `yuk___` State `ho` New `hv____` Event `ha` slide `hv` by Future
- `yok___` Retry `ha` Perhaps `ha` not
+ `yok___` Retry `ha` Perhaps `ha'he` not
 
 rewind = State `ha` Event `hv_` auto `ho'ho` to @(Sliding List) `ha` to @List
 

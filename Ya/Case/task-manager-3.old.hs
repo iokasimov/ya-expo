@@ -19,7 +19,7 @@ type Move = Unit `ML` Unit
 pattern Down x = This x :: Move
 pattern Lift x = That x :: Move
 
-type Task = Mark `LM` Title
+type Task = Mark `P` Title
 
 pattern Task m t = These m t :: Task
 

@@ -3,7 +3,7 @@ import "ya-world" Ya.World
 import "ya-ascii" Ya.ASCII
 import "ya-console" Ya.Console
 
-type Parenthesis = Unit `ML` Unit
+type Parenthesis = Unit `S` Unit
 
 deposit bracket = enter @(State `WR` List _ `JNT` Halts)
  `yuk__` New `ha` State `ha` Event `hv` push @List bracket

@@ -3,7 +3,7 @@ import "ya-world" Ya.World
 import "ya-ascii" Ya.ASCII
 import "ya-console" Ya.Console
 
-type Imbalance = (Shape `LM` Shape) `ML` (Shape `ML` Shape)
+type Imbalance = (Shape `P` Shape) `S` (Shape `S` Shape)
 
 pattern Mismatch x = This x
 pattern Missing x = That x

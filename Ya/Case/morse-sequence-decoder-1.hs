@@ -36,7 +36,7 @@ import "base" System.IO (IO, print)
        -- `lu` (Some `yi` leaf Q)
      -- `yi'lu` (Some `yi` leaf O)))
 
-type Morse = () `ML` ()
+type Morse = () `S` ()
 
 pattern Dot e = This e :: Morse
 pattern Dash e = That e :: Morse

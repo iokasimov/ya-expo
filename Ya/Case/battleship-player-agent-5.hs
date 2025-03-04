@@ -5,22 +5,22 @@ import Ya.Console
 
 import "base" GHC.Num (Integer, (-), (+))
 
-type Tile = Unit `ML` Unit
+type Tile = Unit `S` Unit
 
 pattern Idle e = This e
 pattern Ship e = That e
 
-type Nail = Unit `ML` Unit
+type Nail = Unit `S` Unit
 
 pattern Bang i = This i
 pattern Sunk i = That i
 
-type Shot = Nail `ML` Unit
+type Shot = Nail `S` Unit
 
 pattern Nail i = This i
 pattern Miss i = That i
 
-type Mark = Shot `ML` Integer
+type Mark = Shot `S` Integer
 
 pattern Shot e = This e
 pattern Mist e = That e
@@ -43,7 +43,7 @@ fleet = Nonempty @List @Ship
  `ha_` Item `hv` destroyer `ha_` Next
  `ha_` Item `hv` submarine `ha_` Last `hv_` Unit
 
-type Cell = Tile `LM` Mark
+type Cell = Tile `P` Mark
 
 type Fleet = Nonempty List Ship
 
@@ -51,10 +51,10 @@ type Target = Maybe Ship
 
 shoot' = by Miss `lv` Nail `hv` by Bang `ho_` Shot `ha__` this @Tile
 
-type Result = Unit `ML` Unit `ML` Ship
+type Result = Unit `S` Ship
 
-pattern Verge e = This (This e)
-pattern Smash e = This (That e)
+-- pattern Verge e = This (This e)
+pattern Smash e = This e
 pattern Fault e = That e
 
 type Board = Sliding List
@@ -64,14 +64,13 @@ type Opponent = Board Mark
 
 -- + None: If there is `Some Ship` - we need to remove it from `Fleet`, stop
 
-process = enter @(State `WR_` Target `LM` Fleet `LM` Board Cell `JNT_` Reach Result)
+process = enter @(State `WR_` Target `P` Fleet `P` Board Cell `JNT_` Reach Result)
  `yuk__` State `ho` New `hv__` Event `ha` extend `hv` by Fore `ha_` Scope `hv` at @(Board Cell)
- `yok__` Check `ha__` Reach @Result `ha` Verge `la` Continue `ha` this @Tile
- `yok__` Usual `ha__` Idle `hu` (review `yu` Unit) `la` Ship `hu` (pursuit `yu` Unit)
+ `yok__` Usual `ha__` Idle `hu` (review `yu` Unit) `la` Ship `hu` (pursuit `yu` Unit) `ha__` Last `hu` by Idle `la` this @Tile
  `yok__` Again `ha` Same
 
 -- + If there is `Ship` tile
-pursuit = enter @(State `WR_` Target `LM` Fleet `LM` Board Cell `JNT_` Reach Result)
+pursuit = enter @(State `WR_` Target `P` Fleet `P` Board Cell `JNT_` Reach Result)
  `yuk___` State `ho` New `hv___` Event `hv_` hit `ha_` Scope `hv` at @Target
 
 -- If there is no bombing target - initialize a new bombing target
@@ -83,8 +82,8 @@ hit = auto `ha` Some @Ship
 -- . If there is `Idle` tile
  -- , if there is `None Ship` - do nothing
  -- , if there is `Some Ship` - we need to remove it from `Fleet` and ski
-review = enter @(State `WR_` Target `LM` Fleet `LM` Board Cell `JNT_` Reach Result)
- `yuk___` Old `ha` State `hv__` Event `hv` auto `ha_` Scope `hv` at @Target
+review = enter @(State `WR_` Target `P` Fleet `P` Board Cell `JNT_` Reach Result)
+ `yuk___` Old `ha` State `hv__` Event `hv` get `ha_` Scope `hv` at @Target
  `yok___` Run `ha__` None `hu_`intro `ha` None `hv` Unit  `la` unstock
 
 -- 1. Try to find the same ship
@@ -92,11 +91,11 @@ review = enter @(State `WR_` Target `LM` Fleet `LM` Board Cell `JNT_` Reach Resu
 -- 3. If ship isn't found - `Interrupt` with an `Fault`
 -- 4. If after removing ship fleet is empty - terminate with `Smash`
 -- 5. If fleet is not empty - just update `Fleet`
-unstock ship = enter @(State `WR_` Target `LM` Fleet `LM` Board Cell `JNT_` Reach Result)
- `yuk___` New `ha__` State `hv__` Event `ha` locate `ha` Predicate `ha` exact `hv` ship `ha_` Scope `hv` at @Fleet `ho` as @(Scrolling List)
+unstock ship = enter @(State `WR_` Target `P` Fleet `P` Board Cell `JNT_` Reach Result)
+ `yuk___` New `ha` State `hv__` Event `ha` locate `hd` by Fore `ha` Predicate `ha` exact `hv` ship `ha_` Scope `hv` at @Fleet `ho` as @(Scrolling List)
  `yok___` Try `ha__` Error `hu_` Reach @Result `ha` Fault `hv` ship `la` Ok
  `yok___` Try `ha__` Empty @List `hu_` Reach @Result `hv` by Smash `la` Ok `ha__` at @(Shafted List Ship) `he'ho` this `ho` to @List
- `yok___` New `ha__` State `ha__` Event `ha` switch `ho_'ha` Scope `hv` at @Fleet
+ `yok___` New `ha` State `ha__` Event `ha` switch `ho_'ha` Scope `hv` at @Fleet
  `yuk___` New `ha` State `hv___` Event `ha` switch `hv_` by `hv` Empty @List `ha__` Scope `hv` at @(Board Cell) `ho_` Scope `hv` focus
  `yok___` New `ha` State `ha___` Event `ha` across `ho__'ha` Scope `hv` at @(Board Cell) `ho_` Scope `ha` shaft `hv` by Passed
  `yuk___` New `ha` State `hv___` Event `ha` switch `hv_` by `hv` None `ha__` Scope `hv` at @Target
@@ -114,33 +113,17 @@ window' ship = ship `yukl` Forth
  `ha` extend @List `hv` by Fore
 
 match = enter @(State Opponent `JNT` Reach Unit)
- `yuk____` State `ho` Old
- `hv_____` Event `hv` pop @List
- `ha___'he` Scope `hv` at @(Shafted List Mark)
-   `ho_'he` Scope `hv` at @(Reverse List Mark)
-   `ho_'he` Scope `hv` it @(List Mark)
- `yok____` Check `ha` out
- `yuk____` State `ho` Old
- `hv_____` Event `hv` pop @List
- `ha___'he` Scope `hv` at @(Shafted List Mark)
-   `ho_'he` Scope `hv` at @(Forward List Mark)
-   `ho_'he` Scope `hv` it @(List Mark)
- `yok____` Check `ha` out
- `yuk____` State `ho` Old
- `hv_____` Event `hv` auto
- `ha___'he` Scope `hv` at @(List Mark)
- `yok____` Check `ha` inner
- `yok____` State `ho` New
- `ha_____` Event `ha` switch
- `ho_'ha'he` Scope `hv` at @(List Mark)
+ `yuk___` State `ho` Old `hv__` Event `hv` pop `ha_` Scope `ha` shaft `hv` by Passed `yok___` Check `ha` out
+ `yuk___` State `ho` Old `hv__` Event `hv` pop `ha_` Scope `ha` shaft `hv` by Future `yok___` Check `ha` out
+ `yuk___` State `ho` Old `hv__` Event `hv` get `ha_` Scope `hv` focus `ho` as @List `yok___` Check `ha` inner
+ `yok___` State `ho` New `ha__` Event `ha` put `ho_'ha` Scope `hv` focus
 
 out = None `hu` by Continue
  `la__` Nail `hu` by Interrupt
    `la` Miss `hu` by Continue
    `la` Mist `hu` by Continue
 
-inner ship = ship
- `yokl` Run `ho` Forth
+inner ship = ship `yokl` Run `ho` Forth
  `ha__` Bang `ho` Nail `ho` Shot `ho` Valid
    `la` Sunk `ho` Nail `hu` Error Unit
    `la` Miss `ho` Shot `hu` Error Unit
@@ -151,11 +134,11 @@ mount board = Same `hu` board
  `li` match `he'he'hv` board
 
 chance = enter @(State `WR` Sliding List Mark)
- `yuk___` State `ho` New `hv__` Event `hv_` auto `ho'ho` mount
+ `yuk___` State `ho` New `hv__` Event `hv_` get `ho'ho` mount
  `yuk___` State `ho` New `hv__` Event `ha` slide `hv` by Fore
- `yok___` Retry `ha` Perhaps `ha` not
+ `yok___` Retry `ha` Perhaps `ha'he` not
 
-rewind = State `ha` Event `hv_` auto `ho'ho` to @(Sliding List) `ha` to @List
+rewind = State `ha` Event `hv_` get `ho'ho` to @(Sliding List) `ha` to @List
 
 distribute fleet = fleet
  `yokl` Forth `ha` Run
@@ -171,10 +154,10 @@ enemy = Nonempty @List
  `ha` Item (by Ship) `ha` Next
  `ha` Item (by Idle) `ha` Next
  `ha` Item (by Idle) `ha` Next
- `ha` Item (by Ship) `ha` Next
- `ha` Item (by Ship) `ha` Next
  `ha` Item (by Idle) `ha` Next
- `ha` Item (by Idle) `ha` Last
+ `ha` Item (by Idle) `ha` Next
+ `ha` Item (by Ship) `ha` Next
+ `ha` Item (by Ship) `ha` Last
 
 known = by enemy `yu` Mist 0
 
@@ -201,15 +184,16 @@ fault ship = is @(List ASCII) `hv` "One ship has not been found..." `yokl` Forth
  `yuk____` World `hv____` ship `yukl` Forth `ha` Run `ha` output `ha` Glyph `ha` Symbol `ha` Punctuate `ha` Dollar `hv` Unit
  -- `yuk__` ship `yukl` Forth `ha` Run `ha` output `ha` Glyph `ha` Symbol `ha` Punctuate `ha` Dollar `hv` Unit
 
-verge _ = is @(List ASCII) `hv` "Highly likely you lost this battle..." `yokl` Forth `ha` Run `ha` output
+-- verge _ = is @(List ASCII) `hv` "Highly likely you lost this battle..." `yokl` Forth `ha` Run `ha` output
 
 main = process `he'he'hv__` by `hv` None @Ship `lu` fleet `lu` fresh
- `yi__` verge `ho'yu` Unit `la` smash `ho'yu` Unit `la` fault `ho'yu` Unit
+ -- `yi__` verge `ho'yu` Unit `la` smash `ho'yu` Unit `la` fault `ho'yu` Unit
+ `yi__` smash `ho'yu` Unit `la` fault `ho'yu` Unit
   -- `la_` is @(Equipped _ _) `ho'he` that `ho` that @(Board Cell) `ho` to @List
-  `la_` is @(Equipped _ _) `ho'he` that `ho` this `ho` that @Fleet `ho` print
+   `la` is @(Equipped _ _) `ho'he` that `ho` this `ho` that @Fleet `ho` print `ho'yu` Unit where
   -- `ho_'yokl'yokl` Forth `ha` Forth `ha` Run
    -- `ha` (is `hu_`output `hv` by (Glyph `ha` Symbol `ha` Punctuate `ha` Dollar))
-  `ho_'yu` Unit where
+  
   -- `ho_'yokl` Forth `ha` Run `ha` render `ho_'yu` Unit where
 
 {-

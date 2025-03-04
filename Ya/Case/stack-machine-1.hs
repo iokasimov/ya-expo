@@ -7,9 +7,9 @@ import "base" GHC.Num (Integer, (+))
 
 type Immediate v = v
 
-type Operation v = v `LM` v `AR_` v
+type Operation v = v `P` v `AR_` v
 
-type Command v = Immediate v `ML` Operation v
+type Command v = Immediate v `S` Operation v
 
 pattern Immediate x = This x
 pattern Operation x = That x

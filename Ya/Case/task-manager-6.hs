@@ -7,12 +7,12 @@ import "base" System.IO (IO)
 
 type Title = List ASCII
 
-type Mark = Unit `ML` Unit
+type Mark = Unit `S` Unit
 
 pattern TODO e = This e
 pattern DONE e = That e
 
-type Task = Mark `LM` Title
+type Task = Mark `P` Title
 
 pattern Task m t = These m t :: Task
 
@@ -33,14 +33,14 @@ type Move = Scroller List
 pattern Lift x = This x :: Move
 pattern Down x = That x :: Move
 
-type Command = Move `ML` Mark
+type Command = Move `S` Mark
 
 pattern Move x = This x :: Command
 pattern Mark x = That x :: Command
 
 press k f p = Maybe `he___` k `hd'q` p `yui` Unit `yiu` f Unit
 
-apply = is @(ASCII `MN` Glyph `ML_` Glyph `MN` Letter) `hu` Wrong Unit
+apply = is @(ASCII `MN` Glyph `S_` Glyph `MN` Letter) `hu` Wrong Unit
  `la____` press `hv` Lower J `hv` (Move `ha` Down)
  `lo'ys'la` press `hv` Lower K `hv` (Move `ha` Lift)
  `lo'ys'la` press `hv` Upper T `hv` (Mark `ha` TODO)

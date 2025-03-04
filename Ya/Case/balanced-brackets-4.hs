@@ -3,11 +3,11 @@ import "ya-world" Ya.World
 import "ya-ascii" Ya.ASCII
 import "ya-console" Ya.Console
 
-type Mismatch = Shape `LM` Shape
+type Mismatch = Shape `P` Shape
 
-type Missing = Shape `ML` Shape
+type Missing = Shape `S` Shape
 
-type Imbalance = Mismatch `ML` Missing
+type Imbalance = Mismatch `S` Missing
 
 pattern Mismatch x = This x
 pattern Missing x = That x

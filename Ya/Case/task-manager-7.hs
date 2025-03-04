@@ -10,12 +10,12 @@ import qualified "ya-expo" Ya.Expo.Terminal as Console
 
 type Title = List ASCII
 
-type Mark = Unit `ML` Unit
+type Mark = Unit `S` Unit
 
 pattern TODO e = This e :: Mark
 pattern DONE e = That e :: Mark
 
-type Move = Scroller List `ML` Scroller Tree
+type Move = Scroller List `S` Scroller Tree
 
 pattern Outline x = This x :: Move
 pattern Project x = That x :: Move
@@ -28,17 +28,17 @@ pattern Level x = That x :: Scroller Tree
 
 type Quit = Unit
 
-type Task = Mark `LM` Title
+type Task = Mark `P` Title
 
 pattern Task m t = These m t :: Task
 
-type Command = ((Move) `ML` Mark) `ML` Quit
+type Command = ((Move) `S` Mark) `S` Quit
 
 pattern Move x = This (This x) :: Command
 pattern Mark x = This (That x) :: Command
 pattern Quit x = That x :: Command
 
-type Cursor = Unit `ML` Unit
+type Cursor = Unit `S` Unit
 
 pattern Bullet = This Unit
 pattern Cursor = That Unit
@@ -104,7 +104,7 @@ apply = press `he` Lower P `he` (Move `ha` Outline `ha` Down)
  `lo'ys'la` press `he` Upper T `he` (Mark `ha` TODO)
  `lo'ys'la` press `he` Upper D `he` (Mark `ha` DONE)
  `lo'ys'la` press `he` Lower Q `he` (Quit)
- `la____` Wrong `hv` is @(Number `ML` Symbol `ML` Caret)
+ `la____` Wrong `hv` is @(Number `S` Symbol `S` Caret)
 
 type Project = Scrolling Tree Task
 
