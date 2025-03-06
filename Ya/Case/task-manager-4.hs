@@ -31,7 +31,7 @@ pattern Down x = That x
 
 press k f p = Maybe `hv___` k `hd'q` p `yui` Unit `yiu` f Unit
 
-apply = is @(ASCII `MN` Glyph `S_` Glyph `MN` Letter) `hu` Wrong Unit
+apply = is @(ASCII `M` Glyph `S_` Glyph `M` Letter) `hu` Wrong Unit
  `la____` press `hv` Lower J `hv` Down
  `lo'ys'la` press `hv` Lower K `hv` Lift
 
