@@ -28,7 +28,7 @@ pattern Mist e = That e
 type Board = Sliding List
 
 type Ship = Nonempty List Unit
- 
+
 type Personal = Board Tile
 type Opponent = Board Mark
 
@@ -48,25 +48,13 @@ window' ship = ship `yukl` Forth
  `ha` extend @List `hv` by Fore
 
 match = enter @(State Opponent `JNT` Halts)
- `yuk____` State `ho` Old
- `hv_____` Event `hv` pop @List
- `ha___'he` Scope `hv` at @(Shafted List Mark)
-   `ho_'he` Scope `hv` at @(Reverse List Mark)
-   `ho_'he` Scope `hv` it @(List Mark)
+ `yuk____` State `ho` Old `hv__` Event `hv` pop @List `ha_` Scope `ha` shaft `hv` by Passed
  `yok____` Check `ha` out
- `yuk____` State `ho` Old
- `hv_____` Event `hv` pop @List
- `ha___'he` Scope `hv` at @(Shafted List Mark)
-   `ho_'he` Scope `hv` at @(Forward List Mark)
-   `ho_'he` Scope `hv` it @(List Mark)
+ `yuk____` State `ho` Old `hv__` Event `hv` pop @List `ha_` Scope `ha` shaft `hv` by Future
  `yok____` Check `ha` out
- `yuk____` State `ho` Old
- `hv_____` Event `hv` auto
- `ha___'he` Scope `hv` at @(List Mark)
+ `yuk____` State `ho` Old `hv__` Event `hv` get `ha_` Scope `hv` focus
  `yok____` Check `ha` inner
- `yok____` State `ho` New
- `ha_____` Event `ha` switch
- `ho_'ha'he` Scope `hv` at @(List Mark)
+ `yok____` State `ho` New `ha__` Event `ha` put `ho_'ha` Scope `hv` focus
 
 out = None `hu` by Continue
  `la__` Nail `hu` by Interrupt
@@ -80,7 +68,7 @@ inner ship = ship
    `la` Miss `ho` Shot `hu` Error Unit
    `la` (+1) `ho` Mist `ho` Valid
 
-mount board = Same `hu` board 
+mount board = Same `hu` board
  `la` is `ho'he` that @Opponent
  `li` match `he'he'hv` board
 
