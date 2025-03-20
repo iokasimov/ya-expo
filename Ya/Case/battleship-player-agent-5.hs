@@ -49,7 +49,7 @@ type Fleet = Nonempty List Ship
 
 type Target = Maybe Ship
 
-shoot' = by Miss `lv` Nail `hv` by Bang `ho_` Shot `ha__` this @Tile
+shoot' = Miss `la` Nail `ha` Bang `ho_` Shot `ha__` this @Tile
 
 type Result = Unit `S` Ship
 

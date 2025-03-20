@@ -15,13 +15,13 @@ analyze _______ = enter @(State `WR` List _ `JNT` Halts)
 remnant = Empty @List `hu` by Valid
  `la` Nonempty @List `he'hu` by Error
 
-main = Nonempty @List @Parenthesis
+example = Nonempty @List @Parenthesis
  `ha` Item (Opened Unit) `ha` Next
- `ha` Item (Closed Unit) `ha` Last `hv` Unit
- `yokl` Run `ho` Forth `ha__` deposit `la` analyze
- `he'he'hv___` Empty @List Unit
- `yok_` Try `ha` remnant `ha'he` that @(List Unit)
- `yi__` is @(List ASCII)
-   `hv` "[ERROR] We missed some bracket, oh my!"
-   `lv` "[VALID] Everything is seem to be good."
- `yokl` Run `ho` Forth `ha` output
+ `ha` Item (Closed Unit) `ha` Last
+
+main = by example
+ `yokl` Forth `ha` Run `ha__` deposit `la` analyze `he'he'hv___` by `hv` Empty @List
+ `yok_` Check `ha` remnant `ha'he` that @(List Unit)
+ `yi__` Error `hu` "[ERROR] We missed some bracket, oh my!" `ho` is @(List ASCII)
+   `la` Valid `hu` "[VALID] Everything is seem to be good."
+ `yokl` Forth `ha` Run `ha` output

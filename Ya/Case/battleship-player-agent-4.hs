@@ -114,7 +114,7 @@ main = to @List enemy `lu'yp` to @List guess
   `la__` integer `ho_'yo` Glyph `ha` Digit
 
  tile = Glyph `ha` Symbol `ha` Punctuate
-  `ha___` by Hyphen `lv` by Plus
+  `ha___` Hyphen `la` Plus
 
  cell (These him me) = enter @(State _)
   `yuk_` New `ha` State `ha` Event `ha` push

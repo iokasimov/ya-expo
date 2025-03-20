@@ -20,13 +20,14 @@ compare closed opened = opened `hd'q` closed
 remnant = Empty @List `hu` by Valid
   `la` Error `ha` Missing `ha` Closed `ha` this @Shape `ha` top @(Nonempty List)
 
-main = Nonempty @List
+example = Nonempty @List
  `ha` Item (Opened Round) `ha` Next
- `ha` Item (Closed Angle) `ha` Last `hv` Unit
- `yokl` Forth `ha` Run `ha__` deposit `la` analyze
- `he'he'hv___` by `hv` Empty @List
- `yok_` Try @Imbalance `ha` remnant `ha'he` that @(List Shape)
- `yi__` is @(List ASCII)
- `ha__` "[ERROR] Missing or mismatching bracket!"
-   `lv` "[VALID] Everything is seem to be good!"
+ `ha` Item (Closed Angle) `ha` Last
+
+main = by example
+ `yokl` Forth `ha` Run `ha__` deposit `la` analyze `he'he'hv___` by `hv` Empty @List
+ `yok_` Check @Imbalance `ha` remnant `ha'he` that @(List Shape)
+ `yi__` Error `hu` "[ERROR] Missing or mismatching bracket!" `ho` is @(List ASCII)
+   `la` Valid `hu` "[VALID] Everything is seem to be good."
  `yokl` Forth `ha` Run `ha` output
+

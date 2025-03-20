@@ -5,15 +5,15 @@ import "ya-console" Ya.Console
 
 type Title = List ASCII
 
-pattern Bullet = This Unit
-pattern Cursor = That Unit
+pattern Bullet e = This e
+pattern Cursor e = That e
 
 print cursor title = enter @World
  `yuk___` Run `hv____` point `yokl` Forth `ha` Run `ha` output
  `yuk___` Run `hv____` title `yokl` Forth `ha` Run `ha` output
  `yuk___` Run `hv____` output `ha` Caret `hv` by Newline where
 
- point = is @Title `hv__` "  -  " `lv` "  -> " `hv_` cursor
+ point = is @Title `hv__` Bullet `hu` "  -  " `la` Cursor `hu` "  -> " `hv_` cursor
 
 type Move = Scroller List
 
@@ -34,9 +34,9 @@ start = to @(Scrolling List) `ha` Nonempty @List @Title
 
 draft = enter @(State `WR` Scrolling List Title `JNT` World)
  `yuk___` World `hv__` prepare `lu'yp` clear
- `yuk___` State `ho` New `hv__` Event `hv` auto `ha_` Scope `ha` shaft `hv` by Passed `yok___` World `ha_'yokl` Prior `ha` Run `ha` print Bullet
- `yuk___` State `ho` New `hv__` Event `hv` auto `ha_` Scope `hv` focus `ho` Scope it `yok___` World `ha_'yokl` Forth `ha` Run `ha` print Cursor
- `yuk___` State `ho` New `hv__` Event `hv` auto `ha_` Scope `ha` shaft `hv` by Future `yok___` World `ha_'yokl` Forth `ha` Run `ha` print Bullet
+ `yuk___` State `ho` New `hv__` Event `hv` auto `ha_` Scope `ha` shaft `hv` by Passed `yok___` World `ha_'yokl` Prior `ha` Run `ha` print (by Bullet)
+ `yuk___` State `ho` New `hv__` Event `hv` auto `ha_` Scope `hv` focus `ho` Scope it `yok___` World `ha_'yokl` Forth `ha` Run `ha` print (by Cursor)
+ `yuk___` State `ho` New `hv__` Event `hv` auto `ha_` Scope `ha` shaft `hv` by Future `yok___` World `ha_'yokl` Forth `ha` Run `ha` print (by Bullet)
  `yuk___` World `hv___` input `yok` Retry `ha` apply `ha_` on @Glyph `ho'ho` on @Letter `ho` row
  `yok___` State `ho` New `ha` Event `ha` scroll
  `yok___` Again `ha` Once
