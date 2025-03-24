@@ -15,7 +15,7 @@ print cursor title = enter @World
 
  point = is @Title `hv__` Bullet `hu` "  -  " `la` Cursor `hu` "  -> " `hv_` cursor
 
-type Move = Scroller List
+type Move = Shifter List
 
 pattern Lift x = This x :: Move
 pattern Down x = That x :: Move
@@ -38,7 +38,7 @@ draft = enter @(State `WR` Scrolling List Title `JNT` World)
  `yuk___` State `ho` New `hv__` Event `hv` auto `ha_` Scope `hv` focus `ho` Scope it `yok___` World `ha_'yokl` Forth `ha` Run `ha` print (by Cursor)
  `yuk___` State `ho` New `hv__` Event `hv` auto `ha_` Scope `ha` shaft `hv` by Future `yok___` World `ha_'yokl` Forth `ha` Run `ha` print (by Bullet)
  `yuk___` World `hv___` input `yok` Retry `ha` apply `ha_` on @Glyph `ho'ho` on @Letter `ho` row
- `yok___` State `ho` New `ha` Event `ha` scroll
+ `yok___` State `ho` New `ha` Event `ha` shift
  `yok___` Again `ha` Once
 
 main = draft `he'he'hv` by start

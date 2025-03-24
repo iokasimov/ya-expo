@@ -45,7 +45,7 @@ fleet = Nonempty @List @Ship
 
 window' ship = ship `yukl` Forth
  `ha` New `ha` State `ha` Event
- `ha` extend @List `hv` by Fore
+ `ha` extend `hv` by Fore
 
 match = enter @(State Opponent `JNT` Halts)
  `yuk____` State `ho` Old `hv__` Event `hv` pop @List `ha_` Scope `ha` shaft `hv` by Passed
@@ -74,7 +74,7 @@ mount board = Same `hu` board
 
 chance = enter @(State `WR` Sliding List Mark)
  `yuk___` State `ho` New `hv____` Event `hv_` auto `ho'ho` mount
- `yuk___` State `ho` New `hv____` Event `ha` slide `hv` by Future
+ `yuk___` State `ho` New `hv____` Event `ha` shift `hv` by Future
  `yok___` Retry `ha` Perhaps `ha'he` not
 
 rewind = State `ha` Event `hv_` auto `ho'ho` to @(Sliding List) `ha` to @List

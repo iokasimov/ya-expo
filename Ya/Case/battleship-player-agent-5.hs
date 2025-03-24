@@ -110,7 +110,7 @@ across sunk passed = that @(List Cell) `ha` pop `hv` sunk `yokl` Forth `ha` Run 
 
 window' ship = ship `yukl` Forth
  `ha` New `ha` State `ha` Event
- `ha` extend @List `hv` by Fore
+ `ha` extend `hv` by Fore
 
 match = enter @(State Opponent `JNT` Reach Unit)
  `yuk___` State `ho` Old `hv__` Event `hv` pop `ha_` Scope `ha` shaft `hv` by Passed `yok___` Check `ha` out
@@ -135,7 +135,7 @@ mount board = Same `hu` board
 
 chance = enter @(State `WR` Sliding List Mark)
  `yuk___` State `ho` New `hv__` Event `hv_` get `ho'ho` mount
- `yuk___` State `ho` New `hv__` Event `ha` slide `hv` by Fore
+ `yuk___` State `ho` New `hv__` Event `ha` shift `hv` by Fore
  `yok___` Retry `ha` Perhaps `ha'he` not
 
 rewind = State `ha` Event `hv_` get `ho'ho` to @(Sliding List) `ha` to @List

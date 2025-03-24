@@ -5,7 +5,7 @@ import "ya-console" Ya.Console
 
 type Title = List ASCII
 
-type Mark = Scroller List
+type Mark = Unit `S` Unit
 
 pattern TODO e = This e
 pattern DONE e = That e
@@ -15,7 +15,7 @@ type Task = Mark `P` Title
 pattern Bullet e = This e
 pattern Cursor e = That e
 
-type Move = Scroller List
+type Move = Shifter List
 
 pattern Lift x = This x
 pattern Down x = That x
@@ -55,7 +55,7 @@ draft = enter @(State `WR` Scrolling List Task `JNT` World)
  `yuk___` State `ho` Old `hv___` Event `hv` auto `ha_` Scope `hv` focus `ho` Scope it `yok___` World `ha_'yokl` Forth `ha` Run `ha` print (by Cursor)
  `yuk___` State `ho` Old `hv___` Event `hv` auto `ha_` Scope `ha` shaft `hv` by Future `yok___` World `ha_'yokl` Forth `ha` Run `ha` print (by Bullet)
  `yuk___` World `hv___` input `yok` Retry @Command `ha` apply `ha_` on @Glyph `ho'ho` on @Letter `ho` row
- `yok___` State `ho` New `ha___` Event `ha` (scroll `ho'ho'yui` Unit)
+ `yok___` State `ho` New `ha___` Event `ha` (shift `ho'ho'yui` Unit)
   `la___` State `ho` New `ha___` Event `ha` (switch `ho'ho'yui` Unit) `ho__'ha` Scope `hv` focus `ho_'he` Scope `hv` at @Mark
  `yok___` Again `ha` Once
 

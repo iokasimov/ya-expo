@@ -24,7 +24,7 @@ print cursor (These status task) = enter @World
  hand = is @Title `hv__` Bullet `hu` "  -  " `la` Cursor `hu` "  -> " `li` cursor
  mark = is @Title `hv__` TODO `hu` "TODO " `la` TODO `hu` "DONE " `li` status
 
-type Move = Scroller List
+type Move = Shifter List
 
 pattern Lift x = This x
 pattern Down x = That x
@@ -47,7 +47,7 @@ draft = enter @(State `WR` Scrolling List Task `JNT` World)
  `yuk___` State `ho` New `hv__` Event `hv` auto `ha_` Scope `hv` focus `ho` Scope it `yok___` World `ha_'yokl` Forth `ha` Run `ha` print (by Cursor)
  `yuk___` State `ho` New `hv__` Event `hv` auto `ha_` Scope `ha` shaft `hv` by Future `yok___` World `ha_'yokl` Forth `ha` Run `ha` print (by Bullet)
  `yuk___` World `hv___` input `yok` Retry `ha` apply `ha_` on @Glyph `ho'ho` on @Letter `ho` row
- `yok___` State `ho` New `ha` Event `ha` scroll
+ `yok___` State `ho` New `ha` Event `ha` shift
  `yok___` Again `ha` Once
 
 main = draft `he'he'hv` by start
