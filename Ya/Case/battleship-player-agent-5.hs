@@ -84,7 +84,7 @@ hit = auto `ha` Some @Ship
  -- , if there is `Some Ship` - we need to remove it from `Fleet` and ski
 review = enter @(State `WR_` Target `P` Fleet `P` Board Cell `JNT_` Reach Result)
  `yuk___` Old `ha` State `hv__` Event `hv` get `ha_` Scope `hv` at @Target
- `yok___` Run `ha__` None `hu_`intro `ha` None `hv` Unit  `la` unstock
+ `yok___` Run `ha__` None `hu_` intro `ha` None `hv` Unit `la` unstock
 
 -- 1. Try to find the same ship
 -- 2. If ship is found - remove from `Fleet`
@@ -92,7 +92,7 @@ review = enter @(State `WR_` Target `P` Fleet `P` Board Cell `JNT_` Reach Result
 -- 4. If after removing ship fleet is empty - terminate with `Smash`
 -- 5. If fleet is not empty - just update `Fleet`
 unstock ship = enter @(State `WR_` Target `P` Fleet `P` Board Cell `JNT_` Reach Result)
- `yuk___` New `ha` State `hv__` Event `ha` locate `hd` by Fore `ha` Predicate `ha` exact `hv` ship `ha_` Scope `hv` at @Fleet `ho` as @(Scrolling List)
+ `yuk___` New `ha` State `hv__` Event `ha` locate `hd` by Fore `ha` Predicate `ha` exact `ha` Same `hv` ship `ha_` Scope `hv` at @Fleet `ho` as @(Scrolling List)
  `yok___` Try `ha__` Error `hu_` Reach @Result `ha` Fault `hv` ship `la` Ok
  `yok___` Try `ha__` Empty @List `hu_` Reach @Result `hv` by Smash `la` Ok `ha__` at @(Shafted List Ship) `he'ho` this `ho` to @List
  `yok___` New `ha` State `ha__` Event `ha` switch `ho_'ha` Scope `hv` at @Fleet
