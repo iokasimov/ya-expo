@@ -20,7 +20,7 @@ load value = enter @(State `WR` List _ `JNT` Halts)
 eval binop = enter @(State `WR` List _ `JNT` Halts)
  `yuk_` New `ha` State `ha` Event `hv` pop @List
  `lu'yp` New `ha` State `ha` Event `hv` pop @List
- `yok_` Try `ha` Maybe `ha` (`yip'yo` binop)
+ `yok_` Try `ha` (`yp'yo` binop)
  `yok_` New `ha` State `ha` Event `ha` push @List
 
 initial = Construct
