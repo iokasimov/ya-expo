@@ -105,14 +105,14 @@ review = on @Glyph @ASCII `ho'ho` on @Letter `ho` row
   `lo'ys'la` press `hv` Upper D `hv` (Mark `ha` DONE)
   `lo'ys'la` press `hv` Lower F `hv` (Find)
 
-search :: ASCII `AR__` Command
-search = Heap `ha'he` Glyph
- `la_` Backspace `hu` by Away
-  `la` Tab `hu`by Stop
-  `la` Newline `hu`by Stop
-  `la` Escape `hu`by Stop
-  `la` Heap `ha` Caret `ha` Space
-  `la` Delete `hu` by Stop
+-- search :: ASCII `AR__` Command
+-- search = Heap `ha'he` Glyph
+ -- `la_` Backspace `hu` by Away
+  -- `la` Tab `hu`by Stop
+  -- `la` Newline `hu`by Stop
+  -- `la` Escape `hu`by Stop
+  -- `la` Heap `ha` Caret `ha` Space
+  -- `la` Delete `hu` by Stop
 
 press k f p = Maybe `hv___` k `hd'q` p `yui` Unit `yiu` f Unit
 
@@ -121,23 +121,23 @@ press k f p = Maybe `hv___` k `hd'q` p `yui` Unit `yiu` f Unit
 
 type Interface = Scrolling List Task `P` Shafted List Task `P` Title `P` Mode
 
-update character (These (These (These filtered hidden) filter) mode) =
- -- let new = that @Title `hv` push character filter in
- -- new `yokl` locate
- Unit `lu` That (filtered `lu` that @Title `hv` push character filter)
+handle = push `ho'ho'yoi` Some `ha'he` Glyph
+ `la` (Some `hu` get `ho'ho'yui` by None `la` Some `hu` pop `ho'ho'yoi` is)
+ `ha` (`hd_'q` Back `ha` Space `hv` Unit) `ha'he` is @Caret
+
+update x = enter @(State `WR` Interface `JNT` World)
+ `yuk____` New `ha` State `hv__` Event `hv` handle x `ha_` Scope `hv` at @Title
 
 -- TODO: `locate` method of `Sliding List`
 -- match x = enter @(State Task `JNT` Progress Unit)
  -- `yuk_____` _
-
--- new `yokl` 
 
 proccess = enter @(State `WR` Interface `JNT` World)
  `yuk______` World `hv__` prepare `lu'yp` clear
  `yuk______` State `ho` Old `ha` Event `hv` get
  `yok______` World `ha` render
  `yuk______` World `hv` input
- -- `yok______` State `ho` New `ha` Event `ha` update
+ `yok______` Run `ha` update
 
 -- "Buy [a] w[a]ter gun for Songkr[a]n"
 
