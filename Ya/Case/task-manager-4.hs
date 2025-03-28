@@ -29,11 +29,11 @@ type Move = Shifter List
 pattern Lift x = This x
 pattern Down x = That x
 
-press k f p = Maybe `hv___` k `hd'q` p `yui` Unit `yiu` f Unit
+press k f p = Maybe `hv___` k `hv` Unit `hd'q` p `yui` Unit `yiu` f Unit
 
 apply = is @(ASCII `M` Glyph `S_` Glyph `M` Letter) `hu` Wrong Unit
- `la____` press `hv` Lower J `hv` Down
- `lo'ys'la` press `hv` Lower K `hv` Lift
+ `la____` press `hv` (Lower `ha` J) `hv` Down
+ `lo'ys'la` press `hv` (Lower `ha` K) `hv` Lift
 
 start = to @(Scrolling List) `ha` Nonempty @List @Task
  `ha` Item (by TODO `lu` "Apply to that new position") `ha` Next

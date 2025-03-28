@@ -35,13 +35,13 @@ hand cursor = is @Title `hv__` Bullet `hu` "  -  " `la` Cursor `hu` "  -> " `li`
 
 mark status = is @Title `hv__` TODO `hu` "TODO " `la` DONE `hu` "DONE " `li` status
 
-press k f p = Maybe `hv___` k `hd'q` p `yui` Unit `yiu` f Unit
+press k f p = Maybe `hv___` k `hv` Unit `hd'q` p `yui` Unit `yiu` f Unit
 
 apply = is @(ASCII `M` Glyph `S_` Glyph `M` Letter) `hu` by Wrong
- `la____` press `hv` Lower J `hv` (Move `ha` Down)
- `lo'ys'la` press `hv` Lower K `hv` (Move `ha` Lift)
- `lo'ys'la` press `hv` Upper T `hv` (Mark `ha` TODO)
- `lo'ys'la` press `hv` Upper D `hv` (Mark `ha` DONE)
+  `la____` press `hv` (Lower `ha` J) `hv` (Move `ha` Down)
+  `lo'ys'la` press `hv` (Lower `ha` K) `hv` (Move `ha` Lift)
+  `lo'ys'la` press `hv` (Upper `ha` T) `hv` (Mark `ha` TODO)
+  `lo'ys'la` press `hv` (Upper `ha` D) `hv` (Mark `ha` DONE)
 
 start = to @(Scrolling List) `ha` Nonempty @List @Task
  `ha_` Next `ho` Item (by TODO `lu` "Apply to that new position")
