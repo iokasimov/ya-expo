@@ -45,7 +45,7 @@ fleet = Nonempty @List @Ship
 
 window' ship = ship `yukl` Forth
  `ha` New `ha` State `ha` Event
- `ha` extend `hv` by Fore
+ `ha` adjust `hv` (by Expand `lu` by Fore)
 
 match = enter @(State Opponent `JNT` Halts)
  `yuk____` State `ho` Old `hv__` Event `hv` pop @List `ha_` Scope `ha` shaft `hv` by Passed

@@ -135,7 +135,7 @@ review = is `hu` by Wrong
 
 update x = enter @(State `WR` Interface `JNT` World)
  `yuk____` New `ha` State `hv__` Event `hv` handle x `ha_` Scope `hv` at @Title
- 
+
  -- `yok____` New `ha` State `ha__` Event `ha` (auto `ha` not) `ha_` Scope `hv` at @Mode
       -- `la` New `ha` State `ha__` Event `ha` _
 

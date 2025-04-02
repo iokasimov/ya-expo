@@ -65,7 +65,7 @@ known = enemy `yu` Mist 0
 
 window ship = ship `yukl` Forth
  `ha` New `ha` State `ha` Event
- `ha` extend @List `hv` by Fore
+ `ha` adjust @List `hv` by Fore
 
 match ship = Interrupt `hu_` auto `hv` ship `la` auto `li` check `hv` ship
 
@@ -118,7 +118,7 @@ render = Miss `hu` Hyphen `hv` Unit
 
 -- main = fleet
  -- `yokl_` is -- intro @(State `WR` Sliding List Mark `JNT` World)
- -- `ho__'yukl` Forth `ha` New `ha` State `ha` Event `ha` extend @List `hv` it Fore
+ -- `ho__'yukl` Forth `ha` New `ha` State `ha` Event `ha` adjust @List `hv` it Fore
   -- `ho__'yok` New `ha` extent
   -- `ho__'yuk` (State `ho` New `hv__` Event `hv` fits `ha_'he` Scope `hv` at @(List Mark))
   -- `ho__'yuk` Run `ha` title `hv` "Probs: "
@@ -157,7 +157,7 @@ render = Miss `hu` Hyphen `hv` Unit
 
 -- main = print known
 
--- main = print `ha` this `ha`at @(List Mark) `ha` unwrap @AR `ha`that `ha` extend (Fore Unit) `ha` to @(Sliding List) `hv` known
+-- main = print `ha` this `ha`at @(List Mark) `ha` unwrap @AR `ha`that `ha` adjust (Fore Unit) `ha` to @(Sliding List) `hv` known
 
 -- main = enemy `yokl` Forth `ha` Run `ha` print `ha_` These `he` Capacity 0
 

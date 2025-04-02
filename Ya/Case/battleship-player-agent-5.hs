@@ -65,7 +65,7 @@ type Opponent = Board Mark
 -- + None: If there is `Some Ship` - we need to remove it from `Fleet`, stop
 
 process = enter @(State `WR_` Target `P` Fleet `P` Board Cell `JNT_` Reach Result)
- `yuk__` State `ho` New `hv__` Event `ha` extend `hv` by Fore `ha_` Scope `hv` at @(Board Cell)
+ `yuk__` State `ho` New `hv__` Event `ha` adjust `hv` (by Expand `lu` by Fore) `ha_` Scope `hv` at @(Board Cell)
  `yok__` Usual `ha__` Idle `hu` (review `yu` Unit) `la` Ship `hu` (pursuit `yu` Unit) `ha__` Last `hu` by Idle `la` this @Tile
  `yok__` Again `ha` Same
 
@@ -110,7 +110,7 @@ across sunk passed = that @(List Cell) `ha` pop `hv` sunk `yokl` Forth `ha` Run 
 
 window' ship = ship `yukl` Forth
  `ha` New `ha` State `ha` Event
- `ha` extend `hv` by Fore
+ `ha` adjust `hv` (by Expand `lu` by Fore)
 
 match = enter @(State Opponent `JNT` Reach Unit)
  `yuk___` State `ho` Old `hv__` Event `hv` pop `ha_` Scope `ha` shaft `hv` by Passed `yok___` Check `ha` out

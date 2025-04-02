@@ -25,13 +25,13 @@ eval binop = enter @(State `WR` List _ `JNT` Halts)
 
 initial = Construct
  `ha` (Item `hv` Immediate 1) `ha` Next
- `ha` (Item `hv` Immediate 2) `ha` Next
- `ha` (Item `hv` Operation ((+) `hj`)) `ha` Next
- `ha` (Item `hv` Immediate 4) `ha` Next
- `ha` (Item `hv` Operation ((+) `hj`)) `ha` Last `hv` Unit
+ `ha` (Item `hv` Immediate 2) `ha` Last
+ -- `ha` (Item `hv` Operation ((+) `hj`)) `ha` Next
+ -- `ha` (Item `hv` Immediate 4) `ha` Next
+ -- `ha` (Item `hv` Operation ((+) `hj`)) `ha` Last `hv` Unit
 
 main = error `la` this `he'ho` trace
- `hv_______` initial `yokl` Forth `ha` Run `ha__` load `la` eval
+ `hv_______` by `hv` initial `yokl` Forth `ha` Run `ha__` load `la` eval
  `he'he'hv___` Empty @List Unit where
 
  error _ = "[ERR] No operands!" `yokl` Forth `ha` Raw `ha` output

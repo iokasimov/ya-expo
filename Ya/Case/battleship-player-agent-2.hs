@@ -43,9 +43,7 @@ fleet = Nonempty @List @Ship
   `ha` Item Unit `ha` Last `hv` Unit
  `ha_` Last `hv_` Unit
 
-window' ship = ship `yukl` Forth
- `ha` New `ha` State `ha` Event
- `ha` extend `hv` by Fore
+window' ship = ship `yukl` Forth `ha` New `ha` State `ha` Event `ha` adjust `hv__'he` Expand `lo` Fore
 
 match ship = ship
  `yokl` Run `ho` Forth
