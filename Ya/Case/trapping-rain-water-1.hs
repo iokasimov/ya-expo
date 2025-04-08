@@ -7,13 +7,14 @@ import "base" GHC.Num (Integer, (-), (+))
 import "base" Data.Ord (max, min)
 import "base" System.IO (print)
 
-gap = (trap `hj'hj`)
+trap left right origin all =
+ min left right - origin + all
 
-trap left right origin all = min left right - origin + all
+gap = is `ho'hd'hd` trap
 
-tap = is `ho'yokl` (gap `ho'ho` auto `ho` Event `ho` State `ho` New `ho` Forth) `ho'he'he'hv` 0 `ho` this
- `ha__` is `ho'yokl` (max `ho'ho` auto `ho` Event `ho` State `ho` New `ho` Forth) `ho'he'he'hv` 0 `ho` this
- `lo'yp` is `ho'yokl` (max `ho'ho` auto `ho` Event `ho` State `ho` New `ho` Prior) `ho'he'he'hv` 0 `ho` this
+tap = is `ho'yokl` (Forth `ha` New `ha` State `ha` Event `ha_` gap `ho'ho` auto) `ho'he'he'hv` 0 `ho` this
+ `ha__` is `ho'yokl` (Forth `ha` New `ha` State `ha` Event `ha_` max `ho'ho` auto) `ho'he'he'hv` 0 `ho` this
+ `lo'yp` is `ho'yokl` (Prior `ha` New `ha` State `ha` Event `ha_` max `ho'ho` auto) `ho'he'he'hv` 0 `ho` this
  `lo'yp` is @(Nonempty List Integer)
 
 main = tap `ha` Nonempty @List
