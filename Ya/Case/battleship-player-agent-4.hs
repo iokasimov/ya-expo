@@ -79,14 +79,12 @@ chance = enter @(State `WR` Sliding List Mark)
  `yuk___` State `ho` New `hv____` Event `ha` shift `hv` by Future
  `yok___` Retry `ha` Perhaps `ha'he` not
 
-rewind = State `ha` Event `hv_` auto `ho'ho` to @(Sliding List) `ha` to @List
-
 distribute fleet = fleet
  `yokl` Forth `ha` Run
  `ha__` intro @(State _)
   `ho_'yok` New `ha` window'
   `ho_'yuk` New `hv` chance
-  `ho_'yuk` New `hv` rewind
+  `ho_'yuk` New `ha` State `ha` Event `ha` rewind `hv` by Back
 
 enemy = Nonempty @List
  `ha` Item Idle `ha` Next
