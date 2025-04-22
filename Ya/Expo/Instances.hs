@@ -20,5 +20,10 @@ deriving instance (Show l, Show r) => Show (U_II_I P r l)
 deriving instance (Show l, Show r) => Show (U_II_I S r l)
 deriving instance Show Void
 
-instance Setoid (->) Integer where
+instance Setoid AR Integer where
  equality (These x y) = if x == y then That y else This (These x y)
+
+instance Setoid AR item => Setoid AR (List item) where
+ equality (These x y) = x `lu'ysp` Run y
+  `yokl` Forth `ha` Try `ha__` Reach `hu` by None `la` Progress `ha` (`yui` Unit) `ha` equality @AR
+  `yi__` Some `hu` This (x `lu` y) `la` Some `hu` That x

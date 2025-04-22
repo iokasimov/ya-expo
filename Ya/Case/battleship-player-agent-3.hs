@@ -103,9 +103,11 @@ main = print `ha` that `hv_` distribute fleet `he'he'hv` to known where
       `ho_'yokl` Prior `ha` Run `ha` render
   `lo_'yp` this `ha'he` at @(List Mark)
       `ho_'yokl` Forth `ha` Run `ha` render
+      `ho_` Await
   `lo_'yp` this `ha'he` at @(Shafted List Mark)
       `ho_` unwrap @AR `ha` this `ha'he` at @(Forward List Mark)
       `ho_'yokl` Forth `ha` Run `ha` render
+      `ho_` Await
 
  render = Bang `hu` Plus `hv` Unit
   `la__` Sunk `hu` Hash `hv` Unit

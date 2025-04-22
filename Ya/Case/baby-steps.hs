@@ -1,6 +1,19 @@
 import "ya" Ya
 import "ya-world" Ya.World
 import "ya-ascii" Ya.ASCII (ASCII)
-import "ya-console" Ya.Console (output)
+import "ya-expo" Ya.Expo.Instances ()
+import "ya-console" Ya.Console
 
-main = enter
+import "base" GHC.Num (Integer)
+import "base" System.IO (print)
+
+-- main = print @(Unit `P` Unit) (Unit `hj` is `hv` Unit)
+
+-- (i `AR` a) `P` i -> into (from a o) o
+-- main = print @Unit (is `lu` Unit `hd_` is)
+
+example = is @(List Integer) [1, 2, 3, 4, 5]
+
+-- main = example `yok` Cascading `ha` intro
+main = example
+ `yokl` Forth `ha` World `ha` print

@@ -1,6 +1,7 @@
 import "ya" Ya
 import "ya-world" Ya.World
 import "ya-ascii" Ya.ASCII
+import "ya-expo" Ya.Expo.Instances
 import "ya-console" Ya.Console
 
 type Mode = Unit `S` Unit
@@ -15,15 +16,17 @@ type Mark = Unit `S` Unit
 pattern TODO e = This e
 pattern DONE e = That e
 
-type Task = Mark `P` Sliding List ASCII
+type Description = Sliding List ASCII
+
+type Task = Mark `P` Description
 
 pattern Bullet e = This e
 pattern Cursor e = That e
 
 type Move = Shifter List
 
-pattern Lift x = This x
-pattern Down x = That x
+-- pattern Lift x = This x
+-- pattern Down x = That x
 
 type Command = Move `S` Mark `S_` ASCII `S` Unit
 
@@ -43,8 +46,8 @@ hand cursor = is @Title `hv__` Bullet `hu` "  -  " `la` Cursor `hu` "  -> " `li`
 mark status = is @Title `hv__` TODO `hu` "TODO " `la` DONE `hu` "DONE " `li` status
 
 show = shaft `hv` by Passed `ho` this `ho_'yokl` Prior `ha` Run `ha` output `ho_'yu` Unit
- `lo__'yp` focus `ho` this `ho_'yokl` Forth `ha` Run `ha` output `ho_'yu` Unit
- `lo__'yp` shaft `hv` by Future `ho` this `ho_'yokl` Forth `ha` Run `ha` output `ho_'yu` Unit
+ `lo__'yp` focus `ho` this `ho_'yokl` Forth `ha` Run `ha` output `ho_'yu` Unit `ho_` Await
+ `lo__'yp` shaft `hv` by Future `ho` this `ho_'yokl` Forth `ha` Run `ha` output `ho_'yu` Unit `ho_` Await
 
 -- (`ha'yo`): (t (tt o) i) -> into (from (a) o) (t (tt a) i)
 
@@ -55,8 +58,8 @@ start = to @(Scrolling List) `ha` Nonempty @List @Task
  `ha_` Last `ho` Item (by DONE `lu` to @(Sliding List) @List @ASCII "Buy a water gun for Songkran")
 
 excerpt = shaft `hv` by Passed `ho` this `ho_'yokl` Prior `ha` Run `ha` print (by Bullet)
- `lo__'yp` focus `ho` this `ho_'yokl` Forth `ha` Run `ha` print (by Cursor)
- `lo__'yp` shaft `hv` by Future `ho` this `ho_'yokl` Forth `ha` Run `ha` print (by Bullet)
+ `lo__'yp` focus `ho` this `ho_'yokl` Forth `ha` Run `ha` print (by Cursor) `ho_` Await
+ `lo__'yp` shaft `hv` by Future `ho` this `ho_'yokl` Forth `ha` Run `ha` print (by Bullet) `ho_` Await
 
 active way title = enter @World
  `yuk___` World `ha` styled `ha` Emphasize `hv` by On
@@ -70,25 +73,25 @@ inactive way title = enter @World
 
 indicate (These (This _) title) =
  output `ha` Caret `hv` by Space
- `lu'yp` active Forth "REVIEW"
- `lu'yp` output `ha` Caret `hv` by Space
- `lu'yp` inactive Forth "SEARCH:"
- `lu'yp` inactive Prior title
- `lu'yp` output `ha` Caret `hv` by Newline
+ `lu'yp` Await `hv` active Forth "REVIEW"
+ `lu'yp` Await `hv` (output `ha` Glyph `ha` Symbol `ha` Punctuate `hv` by Space)
+ `lu'yp` Await `hv` inactive Forth "SEARCH:"
+ `lu'yp` Await `hv` inactive Prior title
+ `lu'yp` Await `hv` (output `ha` Caret `hv` by Newline)
  `yu` Unit
 indicate (These (That _) title) =
  output `ha` Caret `hv` by Space
- `lu'yp` inactive Forth "REVIEW"
- `lu'yp` output `ha` Caret `hv` by Space
- `lu'yp` active Forth "SEARCH:"
- `lu'yp` active Prior title
- `lu'yp` output `ha` Caret `hv` by Newline
+ `lu'yp` Await `hv` inactive Forth "REVIEW"
+ `lu'yp` Await `hv` (output `ha` Glyph `ha` Symbol `ha` Punctuate `hv` by Space)
+ `lu'yp` Await `hv` active Forth "SEARCH:"
+ `lu'yp` Await `hv` active Prior title
+ `lu'yp` Await `hv` (output `ha` Caret `hv` by Newline)
  `yu` Unit
 
 render = is `hu_` output `ha` Caret `hv` by Newline
- `lo___'yp` (this `ha` at @Mode `lo` this `ha` at @Title) `ho_` indicate
- `lo___'yp` is `hu_` output `ha` Caret `hv` by Newline
- `lo___'yp` this `ho` this `ho` this `ho` excerpt `ho'yu` Unit
+ `lo___'yp` (this `ha` at @Mode `lo` this `ha` at @Title) `ho_` indicate `ho_` Await
+ `lo___'yp` is `hu_` output `ha` Caret `hv` by Newline `ho_` Await
+ `lo___'yp` this `ho` this `ho` this `ho_'yokl` Run `ha` World `ha` excerpt `ho_'yu` Unit `ho_` Await
 
 -- `yok___` World `ha__` render `lo'yp` match `ho'yok` Retry `lo'yp` intro
 -- `yok___` World `ha__` render `lo'yp` Some `hu` input `lo'yp` intro
@@ -107,23 +110,22 @@ render = is `hu_` output `ha` Caret `hv` by Newline
 press k f p = Maybe `hv___` k `hv` Unit `hd'q` p `yui` Unit `yiu` f Unit
 -- press k f p = Maybe `hv___` k `hd'q` p `yui` Unit `yiu` f Unit
 
-type Interface = Scrolling List Task `P` Shafted List Task `P` Title `P` Mode
+type Result = Maybe (Scrolling List Task)
+
+type Stash = List (List Task)
+
+type Interface = Result `P` Stash `P` Title `P` Mode
 
 -- scroll
 -- remark
 -- search
 
-handle = push `ho_'ho'yoi` Some `ha` Fore `ha_'he` Glyph
- `la_` Some `hu` get `ho'ho'yui` by None
-  `la` Some `hu` pop `ho'ho'yoi'yo` Back
- `ha_` (`hd_'q` by `hv` Delete) `ha'he` is @Caret
-
 review :: ASCII `AR__` Maybe Command
 review = is `hu` by Wrong
-  `la____` press `hv` (Lower `ha` J) `hv` (Move `ha` Down)
-  `lo'ys'la` press `hv` (Lower `ha` K) `hv` (Move `ha` Lift)
-  `lo'ys'la` press `hv` (Upper `ha` T) `hv` (Mark `ha` TODO)
-  `lo'ys'la` press `hv` (Upper `ha` D) `hv` (Mark `ha` DONE)
+  `la____` press (Lower `ha` J) (Move `ha` Down)
+  `lo'ys'la` First `ha` press (Lower `ha` K) (Move `ha` Lift)
+  `lo'ys'la` First `ha` press (Upper `ha` T) (Mark `ha` TODO)
+  `lo'ys'la` First `ha` press (Upper `ha` D) (Mark `ha` DONE)
   -- `lo'ys'la` press `hv` Lower F `hv` (Find)
  `ha______` on @Glyph @ASCII `ho'ho` on @Letter `ho` row
 
@@ -133,18 +135,35 @@ review = is `hu` by Wrong
 
  -- `yuk____` New `ha` State `hv__` Event `hv` handle x `ha_` Scope `hv` at @Mode
 
-update x = enter @(State `WR` Interface `JNT` World)
- `yuk____` New `ha` State `hv__` Event `hv` handle x `ha_` Scope `hv` at @Title
+searchbar = push `ho_'ho'yoi` Some `ha` Fore `ha_'he` Glyph
+ `la_` Some `hu` get `ho'ho'yui` by None
+  `la` Some `hu` pop `ho'ho'yoi'yo` Back
+ `ha_` (`hd_'q` by Delete) `ha'he` is @Caret
 
- -- `yok____` New `ha` State `ha__` Event `ha` (auto `ha` not) `ha_` Scope `hv` at @Mode
-      -- `la` New `ha` State `ha__` Event `ha` _
+-- filter = adjust `ha` (`lu` by Fore)
+ -- `ha__` Back `hu` by Shrink
+   -- `la` Fore `hu` by Expand
+
+-- Here is the algorightm:
+-- 1. `locate` with a Predicate (!= Title)
+-- 3. Push founded task into stash
+
+filter title = enter @(State `WR_` Task)
+ `yuk__` New `ha` State `hv__` Event `ha` locate `ha` (by Fore `lu`) `ha` Predicate `ha` exact `hv` title `ha_` Scope `hv` at @Description
+
+exact sample item = Wrong `hu` by False `la` Valid `hu` by True `li` sample `hd'q` item
+
+update x = enter @(State `WR` Interface)
+ `yuk____` New `ha` State `hv__` Event `hv` searchbar x `ha_` Scope `hv` at @Title
+ -- `yok____` New `ha` State `ha__` Event `ha` get `ha` not `ha_` Scope `hv` at @Mode
+ --  `la____` New `ha` State `ha__` Event `ha` (is :: _) `ha_` Scope `hv` at 
 
 proccess = enter @(State `WR` Interface `JNT` World)
- `yuk______` World `hv__` prepare `lu'yp` clear
+ `yuk______` World `hv__` prepare `lu'yp` Await `hv` clear
  `yuk______` State `ho` Old `ha` Event `hv` get
  `yok______` World `ha` render
  `yuk______` World `hv` input
- `yok______` Run `ha` update
+ `yok______` New `ha` update
  `yok______` Again `ha` Once
 
 -- "Buy [a] w[a]ter gun for Songkr[a]n"
@@ -156,4 +175,4 @@ proccess = enter @(State `WR` Interface `JNT` World)
 -- match x = enter @(State Task `JNT` Progress Unit)
  -- `yuk_____` _
 
-main = proccess `he'he'hv__` (by `hv` start `lu` empty `lu` empty `lu` by `hv` Review)
+main = proccess `he'he'hv__` (Some `ha` by `hv` start `lu` empty `lu` empty `lu` by `hv` Review)

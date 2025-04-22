@@ -17,14 +17,11 @@ print cursor title = enter @World
 
 type Move = Shifter List
 
-pattern Lift x = This x :: Move
-pattern Down x = That x :: Move
-
 press k f p = Maybe `hv___` k `hv` Unit `hd'q` p `yui` Unit `yiu` f Unit
 
 apply = is @(ASCII `M` Glyph `S_` Glyph `M` Letter) `hu` by Wrong
- `la____` press `hv` (Lower `ha` J) `hv` Down
- `lo'ys'la` press `hv` (Lower `ha` K) `hv` Lift
+ `la____` (press `hv` (Lower `ha` J) `hv` Down)
+ `lo'ys'la` (press `hv` (Lower `ha` K) `hv` Lift) `ho` First
 
 start = to @(Scrolling List) `ha` Nonempty @List @Title
  `ha` Item "Apply to that new position" `ha` Next
@@ -33,7 +30,7 @@ start = to @(Scrolling List) `ha` Nonempty @List @Title
  `ha` Item "Buy a water gun for Songkran" `ha` Last
 
 draft = enter @(State `WR` Scrolling List Title `JNT` World)
- `yuk___` World `hv__` prepare `lu'yp` clear
+ `yuk___` World `hv__` prepare `lu'yp` Await `hv` clear
  `yuk___` State `ho` New `hv__` Event `hv` auto `ha_` Scope `ha` shaft `hv` by Passed `yok___` World `ha_'yokl` Prior `ha` Run `ha` print (by Bullet)
  `yuk___` State `ho` New `hv__` Event `hv` auto `ha_` Scope `hv` focus `ho` Scope it `yok___` World `ha_'yokl` Forth `ha` Run `ha` print (by Cursor)
  `yuk___` State `ho` New `hv__` Event `hv` auto `ha_` Scope `ha` shaft `hv` by Future `yok___` World `ha_'yokl` Forth `ha` Run `ha` print (by Bullet)

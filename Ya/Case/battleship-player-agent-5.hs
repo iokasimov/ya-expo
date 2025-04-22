@@ -164,7 +164,7 @@ guess = that @(Board Mark) `hv_` distribute fleet `he'he'hv` to known
 shoot (These x _) = x `lu_` by Miss `lv` Nail `hv` by Bang `ho_` Shot `li` x
 
 fresh = to @List `hv` by enemy
- `lu'yp` to @List `hv` guess
+ `lu'yp` Align `hv` (to @List `hv` guess)
  `yi` to @(Sliding List)
 
 title x = is @(List ASCII) x `yokl` Forth `ha` World `ha` output

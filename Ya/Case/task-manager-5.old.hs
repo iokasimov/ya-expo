@@ -74,7 +74,7 @@ type Outline = Scrolling List Project
 type Application = State Outline `JNT` Halts `JNT` IO
 
 draft = enter @Application
- `yuk___` prepare `lu'yp` clear
+ `yuk___` prepare `lu'yp` Await `hv` clear
  `yuk___` State `he___` Transition `he` auto
  `ha__'he` Scope @(Shafted List Project) at
    `ho'he` Scope @(Reverse List Project) at

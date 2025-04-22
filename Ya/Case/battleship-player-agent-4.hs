@@ -104,7 +104,7 @@ type Cell = Tile `P` Mark
 
 guess = that `hv_` distribute fleet `he'he'hv` to known
 
-main = to @List enemy `lu'yp` to @List guess
+main = to @List enemy `lu'yp` Align `hv` to @List guess
  `yokl` Forth `ha` World `ha` render where
 
  mark = intro `ha` Glyph `ha` Symbol `ha` Punctuate

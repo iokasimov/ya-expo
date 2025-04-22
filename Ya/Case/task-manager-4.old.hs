@@ -52,7 +52,7 @@ type Project = Scrolling List Task
 type Application = State Project `JNT` Halts `JNT` IO
 
 process = enter @Application
- `yuk_____` prepare `lu'yp` clear
+ `yuk_____` prepare `lu'yp` Await `hv` clear
  `yuk_____` State `he__` Transition `he` auto
   `ha_'he` Scope @(Shafted List Task) at
    `ho'he` Scope @(Reverse List Task) at

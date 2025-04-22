@@ -7,7 +7,7 @@ import "base" GHC.Num (Integer, (+))
 
 type Immediate v = v
 
-type Operation v = v `P` v `AR_` v
+type Operation v = v `P` v `AR` v
 
 type Command v = Immediate v `S` Operation v
 
@@ -17,11 +17,18 @@ pattern Operation x = That x
 load value = enter @(State `WR` List _ `JNT` Halts)
  `yuk_` New `ha` State `ha` Event `hv` push @List value
 
-eval binop = enter @(State `WR` List _ `JNT` Halts)
- `yuk_` New `ha` State `ha` Event `hv` pop @List
- `lu'yp` New `ha` State `ha` Event `hv` pop @List
- `yok_` Try `ha` (`yp'yo` binop)
- `yok_` New `ha` State `ha` Event `ha` push @List
+-- last = -- enter @(State `WR` List _ `JNT` Halts)
+ -- `yuk_` New `ha` State `ha` Event `hv` pop @List
+
+-- item = State `ha` Event `hv` pop @List
+
+eval binop = enter @(State `WR` List Integer `JNT` Halts)
+ `yuk_` New `ha` State `ha` Event `hv` pop @List @Integer
+ `lu'yp` New `ha` State `ha` Event `hv` pop @List @Integer
+ `yok_` Try `ha` (`yp'yo` binop) `ha'ho` Check
+ `yok_` New `ha` State `ha` Event `ha` push @List @Integer
+
+type Machine item = State `WR` List item `JNT` Halts
 
 initial = Construct
  `ha` (Item `hv` Immediate 1) `ha` Next
@@ -31,7 +38,9 @@ initial = Construct
  `ha` (Item `hv` Operation (is `ho'hd` (+))) `ha` Last
 
 main = error `la` this `he'ho` trace
- `hv_______` by `hv` initial `yokl` Forth `ha` Run `ha__` load `la` eval
+ `hv_______` by `hv` initial
+ `yokl` Forth `ha` Run
+ `ha__` load `la` eval
  `he'he'hv___` Empty @List Unit where
 
  error _ = "[ERR] No operands!" `yokl` Forth `ha` Raw `ha` output

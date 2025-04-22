@@ -14,8 +14,8 @@ gap = is `ho'hd'hd` trap
 
 tap = is `ho'yokl` (Forth `ha` New `ha` State `ha` Event `ha_` gap `ho'ho` auto) `ho'he'he'hv` 0 `ho` this
  `ha__` is `ho'yokl` (Forth `ha` New `ha` State `ha` Event `ha_` max `ho'ho` auto) `ho'he'he'hv` 0 `ho` this
- `lo'yp` is `ho'yokl` (Prior `ha` New `ha` State `ha` Event `ha_` max `ho'ho` auto) `ho'he'he'hv` 0 `ho` this
- `lo'yp` is @(Nonempty List Integer)
+ `lo'yp` is `ho'yokl` (Prior `ha` New `ha` State `ha` Event `ha_` max `ho'ho` auto) `ho'he'he'hv` 0 `ho` this `ho` Align
+ `lo'yp` Align `ha` is @(Nonempty List Integer)
 
 main = tap `ha` Nonempty @List
  `ha` Item 2 `ha` Next
