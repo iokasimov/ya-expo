@@ -92,7 +92,7 @@ review = enter @(State `WR_` Target `P` Fleet `P` Board Cell `JNT_` Reach Result
 -- 4. If after removing ship fleet is empty - terminate with `Smash`
 -- 5. If fleet is not empty - just update `Fleet`
 unstock ship = enter @(State `WR_` Target `P` Fleet `P` Board Cell `JNT_` Reach Result)
- `yuk___` New `ha` State `hv__` Event `ha` locate `ha` (by Fore `lu`) `ha` Predicate `ha` exact `ha` Same `hv` ship `ha_` Scope `hv` at @Fleet `ho` as @(Scrolling List)
+ `yuk___` New `ha` State `hv__` Event `ha` locate `ha` (by Fore `lu`) `ha` Predicate `ha` exact `ha` Same `hv` ship `ha_` Scope `hv` at @Fleet `ho` Scope (as @(Scrolling List))
  `yok___` Try `ha__` Error `hu_` Reach @Result `ha` Fault `hv` ship `la` Ok
  `yok___` Try `ha__` Empty @List `hu_` Reach @Result `hv` by Smash `la` Ok `ha__` at @(Shafted List Ship) `he'ho` this `ho` to @List
  `yok___` New `ha` State `ha__` Event `ha` switch `ho_'ha` Scope `hv` at @Fleet
@@ -115,7 +115,7 @@ window' ship = ship `yukl` Forth
 match = enter @(State Opponent `JNT` Reach Unit)
  `yuk___` State `ho` Old `hv__` Event `hv` pop `ha_` Scope `ha` shaft `hv` by Passed `yok___` Check `ha` out
  `yuk___` State `ho` Old `hv__` Event `hv` pop `ha_` Scope `ha` shaft `hv` by Future `yok___` Check `ha` out
- `yuk___` State `ho` Old `hv__` Event `hv` get `ha_` Scope `hv` focus `ho` as @List `yok___` Check `ha` inner
+ `yuk___` State `ho` Old `hv__` Event `hv` get `ha_` Scope `hv` focus `ho` Scope (as @List) `yok___` Check `ha` inner
  `yok___` State `ho` New `ha__` Event `ha` put `ho_'ha` Scope `hv` focus
 
 out = None `hu` by Continue
