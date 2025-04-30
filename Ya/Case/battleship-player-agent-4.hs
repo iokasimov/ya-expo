@@ -1,6 +1,7 @@
 import Ya
 import Ya.World
 import Ya.ASCII
+import Ya.Literal
 import Ya.Console
 
 import "base" GHC.Num (Integer, (-), (+))
