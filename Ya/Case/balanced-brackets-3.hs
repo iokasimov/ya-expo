@@ -23,7 +23,7 @@ remnant = Empty @List `hu` by Valid
  `ha` this @Shape `ha` top @(Nonempty List)
 
 inspect code = code
- `yokl_` Forth `ha` Run @(State `WR` List Shape `JNT` Error Imbalance)
+ `yokl_` Forth `ha` Run @(State `T'I` List Shape `JNT` Error Imbalance)
  `ha___` Some `hu` enter `la_` is @Bracket `ho_` (deposit `la` analyze) `ho'yu` Unit
  `ha___` on @Glyph `ho'ho` on @Symbol `ho` row `ho'ho` on @Bracket `ho` row
  `he'he'hv____`by `hv` Empty @List
