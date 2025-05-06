@@ -55,7 +55,7 @@ match ship = ship
 
 mount ship = Same `hu` ship `la` is `li` match ship
 
-chance = enter @(State `WR` Sliding List Mark)
+chance = enter @(State `T'I` Sliding List Mark)
  `yuk___` State `ho` New `hv__` Event `hv_` mount `ho` auto `ha_'he` Scope `hv` at @(List Mark)
  `yuk___` State `ho` New `hv__` Event `hv_` shift `hv` by Future
  `yok___` Retry `ha` Perhaps `ha'he` not

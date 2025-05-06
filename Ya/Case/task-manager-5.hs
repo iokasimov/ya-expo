@@ -46,7 +46,7 @@ start = to @(Scrolling List) `ha` Nonempty @List @Task
  `ha_` Next `ho` Item (by TODO `lu` "Organize a boardgame session")
  `ha_` Last `ho` Item (by DONE `lu` "Buy a water gun for Songkran")
 
-draft = enter @(State `WR` Scrolling List Task `JNT` World)
+draft = enter @(State `T'I` Scrolling List Task `JNT` World)
  `yuk___` World `hv__` prepare `lu'yp` Await `hv` clear
  `yuk___` State `ho` Old `hv___` Event `hv` auto `ha_` Scope `ha` shaft `hv` by Passed `yok___` World `ha_'yokl` Prior `ha` Run `ha` print (by Bullet)
  `yuk___` State `ho` Old `hv___` Event `hv` auto `ha_` Scope `hv` focus `ho` Scope it `yok___` World `ha_'yokl` Forth `ha` Run `ha` print (by Cursor)

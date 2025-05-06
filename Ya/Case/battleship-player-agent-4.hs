@@ -75,7 +75,7 @@ mount board = Same `hu` board
  `la` is `ho'he` that @Opponent
  `li` match `he'he'hv` board
 
-chance = enter @(State `WR` Sliding List Mark)
+chance = enter @(State `T'I` Sliding List Mark)
  `yuk___` State `ho` New `hv____` Event `hv_` auto `ho'ho` mount
  `yuk___` State `ho` New `hv____` Event `ha` shift `hv` by Future
  `yok___` Retry `ha` Perhaps `ha'he` not

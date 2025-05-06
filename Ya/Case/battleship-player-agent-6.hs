@@ -51,14 +51,14 @@ type Mark = Shot `S` Integer
 pattern Shot e = This e :: Mark
 pattern Mist e = That e :: Mark
 
-type Board = Nonempty List `WR_` Mark `P` Tile
+type Board = Nonempty List `T'I` Mark `P` Tile
 
-sunk x = enter @(State `WR` Scrolling List Ship `JNT` Progress `WR` Shafted List Ship)
+sunk x = enter @(State `T'I` Scrolling List Ship `JNT` Progress `T'I` Shafted List Ship)
  `yuk____` New `ha` State `hv__` Event `hv_` auto `ho'yoi` (`hd'q` Same x) `ha_'he` Scope `hv` at @(Focused Ship)
  `yok____` New `ha` State `hv__` Event `hv_` scroll `hv` by Next `ho'yoi` Continue
   `lv____` New `ha` State `hv__` Event `hv_` auto `ho'yoi` Interrupt `ha_'he` Scope `hv` at @(Shafted List Ship)
  -- TODO: can we replace it with `Retry`?
- `yok____` Try `ha` is @(Progress `WR` Shafted List Ship `WR` _)
+ `yok____` Try `ha` is @(Progress `T'I` Shafted List Ship `T'I` _)
  `yok____` Again `ha` Once
 
 known = enemy `yu` Mist 0
@@ -76,7 +76,7 @@ check tile = tile
    `la` Sunk `ho` Shot `ho` Error
    `la` (+1) `ho` Mist `ho` Valid
 
-chance = enter @(State `WR` Sliding List Mark)
+chance = enter @(State `T'I` Sliding List Mark)
  `yuk___` State `ho` New `hv__` Event `hv` match `ha_'he` Scope `hv` at @(List Mark)
  `yuk___` State `ho` New `hv__` Event `ha` slide `hv` by Future
  `yok___` Retry `ha` Perhaps `ha` not
@@ -117,7 +117,7 @@ render = Miss `hu` Hyphen `hv` Unit
     -- `yokl_` Forth `ha` Run `ha` output
 
 -- main = fleet
- -- `yokl_` is -- intro @(State `WR` Sliding List Mark `JNT` World)
+ -- `yokl_` is -- intro @(State `T'I` Sliding List Mark `JNT` World)
  -- `ho__'yukl` Forth `ha` New `ha` State `ha` Event `ha` adjust @List `hv` it Fore
   -- `ho__'yok` New `ha` extent
   -- `ho__'yuk` (State `ho` New `hv__` Event `hv` fits `ha_'he` Scope `hv` at @(List Mark))

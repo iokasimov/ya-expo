@@ -126,9 +126,9 @@ apply = press `he` Lower P `he` (Move `ha` Outline `ha` Down)
  `lo'ys'la` press `he` Lower Q `he` (Quit)
  `la____` Wrong `hv` is @(Number `ML` Symbol `ML` Caret)
 
-type Project = Scrolling Tree `WR_` Fold `LM` Task
+type Project = Scrolling Tree `T'I` Fold `LM` Task
 
-type Outline = Scrolling List `WR_` Project
+type Outline = Scrolling List `T'I` Project
 
 type Application = State Outline `JNT` Halts `JNT` IO
 
@@ -154,12 +154,12 @@ process = enter @Application
   `la_____` State `ho` to `ha__` Transition `ha_` switch `ho'ho` (`yui` Unit)
   `ho_'ha'he` Scope @(Focused Project) at
    `ho'he'he` Scope @(Leveled Tree Item) at
-   `ho'he'he` Scope @(Focused `WR` Tree Item) at
+   `ho'he'he` Scope @(Focused `T'I` Tree Item) at
    `ho'he'he'he'he` Scope @Fold at
   `la_____` State `ho` to `ha__` Transition `ha_` (\m x -> Unit `lu_` x `yo`(`yio`(`yoi` is `hu` m)))
   `ho_'ha'he` Scope @(Focused Project) at
    `ho'he'he` Scope @(Leveled Tree Item) at
-   `ho'he'he` Scope @(Focused `WR` Tree Item) at
+   `ho'he'he` Scope @(Focused `T'I` Tree Item) at
       `ho'he` Scope @(Tree Item) at
 
   `la_____` Close `ho` to @Application

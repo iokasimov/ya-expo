@@ -42,7 +42,7 @@ mark = is @Title `ha__` is `hu` "TODO " `la` is `hu` "DONE "
 
 press k f p = Maybe `he___` k `hd'q` p `yui` Unit `yiu` f Unit
 
-draft = enter @(State `WR` Scrolling List Task `JNT` IO)
+draft = enter @(State `T'I` Scrolling List Task `JNT` IO)
  `yuk___` prepare `lu'yp` Await `hv` clear
  `yuk___` State `he__` Transition `he` auto
   `ha_'he` Scope @(Shafted List Task) at

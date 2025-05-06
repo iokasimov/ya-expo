@@ -148,17 +148,17 @@ searchbar = push `ho_'ho'yoi` Some `ha` Fore `ha_'he` Glyph
 -- 1. `locate` with a Predicate (!= Title)
 -- 3. Push founded task into stash
 
-filter title = enter @(State `WR_` Task)
+filter title = enter @(State `T'I` Task)
  `yuk__` New `ha` State `hv__` Event `ha` locate `ha` (by Fore `lu`) `ha` Predicate `ha` exact `hv` title `ha_` Scope `hv` at @Description
 
 exact sample item = Wrong `hu` by False `la` Valid `hu` by True `li` sample `hd'q` item
 
-update x = enter @(State `WR` Interface)
+update x = enter @(State `T'I` Interface)
  `yuk____` New `ha` State `hv__` Event `hv` searchbar x `ha_` Scope `hv` at @Title
  -- `yok____` New `ha` State `ha__` Event `ha` get `ha` not `ha_` Scope `hv` at @Mode
  --  `la____` New `ha` State `ha__` Event `ha` (is :: _) `ha_` Scope `hv` at 
 
-proccess = enter @(State `WR` Interface `JNT` World)
+proccess = enter @(State `T'I` Interface `JNT` World)
  `yuk______` World `hv__` prepare `lu'yp` Await `hv` clear
  `yuk______` State `ho` Old `ha` Event `hv` get
  `yok______` World `ha` render

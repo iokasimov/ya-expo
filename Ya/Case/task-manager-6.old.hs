@@ -135,7 +135,7 @@ process = enter @Application
   `la_____` State `ho` to `ha__` Transition `ha_` switch `ho'ho` (`yui` Unit)
   `ho_'ha'he` Scope @(Focused Project) at
    `ho'he'he` Scope @(Leveled Tree Task) at
-   `ho'he'he` Scope @(Focused `WR` Tree Task) at
+   `ho'he'he` Scope @(Focused `T'I` Tree Task) at
    `ho'he'he'he'he` Scope @Mark at
   `la_____` Close `ho` to @Application
  `yok_____` Again `ha` Same

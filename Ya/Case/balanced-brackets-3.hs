@@ -8,10 +8,10 @@ type Imbalance = (Shape `P` Shape) `S` (Shape `S` Shape)
 pattern Mismatch x = This x
 pattern Missing x = That x
 
-deposit bracket = enter @(State `WR` List Shape `JNT` Error Imbalance)
+deposit bracket = enter @(State `T'I` List Shape `JNT` Error Imbalance)
  `yuk__` New `ha` State `ha` Event `hv` push @List bracket
 
-analyze bracket = enter @(State `WR` List Shape `JNT` Error Imbalance)
+analyze bracket = enter @(State `T'I` List Shape `JNT` Error Imbalance)
  `yuk__` New `ha` State `ha` Event `hv` pop @List
  `yok__` Try @Imbalance `ha__` None `hu_` Error `ha` Missing `ha` Opened `hv` bracket `la` Valid @Shape
  `yok__` Try @Imbalance `ha__` Error `ha` Mismatch `la` Valid @Shape `ha__` compare bracket

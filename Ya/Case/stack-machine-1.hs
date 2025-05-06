@@ -15,21 +15,21 @@ type Command v = Immediate v `S` Operation v
 pattern Immediate x = This x
 pattern Operation x = That x
 
-load value = enter @(State `WR` List _ `JNT` Halts)
+load value = enter @(State `T'I` List _ `JNT` Halts)
  `yuk_` New `ha` State `ha` Event `hv` push @List value
 
--- last = -- enter @(State `WR` List _ `JNT` Halts)
+-- last = -- enter @(State `T'I` List _ `JNT` Halts)
  -- `yuk_` New `ha` State `ha` Event `hv` pop @List
 
 -- item = State `ha` Event `hv` pop @List
 
-eval binop = enter @(State `WR` List Integer `JNT` Halts)
+eval binop = enter @(State `T'I` List Integer `JNT` Halts)
  `yuk_` New `ha` State `ha` Event `hv` pop @List @Integer
  `lu'yp` New `ha` State `ha` Event `hv` pop @List @Integer
  `yok_` Try `ha` (`yp'yo` binop) `ha'ho` Check
  `yok_` New `ha` State `ha` Event `ha` push @List @Integer
 
-type Machine item = State `WR` List item `JNT` Halts
+type Machine item = State `T'I` List item `JNT` Halts
 
 initial = Construct
  `ha` (Item `hv` Immediate 1) `ha` Next
