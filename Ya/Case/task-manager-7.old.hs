@@ -62,12 +62,12 @@ string prefix cursor (These status title) = enter @IO
 
 titled = is `hu` Underline `la` is `hu` Crossing
 
-block_sl prefix cursor (U_T_I_TT_I (These (T'TT'I (U_T_I_TT_I (These focus (U_T_I_TT_I (These left right))))) (T'TT'I (Reverse (T'TT'I (U_I_II (This ()))))))) = enter @IO
+block_sl prefix cursor (U_T_I_TT_I (These (T'TT'I (U_T_I_TT_I (These focus (U_T_I_TT_I (These left right))))) (T'TT'I (Reverse (T'TT'I (T'I'II (This ()))))))) = enter @IO
  `yuk__`  left `yokl` block_tree prefix Bullet
  `yuk__` focus `yokl` block_tree prefix cursor
  `yuk__` right `yokl` block_tree prefix Bullet
  `yuk__` intro @_ @IO Unit
-block_sl prefix cursor (U_T_I_TT_I (These current (T'TT'I (Reverse (T'TT'I (U_I_II (That (R_U_I_T_I (Recursive (U_I_T_II (These x xs))))))))))) =
+block_sl prefix cursor (U_T_I_TT_I (These current (T'TT'I (Reverse (T'TT'I (T'I'II (That (R_U_I_T_I (Recursive (U_I_T_II (These x xs))))))))))) =
  let (U_T_I_TT_I (These focus (T'TT'I (U_T_I_TT_I (These rs fs))))) = x in enter
  `yuk__` output (Caret Newline)
  `yuk__` focus `yokl` string prefix Bullet
