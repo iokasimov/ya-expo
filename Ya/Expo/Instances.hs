@@ -16,8 +16,8 @@ deriving instance (Show l, Show r) => Show (l `P` r)
 deriving instance (Show l, Show r) => Show (l `S` r)
 deriving instance (Show l, Show r) => Show (T'I'II P l r)
 deriving instance (Show l, Show r) => Show (T'I'II S l r)
-deriving instance (Show l, Show r) => Show (U_II_I P r l)
-deriving instance (Show l, Show r) => Show (U_II_I S r l)
+deriving instance (Show l, Show r) => Show (T'II'I P r l)
+deriving instance (Show l, Show r) => Show (T'II'I S r l)
 deriving instance Show Void
 
 instance Setoid AR Integer where
