@@ -13,13 +13,13 @@ deposit bracket = enter @(State `T'I` List Shape `JNT` Error Imbalance)
 
 analyze bracket = enter @(State `T'I` List Shape `JNT` Error Imbalance)
  `yuk__` New `ha` State `ha` Event `hv` pop @List
- `yok__` Try @Imbalance `ha__` None `hu_` Error `ha` Missing `ha` Opened `hv` bracket `la` Valid @Shape
- `yok__` Try @Imbalance `ha__` Error `ha` Mismatch `la` Valid @Shape `ha__` compare bracket
+ `yok__` Try `ha__` None `hu_` Error @Imbalance `ha` Missing `ha` Opened `hv` bracket `la` Valid @Shape
+ `yok__` Try `ha__` Error @Imbalance `ha` Mismatch `la` Valid @Shape `ha__` compare bracket
 
 compare closed opened = opened `hd'q` closed
 
 remnant = Empty @List `hu` by Valid
- `la` Error `ha` Missing `ha` Closed
+ `la` Error @Imbalance `ha` Missing `ha` Closed
  `ha` this @Shape `ha` top @(Nonempty List)
 
 inspect code = code
@@ -27,7 +27,7 @@ inspect code = code
  `ha___` Some `hu` enter `la_` is @Bracket `ho_` (deposit `la` analyze) `ho'yu` Unit
  `ha___` on @Glyph `ho'ho` on @Symbol `ho` row `ho'ho` on @Bracket `ho` row
  `he'he'hv____`by `hv` Empty @List
- `yok__` Try @Imbalance `ha` remnant `ha'he` that @(List Shape)
+ `yok__` Try `ha` remnant `ha'he` that @(List Shape)
 
 main = Error `hu` "[ERROR] Missing or mismatching bracket!"
  `la___` Valid `hu` "[VALID] Everything is seem to be good!" `ho` is @(List ASCII)

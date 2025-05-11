@@ -1,6 +1,6 @@
 import "ya" Ya
 import "ya-world" Ya.World
-import "ya-ascii" Ya.ASCII (ASCII)
+import "ya-ascii" Ya.ASCII
 import "ya-expo" Ya.Expo.Instances ()
 import "ya-console" Ya.Console
 
@@ -18,6 +18,15 @@ import "base" System.IO (print)
 -- main = example
  -- `yokl` Forth `ha` World `ha` print
 
-main = is @(List Integer) [1, 2, 3]
-   `lu'yp` Align @List [4, 5, 6]
-   `yokl` Forth `ha` World `ha` print
+-- main = is @(List Integer) [1, 2, 3]
+--    `lu'yp` Align @List [4, 5, 6]
+--    `yokl` Forth `ha` World `ha` print
+
+-- main = is @(Nonempty List Integer) [1, 2, 3]
+--  `kyo` Range `ha` is @(Nonempty List Integer)
+--  `yokl` Forth `ha` World
+--  `ha__'yuk` World `ha` output `ha` Glyph `ha` Symbol `ha` Punctuate `hv` by Space
+--  `ha__'yokl` Forth `ha` World `ha` print
+
+main = is @(Optional `T'I` Nonempty List Integer) `hv` Some [1, 2, 3]
+ `yokl'yokl` Try `ha` Forth `ha` World `ha` print

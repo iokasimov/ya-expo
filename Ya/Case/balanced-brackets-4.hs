@@ -17,8 +17,8 @@ deposit bracket = enter @(State `T'I` List Shape `JNT` Error Imbalance)
 
 analyze bracket = enter @(State `T'I` List Shape `JNT` Error Imbalance)
  `yuk__` New `ha` State `ha` Event `hv` pop @List
- `yok__` Try @Imbalance `ha__` None `hu_` Error `ha` Missing `ha` Opened `hv` bracket `la` Valid
- `yok__` Try @Imbalance `ha__` Error `ha` Mismatch `la` Valid `ha_` compare bracket
+ `yok__` Try `ha__` None `hu_` Error @Imbalance `ha` Missing `ha` Opened `hv` bracket `la` Valid
+ `yok__` Try `ha__` Error @Imbalance `ha` Mismatch `la` Valid `ha_` compare bracket
 
 compare closed opened = opened `hd'q` closed
 
@@ -30,7 +30,7 @@ inspect code = code
  `ha___` Some `hu` enter `la_` is @Bracket `ho_` (deposit `la` analyze) `ho'yu` Unit
  `ha___` on @Glyph `ho'ho` on @Symbol `ho` row `ho'ho` on @Bracket `ho` row
  `he'he'hv____`by `hv` Empty @List
- `yok__` Try @Imbalance `ha` remnant `ha'he` that @(List Shape)
+ `yok__` Try `ha` remnant `ha'he` that @(List Shape)
 
 main = that @(List ASCII) `ha__` mismatch `la` missing `la` balance
  `li___` inspect `ha` is @(Nonempty List ASCII) `hv` "fn main() { println('hello, <world>!') }"
