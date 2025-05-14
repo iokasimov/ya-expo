@@ -4,9 +4,9 @@ import "base" System.IO (IO)
 import "ya-world" Ya.World
 import "ya-ascii" Ya.ASCII
 import "ya-console" Ya.Console
-import "ya-expo" Ya.Expo.Instances
+import "ya-tutorials" Ya.Expo.Instances
 
-import qualified "ya-expo" Ya.Expo.Terminal as Console
+import qualified "ya-tutorials" Ya.Expo.Terminal as Console
 
 type Title = List ASCII
 

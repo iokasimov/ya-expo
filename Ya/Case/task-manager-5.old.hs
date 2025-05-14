@@ -2,10 +2,10 @@ import Ya
 
 import "base" System.IO (IO, print)
 import "ya-ascii" Ya.ASCII
-import "ya-expo" Ya.Expo.ASCII
-import "ya-expo" Ya.Expo.Instances
+import "ya-tutorials" Ya.Expo.ASCII
+import "ya-tutorials" Ya.Expo.Instances
 
-import qualified "ya-expo" Ya.Expo.Terminal as Console
+import qualified "ya-tutorials" Ya.Expo.Terminal as Console
 
 type Title = List ASCII
 

@@ -1,7 +1,7 @@
 import Ya
 import "ya-console" Ya.Console
 
-import "ya-expo" Ya.Expo.Instances ()
+import "ya-tutorials" Ya.Expo.Instances ()
 
 import "base" GHC.Num (Integer, (-), (+))
 import "base" Data.Ord (max, min)

@@ -1,7 +1,7 @@
 import "ya" Ya
 import "ya-world" Ya.World
 import "ya-ascii" Ya.ASCII
-import "ya-expo" Ya.Expo.Instances
+import "ya-tutorials" Ya.Expo.Instances
 import "ya-console" Ya.Console
 
 type Mode = Unit `S` Unit

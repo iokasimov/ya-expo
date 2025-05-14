@@ -3,11 +3,11 @@ import Ya
 import "base" System.IO (IO)
 import "ya-world" Ya.World
 import "ya-ascii" Ya.ASCII
-import "ya-expo" Ya.Expo.ASCII
-import "ya-expo" Ya.Expo.Instances
-import "ya-expo" Ya.Expo.Terminal
+import "ya-tutorials" Ya.Expo.ASCII
+import "ya-tutorials" Ya.Expo.Instances
+import "ya-tutorials" Ya.Expo.Terminal
 
-import qualified "ya-expo" Ya.Expo.Terminal as Console
+import qualified "ya-tutorials" Ya.Expo.Terminal as Console
 
 type Title = List ASCII
 
