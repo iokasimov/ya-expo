@@ -31,7 +31,7 @@ pattern Mark x = That x :: Command
 pattern Bullet = This Unit
 pattern Cursor = That Unit
 
-string cursor (These status title) = enter @IO
+string cursor (These status title) = intro @IO
  `yuk__` Forward `he` hand cursor `yokl` output
  `yuk__` Forward `he` mark status `yokl` output
  `yuk__` Forward @List `he` title `yokl` output
@@ -42,7 +42,7 @@ mark = is @Title `ha__` is `hu` "TODO " `la` is `hu` "DONE "
 
 press k f p = Maybe `he___` k `hd'q` p `yui` Unit `yiu` f Unit
 
-draft = enter @(State `T'I` Scrolling List Task `JNT` IO)
+draft = intro @(State `T'I` Scrolling List Task `JNT` IO)
  `yuk___` prepare `lu'yp` Await `hv` clear
  `yuk___` State `he__` Transition `he` auto
   `ha_'he` Scope @(Shafted List Task) at

@@ -19,7 +19,7 @@ pattern Task m t = These m t :: Task
 pattern Bullet = This Unit
 pattern Cursor = That Unit
 
-print cursor (These status task) = enter @IO
+print cursor (These status task) = intro @IO
  `yuk___` Run (hand `yokl` Forth `ha` Run `ha` output)
  `yuk___` Run (mark `yokl` Forth `ha` Run `ha` output)
  `yuk___` Run (task `yokl` Forth `ha` Run `ha` output)
@@ -58,7 +58,7 @@ type Outline = Scrolling List Project
 
 type Application = State Outline `JNT` Halts `JNT` IO
 
-draft = enter @(State `T'I` Scrolling List Task `JNT` World)
+draft = intro @(State `T'I` Scrolling List Task `JNT` World)
  `yuk___` World `hv__` prepare `lu'yp` clear
  `yuk___` State `ho` Old `hv___` Event `hv` auto `ha_` Scope `ha` shaft `hv` by Passed `yok___` World `ha_'yokl` Prior `ha` Run `ha` print (by Bullet)
  `yuk___` State `ho` Old `hv___` Event `hv` auto `ha_` Scope `hv` focus `ho` Scope it `yok___` World `ha_'yokl` Forth `ha` Run `ha` print (by Cursor)

@@ -35,7 +35,7 @@ pattern Mark x = This (That x)
 pattern Heap x = That (This x)
 pattern Away x = That (That x)
 
-print cursor (These status task) = enter @World
+print cursor (These status task) = intro @World Unit
  `yuk___` Run `hv____` hand cursor `yokl` Forth `ha` Run `ha` output
  `yuk___` Run `hv____` mark status `yokl` Forth `ha` Run `ha` output
  `yuk___` Run `hv____` show task -- `yokl` Forth `ha` Run `ha` output
@@ -61,14 +61,14 @@ excerpt = shaft `hv` by Passed `ho` this `ho_'yokl` Prior `ha` Run `ha` print (b
  `lo__'yp` focus `ho` this `ho_'yokl` Forth `ha` Run `ha` print (by Cursor) `ho_` Await
  `lo__'yp` shaft `hv` by Future `ho` this `ho_'yokl` Forth `ha` Run `ha` print (by Bullet) `ho_` Await
 
-active way title = enter @World
+active way title = intro @World Unit
  `yuk___` World `ha` styled `ha` Emphasize `hv` by On
  `yuk___` World `ha` styled `ha` Underline `hv` by On
  `yuk___` World (is @Title `hv` title `yokl` way `ha` Run `ha` output)
  `yuk___` World `ha` styled `ha` Emphasize `hv` by Off
  `yuk___` World `ha` styled `ha` Underline `hv` by Off
 
-inactive way title = enter @World
+inactive way title = intro @World Unit
  `yuk___` World (is @Title `hv` title `yokl` way `ha` Run `ha` output)
 
 indicate (These (This _) title) =
@@ -93,8 +93,11 @@ render = is `hu_` output `ha` Caret `hv` by Newline
  `lo___'yp` is `hu_` output `ha` Caret `hv` by Newline `ho_` Await
  `lo___'yp` this `ho` this `ho` this `ho_'yokl` Run `ha` World `ha` excerpt `ho_'yu` Unit `ho_` Await
 
--- `yok___` World `ha__` render `lo'yp` match `ho'yok` Retry `lo'yp` intro
--- `yok___` World `ha__` render `lo'yp` Some `hu` input `lo'yp` intro
+-- `yok___` World `ha__` render `lo'yp` match `ho'yok` Retry `lo'yp` intro Unit
+-- `yok___` World `ha__` render `lo'yp` Some `hu` input `lo'yp` intro Unit
+
+-- Scrolling list:
+-- <does not contain this pattern for sure> [pattern itself] <the rest>
 
 -- match mode = input `yo_` is `hu` review `la` is `hu` (Some `ha` search) `li` mode
 
@@ -119,6 +122,8 @@ type Interface = Result `P` Stash `P` Title `P` Mode
 -- scroll
 -- remark
 -- search
+
+-- TODO: let's continue from here tomorrow!
 
 review :: ASCII `AR__` Maybe Command
 review = is `hu` by Wrong
@@ -148,17 +153,17 @@ searchbar = push `ho_'ho'yoi` Some `ha` Fore `ha_'he` Glyph
 -- 1. `locate` with a Predicate (!= Title)
 -- 3. Push founded task into stash
 
-filter title = enter @(State `T'I` Task)
+filter title = intro @(State `T'I` Task) Unit
  `yuk__` New `ha` State `hv__` Event `ha` locate `ha` (by Fore `lu`) `ha` Predicate `ha` exact `hv` title `ha_` Scope `hv` at @Description
 
 exact sample item = Wrong `hu` by False `la` Valid `hu` by True `li` sample `hd'q` item
 
-update x = enter @(State `T'I` Interface)
+update x = intro @(State `T'I` Interface) Unit
  `yuk____` New `ha` State `hv__` Event `hv` searchbar x `ha_` Scope `hv` at @Title
  -- `yok____` New `ha` State `ha__` Event `ha` get `ha` not `ha_` Scope `hv` at @Mode
  --  `la____` New `ha` State `ha__` Event `ha` (is :: _) `ha_` Scope `hv` at 
 
-proccess = enter @(State `T'I` Interface `JNT` World)
+proccess = intro @(State `T'I` Interface `JNT` World) Unit
  `yuk______` World `hv__` prepare `lu'yp` Await `hv` clear
  `yuk______` State `ho` Old `ha` Event `hv` get
  `yok______` World `ha` render
@@ -172,7 +177,7 @@ proccess = enter @(State `T'I` Interface `JNT` World)
  --  `la______` (is `hu______` State `ho` New `hv__` Event @Searching `hv` (auto `ho'yui` Unit))
 
 -- TODO: `locate` method of `Sliding List`
--- match x = enter @(State Task `JNT` Progress Unit)
+-- match x = intro @(State Task `JNT` Progress Unit) Unit
  -- `yuk_____` _
 
 main = proccess `he'he'hv__` (Some `ha` by `hv` start `lu` empty `lu` empty `lu` by `hv` Review)

@@ -53,7 +53,7 @@ pattern Mist e = That e :: Mark
 
 type Board = Nonempty List `T'I` Mark `P` Tile
 
-sunk x = enter @(State `T'I` Scrolling List Ship `JNT` Progress `T'I` Shafted List Ship)
+sunk x = intro @(State `T'I` Scrolling List Ship `JNT` Progress `T'I` Shafted List Ship) Unit
  `yuk____` New `ha` State `hv__` Event `hv_` auto `ho'yoi` (`hd'q` Same x) `ha_'he` Scope `hv` at @(Focused Ship)
  `yok____` New `ha` State `hv__` Event `hv_` scroll `hv` by Next `ho'yoi` Continue
   `lv____` New `ha` State `hv__` Event `hv_` auto `ho'yoi` Interrupt `ha_'he` Scope `hv` at @(Shafted List Ship)
@@ -76,7 +76,7 @@ check tile = tile
    `la` Sunk `ho` Shot `ho` Error
    `la` (+1) `ho` Mist `ho` Valid
 
-chance = enter @(State `T'I` Sliding List Mark)
+chance = intro @(State `T'I` Sliding List Mark) Unit
  `yuk___` State `ho` New `hv__` Event `hv` match `ha_'he` Scope `hv` at @(List Mark)
  `yuk___` State `ho` New `hv__` Event `ha` slide `hv` by Future
  `yok___` Retry `ha` Perhaps `ha` not
@@ -142,7 +142,7 @@ render = Miss `hu` Hyphen `hv` Unit
  -- `ho___'yuk` Run `ha` title `hv` "Gauge: "
  -- `ho___'yuk` Run `hv` frame
  -- `ho___'yuk` New `ha` State `ha` Event `ha` slide `hv` it Fore
- -- `ho___'yok` enter `lv` Again `ha` Once `hv` Unit
+ -- `ho___'yok` intro `lv` Again `ha` Once `hv` Unit
 
  -- `ho___'yuk` New `ha` State `ha` Event `ha` slide `hv` it Fore
  -- `ho___'yok` World `hv` print "The end!" `lv` World `hv` print "Continue..."

@@ -48,7 +48,7 @@ window' ship = ship `yukl` Forth
  `ha` New `ha` State `ha` Event
  `ha` adjust `hv` (by Expand `lu` by Fore)
 
-match = enter @(State Opponent `JNT` Halts)
+match = intro @(State Opponent `JNT` Halts) Unit
  `yuk____` State `ho` Old `hv__` Event `hv` pop @List `ha_` Scope `ha` shaft `hv` by Passed
  `yok____` Check `ha` out
  `yuk____` State `ho` Old `hv__` Event `hv` pop @List `ha_` Scope `ha` shaft `hv` by Future
@@ -73,7 +73,7 @@ mount board = Same `hu` board
  `la` is `ho'he` that @Opponent
  `li` match `he'he'hv` board
 
-chance = enter @(State `T'I` Sliding List Mark)
+chance = intro @(State `T'I` Sliding List Mark) Unit
  `yuk___` State `ho` New `hv____` Event `hv_` auto `ho'ho` mount
  `yuk___` State `ho` New `hv____` Event `ha` shift `hv` by Future
  `yok___` Retry `ha` Perhaps `ha'he` not

@@ -11,7 +11,7 @@ initial = Nonempty @List @Title
  `ha` Item "Organize a boardgame session" `ha` Next
  `ha` Item "Buy a water gun for Songkran" `ha` Last
 
-print title = enter @World
+print title = intro @World Unit
  `yuk___` Run `hv____` title `yokl` Forth `ha` Run `ha` output
  `yuk___` Run `hv____` output `ha` Caret `hv` by Newline
 

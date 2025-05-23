@@ -36,7 +36,7 @@ pattern Cursor = That Unit
 
 type Shifted = Shafted List
 
-string prefix cursor (These status title) = enter @IO
+string prefix cursor (These status title) = intro @IO
  `yuk__` Forward `he` prefix `yokl` output
  `yuk__` Forward `he` hand cursor `yokl` output
  `yuk__` Forward `he` mark status `yokl` output
@@ -50,17 +50,17 @@ block_tree prefix cursor tree =
 
 tab = that `ha` push @List (Caret Space)
 
-block_scrolling_list_tree prefix cursor (U_T_I_TT_I (These focus (U_T_I_TT_I (These left right)))) = enter @IO
+block_scrolling_list_tree prefix cursor (U_T_I_TT_I (These focus (U_T_I_TT_I (These left right)))) = intro @IO
  `yuk__`  left `yokl` block_tree prefix Bullet
  `yuk__` focus `yokl` block_tree prefix cursor
  `yuk__` right `yokl` block_tree prefix Bullet
 
 block_project :: Title -> (Unit `ML` Unit) -> Project -> IO Unit
-block_project prefix cursor project = enter @IO
+block_project prefix cursor project = intro @IO
  `yuk__` output `he` Caret Newline
  `yuk__` block_scrolling_list_tree prefix cursor `ha` unwrap @AR
     `ha` to @(Scrolling List `T'TT'I` Tree) `he` project
- `yuk__` enter @IO where
+ `yuk__` intro @IO where
 
 hand = is @Title `ha__` is `hu` "   * " `la` is `hu` "  -> "
 mark = is @Title `ha__` is `hu` "TODO " `la` is `hu` "DONE "
@@ -73,7 +73,7 @@ type Outline = Scrolling List Project
 
 type Application = State Outline `JNT` Halts `JNT` IO
 
-draft = enter @Application
+draft = intro @Application
  `yuk___` prepare `lu'yp` Await `hv` clear
  `yuk___` State `he___` Transition `he` auto
  `ha__'he` Scope @(Shafted List Project) at

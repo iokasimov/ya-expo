@@ -7,7 +7,7 @@ import "ya-console" Ya.Console
 import "base" GHC.Num (Integer)
 import "base" System.IO (print)
 
--- main = print @(Unit `P` Unit) (Unit `hj` is `hv` Unit)
+main = print @(Unit `P` Unit) (Unit `hj` is `hv` Unit)
 
 -- (i `AR` a) `P` i -> into (from a o) o
 -- main = print @Unit (is `lu` Unit `hd_` is)
@@ -28,5 +28,5 @@ import "base" System.IO (print)
 --  `ha__'yuk` World `ha` output `ha` Glyph `ha` Symbol `ha` Punctuate `hv` by Space
 --  `ha__'yokl` Forth `ha` World `ha` print
 
-main = is @(Optional `T'I` Nonempty List Integer) `hv` Some [1, 2, 3]
- `yokl'yokl` Try `ha` Forth `ha` World `ha` print
+-- main = is @(Optional `T'I` Nonempty List Integer) `hv` Some [1, 2, 3]
+--  `yokl'yokl` Try `ha` Forth `ha` World `ha` print

@@ -45,7 +45,7 @@ pattern Cursor = That Unit
 
 type Shifted = Shafted List
 
-string prefix cursor (These status title) = enter @IO
+string prefix cursor (These status title) = intro @IO
  `yuk__` Blinking `ha` On `he` Unit `yi__` styled
  `yuk__` Forward `he` hand cursor `yokl` output
  `yuk__` Blinking `ha` Off `he` Unit `yi_` styled
@@ -62,13 +62,13 @@ string prefix cursor (These status title) = enter @IO
 
 titled = is `hu` Underline `la` is `hu` Crossing
 
-block_sl prefix cursor (U_T_I_TT_I (These (T'TT'I (U_T_I_TT_I (These focus (U_T_I_TT_I (These left right))))) (T'TT'I (Reverse (T'TT'I (T'I'II (This ()))))))) = enter @IO
+block_sl prefix cursor (U_T_I_TT_I (These (T'TT'I (U_T_I_TT_I (These focus (U_T_I_TT_I (These left right))))) (T'TT'I (Reverse (T'TT'I (T'I'II (This ()))))))) = intro @IO
  `yuk__`  left `yokl` block_tree prefix Bullet
  `yuk__` focus `yokl` block_tree prefix cursor
  `yuk__` right `yokl` block_tree prefix Bullet
  `yuk__` intro @_ @IO Unit
 block_sl prefix cursor (U_T_I_TT_I (These current (T'TT'I (Reverse (T'TT'I (T'I'II (That (R_U_I_T_I (Recursive (U_I_T_II (These x xs))))))))))) =
- let (U_T_I_TT_I (These focus (T'TT'I (U_T_I_TT_I (These rs fs))))) = x in enter
+ let (U_T_I_TT_I (These focus (T'TT'I (U_T_I_TT_I (These rs fs))))) = x in intro
  `yuk__` output (Caret Newline)
  `yuk__` focus `yokl` string prefix Bullet
  `yuk__` rs `yokl` block_tree (tab `he` prefix) Bullet
@@ -82,7 +82,7 @@ block_tree prefix cursor (R_U_I_T_I (Recursive (U_I_T_II (These focus subtree)))
       string pointer cursor focus `yu` Unit
  `lu'yp` ((Forward subtree `yokl` Construct `ho` block_tree (aligner prefix) Bullet) `yu` Unit)
 
-print cursor x = enter @IO
+print cursor x = intro @IO
  `yuk__` x `yokl` block_sl "" cursor
  `ho_'yuk` output `he` Caret Newline
 
@@ -112,7 +112,7 @@ type Outline = Scrolling List Project
 
 type Application = State Outline `JNT` Halts `JNT` IO
 
-process = enter @Application
+process = intro @Application
  `yuk_____` prepare `lu'yp` clear
  `yuk_____` Caret `he` Newline `yi` output
  `yuk_____` State `he__` Transition `he` auto

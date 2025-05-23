@@ -22,7 +22,7 @@ type Command = Move `S` Mark
 pattern Move x = This x
 pattern Mark x = That x
 
-print cursor (These status task) = enter @World
+print cursor (These status task) = intro @World `hv` Unit
  `yuk___` Run `hv____` hand cursor `yokl` Forth `ha` Run `ha` output
  `yuk___` Run `hv____` mark status `yokl` Forth `ha` Run `ha` output
  `yuk___` Run `hv____` task `yokl` Forth `ha` Run `ha` output
@@ -46,7 +46,7 @@ start = to @(Scrolling List) `ha` Nonempty @List @Task
  `ha_` Next `ho` Item (by TODO `lu` "Organize a boardgame session")
  `ha_` Last `ho` Item (by DONE `lu` "Buy a water gun for Songkran")
 
-draft = enter @(State `T'I` Scrolling List Task `JNT` World)
+draft = intro @(State `T'I` Scrolling List Task `JNT` World) Unit
  `yuk___` World `hv__` prepare `lu'yp` Await `hv` clear
  `yuk___` State `ho` Old `hv___` Event `hv` auto `ha_` Scope `ha` shaft `hv` by Passed `yok___` World `ha_'yokl` Prior `ha` Run `ha` print (by Bullet)
  `yuk___` State `ho` Old `hv___` Event `hv` auto `ha_` Scope `hv` focus `ho` Scope it `yok___` World `ha_'yokl` Forth `ha` Run `ha` print (by Cursor)

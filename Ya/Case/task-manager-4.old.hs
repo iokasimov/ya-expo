@@ -36,7 +36,7 @@ pattern Cursor = That Unit
 
 type Shifted = Shafted List
 
-string cursor (These status title) = enter @IO
+string cursor (These status title) = intro @IO
  `yuk__` Forward `he` hand cursor `yokl` output
  `yuk__` Forward `he` mark status `yokl` output
  `yuk__` Forward @List `he` title `yokl` output
@@ -51,7 +51,7 @@ type Project = Scrolling List Task
 
 type Application = State Project `JNT` Halts `JNT` IO
 
-process = enter @Application
+process = intro @Application
  `yuk_____` prepare `lu'yp` Await `hv` clear
  `yuk_____` State `he__` Transition `he` auto
   `ha_'he` Scope @(Shafted List Task) at

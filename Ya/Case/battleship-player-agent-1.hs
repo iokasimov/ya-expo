@@ -39,6 +39,6 @@ print x = x `yokl_` Forth `ha` World `ha___` is @Ship
  `ho__'yukl` Forth `ha` World `ha` output `ha` Glyph `ha` Symbol `ha` Punctuate `hv` by Hash
  `ho__'yuk` World `ha` output `ha` Caret `hv` by Space
 
-main = enter @World
+main = intro @World Unit
  `yuk__` World `hv` title
  `yuk__` World `ha` print `hv` by fleet

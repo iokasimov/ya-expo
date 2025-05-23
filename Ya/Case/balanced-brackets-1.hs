@@ -5,10 +5,10 @@ import "ya-console" Ya.Console
 
 type Parenthesis = Unit `S` Unit
 
-deposit bracket = enter @(State `T'I` List _ `JNT` Halts)
+deposit bracket = intro @(State `T'I` List _ `JNT` Halts) Unit
  `yuk__` New `ha` State `ha` Event `hv` push @List bracket
 
-analyze _______ = enter @(State `T'I` List _ `JNT` Halts)
+analyze _______ = intro @(State `T'I` List _ `JNT` Halts) Unit
  `yuk__` New `ha` State `ha` Event `hv` pop @List
  `yok__` Try `ha__` None `hu` by Error `la` Some `hu` by Valid
 
