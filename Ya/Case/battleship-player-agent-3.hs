@@ -80,7 +80,7 @@ chance = intro @(State `T'I` Sliding List Mark) Unit
 
 distribute fleet = fleet
  `yokl` Forth `ha` Run
- `ha__` intro @(State _)
+ `ha__` intro @(State _) @(AR)
   `ho_'yok` New `ha` window'
   `ho_'yuk` New `hv` chance
   `ho_'yuk` New `ha` State `ha` Event `ha` rewind `hv` by Back
@@ -113,7 +113,7 @@ main = print `ha` that `hv_` distribute fleet `he'he'hv` to known where
  render = Bang `hu` Plus `hv` Unit
   `la__` Sunk `hu` Hash `hv` Unit
   `la__` Miss `hu` Hyphen `hv` Unit
-  `ho___` intro `ha` Glyph `ha` Symbol `ha` Punctuate
+  `ho___` intro @_ @(AR) `ha` Glyph `ha` Symbol `ha` Punctuate
   `la__` integer `ho_'yo` Glyph `ha` Digit
   `ho___'yokl` Forth `ha` Run `ha` output
   `ho___'yuk` World `ha` output `ha` Caret `hv` by Space

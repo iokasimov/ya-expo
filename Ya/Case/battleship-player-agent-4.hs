@@ -82,7 +82,7 @@ chance = intro @(State `T'I` Sliding List Mark) Unit
 
 distribute fleet = fleet
  `yokl` Forth `ha` Run
- `ha__` intro @(State _)
+ `ha__` intro @(State _) @(AR)
   `ho_'yok` New `ha` window'
   `ho_'yuk` New `hv` chance
   `ho_'yuk` New `ha` State `ha` Event `ha` rewind `hv` by Back
